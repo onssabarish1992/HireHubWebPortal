@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRAnalytics.Web", "HRAnalytics.Web\HRAnalytics.Web.csproj", "{33C00898-03C2-407E-BCFD-251D3CB2CEFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAnalytics.WebAPI", "HRAnalytics.WebAPI\HRAnalytics.WebAPI.csproj", "{7702F82B-84A1-490F-833E-094AB4333B22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAnalytics.Entities", "HRAnalytics.Entities\HRAnalytics.Entities.csproj", "{327E0B38-D5C7-44F1-8EAA-021D8AF742D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAnalytics.Utilities", "HRAnalytics.Utilities\HRAnalytics.Utilities.csproj", "{D438E62A-8796-4ABE-88B2-35B684FBF329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAnalytics.DAL", "HRAnalytics.DAL\HRAnalytics.DAL.csproj", "{6947BF45-6188-4252-93FC-6CE35EAFD73C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAnalytics.BL", "HRAnalytics.BL\HRAnalytics.BL.csproj", "{5C33B723-73AA-4B27-87E7-32A62A019AC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33C00898-03C2-407E-BCFD-251D3CB2CEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C00898-03C2-407E-BCFD-251D3CB2CEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C00898-03C2-407E-BCFD-251D3CB2CEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C00898-03C2-407E-BCFD-251D3CB2CEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7702F82B-84A1-490F-833E-094AB4333B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7702F82B-84A1-490F-833E-094AB4333B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7702F82B-84A1-490F-833E-094AB4333B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7702F82B-84A1-490F-833E-094AB4333B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327E0B38-D5C7-44F1-8EAA-021D8AF742D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327E0B38-D5C7-44F1-8EAA-021D8AF742D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327E0B38-D5C7-44F1-8EAA-021D8AF742D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327E0B38-D5C7-44F1-8EAA-021D8AF742D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D438E62A-8796-4ABE-88B2-35B684FBF329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D438E62A-8796-4ABE-88B2-35B684FBF329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D438E62A-8796-4ABE-88B2-35B684FBF329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D438E62A-8796-4ABE-88B2-35B684FBF329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6947BF45-6188-4252-93FC-6CE35EAFD73C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6947BF45-6188-4252-93FC-6CE35EAFD73C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6947BF45-6188-4252-93FC-6CE35EAFD73C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6947BF45-6188-4252-93FC-6CE35EAFD73C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C33B723-73AA-4B27-87E7-32A62A019AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C33B723-73AA-4B27-87E7-32A62A019AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C33B723-73AA-4B27-87E7-32A62A019AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C33B723-73AA-4B27-87E7-32A62A019AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72A97044-0DBE-4C90-A1C1-CF295A86D302}
+	EndGlobalSection
+EndGlobal
