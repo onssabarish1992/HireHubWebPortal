@@ -137,6 +137,8 @@ namespace HRAnalytics.Web.Areas.Identity.Pages.Account
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
                     EmailConfirmed = true,
                 };
 
