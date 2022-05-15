@@ -14,5 +14,8 @@ namespace HRAnalytics.BL
         public const string PROJECTNAME = "@project_name";
         public const string INTERVIEWERID = "@interviewer_id";
         public const string INTERVIEWTIMESTAMP = "@interview_timestamp";
+        public const string USERTYPE = "@UserType";
+
+        
     }
 }

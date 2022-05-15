@@ -53,6 +53,54 @@ namespace HRAnalytics.BL
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get all interviewers to schedule interview for candidate
+        /// </summary>
+        /// <param name="argUserType"></param>
+        /// <returns></returns>
+        public UserCollection GetAllInterviewers(string argUserType)
+        {
+            #region Declarations
+            UserCollection l_UserCollection = new();
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            DataTable l_InterviewersDataTable;
+            User l_User;
+            int l_UserCount;
+            #endregion
+            try
+            {
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.USERTYPE, argUserType, DbType.String));
+
+                l_InterviewersDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_ALLUSERS, CommandType.StoredProcedure, l_Parameters.ToArray());
+
+                if (l_InterviewersDataTable != null && l_InterviewersDataTable.Rows.Count > 0)
+                {
+                    l_UserCount = l_InterviewersDataTable.Rows.Count;
+                    for (int i = 0; i < l_UserCount; i++)
+                    {
+                        l_User = new User();
+
+                        DataRow l_Row = l_InterviewersDataTable.Rows[i];
+
+                        l_User.UserID = l_Row["Id"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["Id"]);
+                        l_User.UserName = l_Row["UserName"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["UserName"]);
+                        l_User.FirstName = l_Row["FirstName"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["FirstName"]);
+                        l_User.LastName = l_Row["LastName"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["LastName"]);
+                        l_User.EmailID = l_Row["Email"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["Email"]);
+
+                        l_UserCollection.Add(l_User);
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_UserCollection;
+        }
     }
 
 }
