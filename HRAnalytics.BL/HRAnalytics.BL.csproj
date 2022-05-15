@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HRAnalytics.DAL\HRAnalytics.DAL.csproj" />
+    <ProjectReference Include="..\HRAnalytics.Entities\HRAnalytics.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

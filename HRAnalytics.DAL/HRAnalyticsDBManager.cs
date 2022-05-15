@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace HRAnalytics.DAL
         private DatabaseFactory _dbFactory;
         private IDatabase _database;
         private string _providerName;
+        private readonly IConfiguration _configuration;
 
-        public HRAnalyticsDBManager(string argConnectionStringName)
+        public HRAnalyticsDBManager(string argConnectionStringName, IConfiguration configuration)
         {
-            _dbFactory = new DatabaseFactory(argConnectionStringName);
+            _configuration = configuration;
+            _dbFactory = new DatabaseFactory(argConnectionStringName, _configuration);
             _database = _dbFactory.CreateDatabase();
             _providerName = _dbFactory.GetProviderName();
         }

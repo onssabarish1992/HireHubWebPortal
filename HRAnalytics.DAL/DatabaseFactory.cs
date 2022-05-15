@@ -1,25 +1,32 @@
-﻿using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using System.Configuration;
+
 
 namespace HRAnalytics.DAL
 {
     public class DatabaseFactory
     {
-        private ConnectionStringSettings connectionStringSettings;
+        //private ConnectionStringSettings connectionStringSettings;
+        private readonly IConfiguration _configuration;
+        private readonly string connectionString;
+        private readonly string providerName;
 
-        public DatabaseFactory(string connectionStringName)
+        public DatabaseFactory(string connectionStringName, IConfiguration configuration)
         {
-            connectionStringSettings = ConfigurationManager.ConnectionStrings[connectionStringName];
+            _configuration = configuration;
+            connectionString = _configuration.GetConnectionString(connectionStringName);
+            providerName = _configuration.GetConnectionString("ProviderName");
         }
 
         public IDatabase CreateDatabase()
         {
             IDatabase database = null;
 
-            switch (connectionStringSettings.ProviderName.ToLower())
+            switch (providerName.ToLower())
             {
                 case "system.data.sqlclient":
                 default:
-                    database = new SqlServerDatabase(connectionStringSettings.ConnectionString);
+                    database = new SqlServerDatabase(connectionString);
                     break;
             }
 
@@ -28,7 +35,7 @@ namespace HRAnalytics.DAL
 
         public string GetProviderName()
         {
-            return connectionStringSettings.ProviderName;
+            return providerName;
         }
     }
 }

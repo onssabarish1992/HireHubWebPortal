@@ -40,6 +40,11 @@ namespace HRAnalytics.DAL
             return new SqlConnection(ConnectionString);
         }
 
+        public SqlServerDatabase(string argConnectionString)
+        {
+            ConnectionString = argConnectionString;
+        }
+
         public IDbDataParameter CreateParameter(IDbCommand argcommand)
         {
             SqlCommand SQLcommand = (SqlCommand)argcommand;

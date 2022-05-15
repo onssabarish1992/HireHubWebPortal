@@ -1,6 +1,6 @@
 ﻿namespace HRAnalytics.Entities
 {
-    public class Class1
+    public class Candidate
     {
 
     }
