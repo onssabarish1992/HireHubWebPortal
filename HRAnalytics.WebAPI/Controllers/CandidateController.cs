@@ -31,5 +31,29 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("GetInterviewers")]
+        public IActionResult GetInterviewers(string argUserType)
+        {
+            #region Declarations
+            UserCollection l_userCollection;
+            #endregion
+            try
+            {
+                l_userCollection = _candiadateBL.GetAllInterviewers(argUserType);
+
+                if (l_userCollection == null || l_userCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_userCollection);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace HRAnalytics.BL.Interfaces
     public  interface ICandidateBL
     {
         void SaveCandidateInterviewSchedule(string argLoggedInUser, Candidate argCandidate);
+        UserCollection GetAllInterviewers(string argUserType);
     }
 }
