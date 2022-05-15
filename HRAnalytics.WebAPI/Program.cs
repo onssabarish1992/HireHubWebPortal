@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IJobBL, JobBL>();
+builder.Services.AddScoped<ICandidateBL, CandidateBL>();
 
 
 
