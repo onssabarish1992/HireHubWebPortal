@@ -1,0 +1,71 @@
+﻿body {
+}
+
+.container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.candidate_profile {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.c_profile {
+    float: left;
+    width: 100%;
+    background:url(/Images/dem1.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+    .c_profile h2 {
+        text-align: left;
+        background: #000;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 15px;
+        display: inline-block;
+        font-size: 20px;
+        -webkit-box-shadow: 5px 5px 15px 3px #000000;
+        box-shadow: 5px 5px 15px 5px #000000;
+    }
+
+.candidate_profile .form-group {
+    margin-bottom: 10px;
+}
+
+.candidate_profile .form-control {
+    height: 40px !important;
+}
+
+.sub-btn {
+    text-align: center;
+    margin: 10px 0px;
+}
+
+    .sub-btn button {
+        background: #000;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 5px 15px;
+        display: inline-block;
+        font-size: 18px;
+        -webkit-box-shadow: 5px 5px 15px 5px #000000;
+        box-shadow: 5px 5px 15px 3px #000000;
+        transition: all 0.3s ease-in-out 0s;
+    }
+
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    .c_profile h2 {
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .candidate_profile {
+        padding: 0 20px;
+    }
+}
