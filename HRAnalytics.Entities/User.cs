@@ -17,6 +17,8 @@ namespace HRAnalytics.Entities
         public string LastName { get; set; }
 
         public string EmailID { get; set; }
+
+        public string FullName { get; set; }
     }
 
     public class UserCollection : List<User>

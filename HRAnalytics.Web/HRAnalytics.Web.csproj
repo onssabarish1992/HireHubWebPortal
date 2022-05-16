@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HRAnalytics.Entities\HRAnalytics.Entities.csproj" />
+    <ProjectReference Include="..\HRAnalytics.Utilities\HRAnalytics.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

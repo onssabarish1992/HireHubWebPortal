@@ -1,9 +1,7 @@
-﻿@*
-	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
 }
-
+ @model CandidateViewModel
 <html>
 	<head>
 		<link rel="stylesheet" href="~/css/Candidate.css" asp-append-version="true" />
@@ -12,69 +10,65 @@
 		<div class="container c_profile">
 		<h2>Set Candidate Profile</h2>
 		<div class="candidate_profile">
-	
-	<form id="candidate_pr" class="form-horizontal" action="/" method="POST">
-	  <div class="form-group">
-		  
-		<label class="control-label" for="email">Candidate Name:</label>
-	   
-	   
-		  <input type="text" class="form-control" id="c_name" placeholder="Enter Candidate name" required>
-	 
-	  </div>
-	  <div class="form-group">
-		 
-		<label class="control-label" for="email">Project:</label>
-   
-  
-		  <input type="text" class="form-control" id="p_name" placeholder="Enter Project" required>
-	   
-	  </div>
-	  <div class="form-group">
-	 
-		<label class="control-label" for="email">Role:</label>
-	   
-	   
-			<select class="form-control" id="role">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-			</select>
-	   
-	  </div>
-	  <div class="form-group">
-		 
-		<label class="control-label" for="interviewer">Interviewer:</label>
-	 
-	   
-			<select class="form-control" id="interviewer">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-			</select>
-		
-	  </div>
-	  <div class="form-group">
-		<label class="control-label"></label>
-		<div class='input-group date' id='datepicker1'>
-			<input  type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" />
-			<span class="input-group-addon">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</span>
-		</div>
-    
-    
-	</div>
+			@if (ViewBag.SuccessMessage != null)
+			{
+				<div class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					@ViewBag.SuccessMessage
+				</div>
+			}
+			@if (ViewBag.ErrorMessage != null)
+			{
+				<div class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					@ViewBag.ErrorMessage
+				</div>
+			}
 
+	<form id="candidate_pr" method="post" class="form-horizontal">
+		 @Html.AntiForgeryToken()
 
-	  <div class="form-group">
-		<div class="sub-btn">
-		  <button type="submit" id='submitButton' class="btn btn-primary">Schedule</button>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label class="control-label" asp-for="@Model.CandidateName">Candidate Name:</label>
+				<input type="text"asp-for="@Model.CandidateName" class="form-control" id="c_name" placeholder="Enter Candidate name" aria-required="true">
+				<span asp-validation-for="@Model.CandidateName" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" asp-for="@Model.Project">Project:</label>
+				<input type="text" asp-for="@Model.Project" class="form-control" id="p_name" placeholder="Enter Project" aria-required="false">
+				<span asp-validation-for="@Model.Project" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" asp-for="@Model.JobId">Role:</label>
+				@Html.DropDownListFor(m => m.JobId, ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "role" })
+				<span asp-validation-for="@Model.JobId" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" asp-for="@Model.UserID">Interviewer:</label>
+				@Html.DropDownListFor(m => m.UserID, ViewBag.Interviewers as SelectList, "--Select--", new { @class = "form-control", @id = "interviewer" })
+				<span asp-validation-for="@Model.UserID" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" asp-for="@Model.InterviewSchedule">Schedule:</label>
+				<div class='input-group date'>
+					@Html.EditorFor(m => m.InterviewSchedule, new {@class = "form-control datepicker" , @id = "datepicker1" })
+				</div>
+				<span asp-validation-for="@Model.InterviewSchedule" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+			<div class="sub-btn">
+				<button type="submit" id='submitButton' formaction="@Url.Action("SaveCandidateSchedule","Candidate")" class="btn btn-primary">Schedule</button>
+			</div>
 		</div>
-	  </div>
 	</form>
+
+
 	</div>
 </div>
 	</body>
@@ -82,6 +76,7 @@
 
 @section Scripts
     {
+	<partial name="_ValidationScriptsPartial" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
