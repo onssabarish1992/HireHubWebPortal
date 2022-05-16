@@ -89,6 +89,7 @@ namespace HRAnalytics.BL
                         l_User.FirstName = l_Row["FirstName"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["FirstName"]);
                         l_User.LastName = l_Row["LastName"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["LastName"]);
                         l_User.EmailID = l_Row["Email"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["Email"]);
+                        l_User.FullName = String.Concat(l_User.FirstName, ' ', l_User.LastName);
 
                         l_UserCollection.Add(l_User);
 
