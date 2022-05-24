@@ -38,6 +38,12 @@ namespace HRAnalytics.Web.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Candidate()
+        {
+
+            return View();
+        }
+
         /// <summary>
         /// Get interviewers for scheduling interview
         /// </summary>

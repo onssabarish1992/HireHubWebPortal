@@ -6,7 +6,7 @@ html {
   html {
     font-size: 16px;
   }
-}
+}   
 
 html {
   position: relative;
@@ -15,4 +15,27 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+.navbar {
+    margin-bottom: 0px !important;
+    -webkit-box-shadow: 5px 5px 15px 3px #000000;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+.nav-logout {
+    float:right !important;
+}
+#logoutForm button {
+    padding:0px !important;
+    margin-top:14px !important;
+}
+.margin-none {
+    padding:0px !important;
+}
+
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    .nav-logout {
+        float:left;
+    }
+
 }
