@@ -102,6 +102,47 @@ namespace HRAnalytics.BL
             }
             return l_UserCollection;
         }
+
+
+        /// <summary>
+        /// Get the candidate information using schedule ID and candidate ID
+        /// </summary>
+        /// <param name="argCandidateID"></param>
+        /// <param name="argScheduleID"></param>
+        /// <returns></returns>
+        public Candidate GetCandidateInformation(int argCandidateID, int argScheduleID)
+        {
+            #region Declarations
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            DataTable l_candidateDataTable;
+            Candidate l_candidate=new();
+            #endregion
+            try
+            {
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CANDIDATEID, argCandidateID, DbType.Int32));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SCHEDULEID, argScheduleID, DbType.Int32));
+
+                l_candidateDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_CANDIDATEDETAILS, CommandType.StoredProcedure, l_Parameters.ToArray());
+
+                if (l_candidateDataTable != null && l_candidateDataTable.Rows.Count > 0)
+                {
+                    DataRow l_Row = l_candidateDataTable.Rows[0];
+
+                    l_candidate.CandidateID = l_Row["candidate_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["candidate_id"]);
+                    l_candidate.CandidateName = l_Row["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["candidate_name"]);
+                    l_candidate.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
+                    l_candidate.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
+                    l_candidate.InterviewerName = l_Row["interviewer_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["interviewer_name"]);
+                    l_candidate.ProjectName = l_Row["project_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["project_name"]);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_candidate;
+        }
     }
 
 }

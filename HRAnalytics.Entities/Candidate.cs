@@ -12,6 +12,15 @@
 
         public DateTime InterviewTimeStamp { get; set; }
 
+        public string InterviewerName { get; set; }
+
+        public string JobName { get; set; }
+
         public int JobId { get; set; }
+    }
+
+    public class CandidateCollection: List<Candidate>
+    {
+
     }
 }

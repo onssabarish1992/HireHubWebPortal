@@ -15,7 +15,9 @@ namespace HRAnalytics.BL
         public const string INTERVIEWERID = "@interviewer_id";
         public const string INTERVIEWTIMESTAMP = "@interview_timestamp";
         public const string USERTYPE = "@UserType";
+        public const string CANDIDATEID = "@CandidateID";
+        public const string SCHEDULEID = "@ScheduleID";
 
-        
+
     }
 }
