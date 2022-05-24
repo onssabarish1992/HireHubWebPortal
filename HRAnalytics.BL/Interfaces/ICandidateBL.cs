@@ -11,5 +11,7 @@ namespace HRAnalytics.BL.Interfaces
     {
         void SaveCandidateInterviewSchedule(string argLoggedInUser, Candidate argCandidate);
         UserCollection GetAllInterviewers(string argUserType);
+
+        Candidate GetCandidateInformation(int argCandidateID, int argScheduleID);
     }
 }

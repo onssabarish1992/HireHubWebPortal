@@ -55,5 +55,29 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_userCollection);
         }
+
+        [HttpGet]
+        [Route("GetCandidateDetails")]
+        public IActionResult GetCandidateDetails(int argCandidateID, int argScheduleID)
+        {
+            #region Declarations
+            Candidate l_Candidate;
+            #endregion
+            try
+            {
+                l_Candidate = _candiadateBL.GetCandidateInformation(argCandidateID, argScheduleID);
+
+                if (l_Candidate == null || l_Candidate.CandidateID == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_Candidate);
+        }
     }
 }
