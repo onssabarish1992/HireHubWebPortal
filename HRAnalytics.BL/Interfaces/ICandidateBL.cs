@@ -13,5 +13,6 @@ namespace HRAnalytics.BL.Interfaces
         UserCollection GetAllInterviewers(string argUserType);
 
         Candidate GetCandidateInformation(int argCandidateID, int argScheduleID);
+        CandidateCollection GetCandidateForInterviewer(string argInterviewerID);
     }
 }

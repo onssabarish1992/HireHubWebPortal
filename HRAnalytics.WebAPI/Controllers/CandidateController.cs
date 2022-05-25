@@ -79,5 +79,28 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_Candidate);
         }
+        [HttpGet]
+        [Route("GetCandidateForInterviewer")]
+        public IActionResult GetCandidateForInterviewer(string argInterviewerID)
+        {
+            #region Declarations
+            CandidateCollection l_CandidateCollection;
+            #endregion
+            try
+            {
+                l_CandidateCollection = _candiadateBL.GetCandidateForInterviewer(argInterviewerID);
+
+                if (l_CandidateCollection == null || l_CandidateCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_CandidateCollection);
+        }
     }
 }

@@ -143,6 +143,52 @@ namespace HRAnalytics.BL
             }
             return l_candidate;
         }
+       
+        public CandidateCollection GetCandidateForInterviewer(string argInterviewerID)
+        {
+            #region Declarations
+            CandidateCollection l_CandidateCollection = new();
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            DataTable l_CandidateDataTable;
+            Candidate l_Candidate;
+            int l_CandidateCount;
+            #endregion
+            try
+            {
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.INTERVIEWERID, argInterviewerID, DbType.String));
+
+                l_CandidateDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_CANDIDATEDETAILSFORINTERVIEW, CommandType.StoredProcedure, l_Parameters.ToArray());
+
+                if (l_CandidateDataTable != null && l_CandidateDataTable.Rows.Count > 0)
+                {
+                    l_CandidateCount = l_CandidateDataTable.Rows.Count;
+                    for (int i = 0; i < l_CandidateCount; i++)
+                    {
+                        l_Candidate = new Candidate();
+
+                        DataRow l_Row = l_CandidateDataTable.Rows[i];
+
+                        l_Candidate.CandidateID = l_Row["candidate_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["candidate_id"]);
+                        l_Candidate.CandidateName = l_Row["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["candidate_name"]);
+                        l_Candidate.DateCreated = l_Row["date_created"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["date_created"]);
+                        l_Candidate.ProjectName = l_Row["project_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["project_name"]);
+                        l_Candidate.InterviewTimeStamp = l_Row["interview_timestamp"] == DBNull.Value ? DateTime.Now : Convert.ToDateTime(l_Row["interview_timestamp"]);
+                        l_Candidate.ScheduleID =  l_Row["schedule_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["schedule_id"]);
+                        l_Candidate.JobId =  l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
+                        l_Candidate.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
+
+                        l_CandidateCollection.Add(l_Candidate);
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_CandidateCollection;
+        }
     }
 
 }

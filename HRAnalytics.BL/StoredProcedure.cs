@@ -12,5 +12,6 @@ namespace HRAnalytics.BL
         public const string INSERT_INTERVIEWSCHEDULE = "usp_sav_interviewSchedule";
         public const string GET_ALLUSERS = "usp_getAllUsers";
         public const string GET_CANDIDATEDETAILS = "usp_getCandidateDetails";
+        public const string GET_CANDIDATEDETAILSFORINTERVIEW = "usp_getInterviewerCandidates";
     }
 }

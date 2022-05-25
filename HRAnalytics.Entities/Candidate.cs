@@ -17,6 +17,10 @@
         public string JobName { get; set; }
 
         public int JobId { get; set; }
+
+        public string DateCreated { get; set; }
+
+        public int ScheduleID { get; set; }
     }
 
     public class CandidateCollection: List<Candidate>
