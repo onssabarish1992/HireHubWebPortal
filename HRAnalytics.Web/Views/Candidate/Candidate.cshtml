@@ -38,19 +38,12 @@
                <tbody>
                   <tr>
                      <td id="teamsk"></td>
-                     <td>Perfect fit for the job position</td>
+                     <td id="desc"></td>
                      <td>
-                        <select required id="select_rating" class="form-control" >
-                           <option value="" selected disabled >Select Rating</option>
-                           <option value="volvo">1</option>
-                           <option value="saab">2</option>
-                           <option value="mercedes">3</option>
-                           <option value="audi">4</option>
-                           <option value="audi">5</option>
-                        </select>
+<select id="ratings" required class="form-control"></select>   
                      </td>
                      <td>
-                        <textarea name="" id="txtarea" rows="5" class="form-control" required></textarea>
+                        <textarea name="" id="comment" rows="5" class="form-control" required></textarea>
                      </td>
                   </tr>
 
@@ -62,10 +55,10 @@
                </div>
          </form>
       </div>
-   </div>
+   </div>   
 </div>
 
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script> 
 <script>
       
 function submitForm(){
@@ -76,11 +69,41 @@ var select_rating= $('#select_rating').val();
  
     </script>
     <script>
-const txt = '{"name":"Ashima Sharma", "role":"Project Manager", "evaluation_criteria":"Team Skills"}'
+const txt = '{"name":"Ashima Sharma", "role":"Project Manager", "evaluation_criteria":"Team Skills", "desc":"Perfect fit for the job position", "comment": "This is a dummy comment" }'
 const obj = JSON.parse(txt);
 document.getElementById("cname").innerHTML = obj.name;
 document.getElementById("role").innerHTML = obj.role;
-document.getElementById("role").innerHTML = obj.role;
+document.getElementById("teamsk").innerHTML = obj.evaluation_criteria;
+document.getElementById("desc").innerHTML = obj.desc;
+document.getElementById("comment").innerHTML = obj.comment;
 
+  var jsonData = {
+      "Table": [{
+          "ratingid": "0",
+          "rating": "1"
+      }, {
+          "ratingid": "1",
+          "rating": "2"
+      }, {
+          "ratingid": "2",
+          "rating": "3"
+      }, {
+          "ratingid": "3",
+          "rating": "4"
+      }, {
+          "ratingid": "4",
+          "rating": "5"
+      }]
+  };
+ 
+     $(document).ready(function () {
+         var listItems = '<option selected="selected" value="0">- Select Rating -</option>';
+ 
+      for (var i = 0; i < jsonData.Table.length; i++) {
+             listItems += "<option value='" + jsonData.Table[i].ratingid + "'>" + jsonData.Table[i].rating + "</option>";
+         }
+ 
+         $("#ratings").html(listItems);
+     });
 </script>
 </body>

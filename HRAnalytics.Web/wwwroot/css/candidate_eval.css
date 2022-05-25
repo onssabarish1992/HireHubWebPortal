@@ -12,14 +12,20 @@
     box-shadow: 5px 5px 15px 5px #000000;
 }
 
-.candidate_evaluation {
+.candidate_evaluation { 
     margin-top: 30px;
 }
+.candidate_evaluation label {
+    color:#fff;
+}
+    .candidate_evaluation p {
+        color: #fff;
+    }
 
 .c_eval {
     float: left;
     width: 100%;
-    background: #EDEBED url(../Images/dem.jpg) no-repeat center center;
+    background: #EDEBED url(../Images/dem2.jpg) no-repeat center center;
     background-size: cover;
     height: 100vh;
     padding: 15px;
@@ -73,10 +79,12 @@
 .custom_table th {
     color: #fff;
     font-size: 20px;
+    background:rgba(0,0,0,0.7);
 }
 
 .custom_table td {
     color: #fff;
+    background: rgba(0,0,0,0.6);
 }
 
 .custom_table textarea {
