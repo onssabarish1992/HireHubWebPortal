@@ -17,6 +17,20 @@ namespace HRAnalytics.Entities
         public string? CriteriaName { get; set; }
 
         public string? DateCreated { get; set; }
+
+        public int CriteriaID { get; set; }
+
+        public string? SubCriteriaDescription { get; set; }
+
+        public double Weightage { get; set; }
+
+        public string? CreatedBy { get; set; }
+
+        public string? CriteriaDescription { get; set; }
+
+
+
+
     }
 
     public class JobCollection: List<Job>

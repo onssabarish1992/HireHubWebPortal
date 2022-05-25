@@ -11,5 +11,8 @@ namespace HRAnalytics.BL.Interfaces
     {
         JobCollection GetAllJobs();
         JobCollection GetEvaluationCriteria();
+
+        void SaveSubCriteria(string argLoggedInUser, Job argJob);
+        JobCollection GetCriteriaForJob(int argJobId);
     }
 }

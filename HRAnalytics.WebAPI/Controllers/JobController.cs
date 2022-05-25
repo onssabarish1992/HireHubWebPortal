@@ -63,5 +63,44 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_jobCollection);
         }
+        [HttpPost]
+        [Route("SaveSubCriteria")]
+        public IActionResult SaveSubCriteria(string LoggedInUser, [FromBody] Job job)
+        {
+            try
+            {
+                _jobBL.SaveSubCriteria(LoggedInUser, job);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+        [HttpGet]
+        [Route("GetCriteriaForJob")]
+        public IActionResult GetCriteriaForJob(int argJobId)
+        {
+            #region Declarations
+            JobCollection l_jobCollection;
+            #endregion
+            try
+            {
+                l_jobCollection = _jobBL.GetCriteriaForJob(argJobId);
+
+                if (l_jobCollection == null || l_jobCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_jobCollection);
+        }
     }
+
 }

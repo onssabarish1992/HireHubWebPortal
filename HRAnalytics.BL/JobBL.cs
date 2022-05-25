@@ -92,6 +92,82 @@ namespace HRAnalytics.BL
                 throw;
             }
             return l_JobCollection;
+
+
+        }
+
+        public void SaveSubCriteria(string argLoggedInUser, Job argJob)
+        {
+            #region Declarations
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            #endregion
+            try
+            {
+                if (argJob != null)
+                {
+                    //Create Parameters
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CRITERIAID, argJob.CriteriaID, DbType.Int32));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIADESCRIPTION, argJob.SubCriteriaDescription, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJob.JobId, DbType.Int32));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CREATEDBY, argLoggedInUser, DbType.String));
+                   
+                    //Call stored procedure
+                    l_HRAnalyticsDBManager.Insert(StoredProcedure.INSERT_SUBCRITERIA, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+      
+        }
+
+        public JobCollection GetCriteriaForJob(int argJobId)
+        {
+            #region Declarations
+            JobCollection l_JobCollection = new();
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            DataTable l_JobDataTable;
+            List<IDbDataParameter> l_Parameters = new();
+            Job l_Job;
+            int l_JobCount;
+            #endregion
+            try
+            {
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJobId, DbType.Int32));
+
+                l_JobDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_CRITERIAFORJOB, CommandType.StoredProcedure);
+
+                if (l_JobDataTable != null && l_JobDataTable.Rows.Count > 0)
+                {
+                    l_JobCount = l_JobDataTable.Rows.Count;
+                    for (int i = 0; i < l_JobCount; i++)
+                    {
+                        l_Job = new Job();
+
+                        DataRow l_Row = l_JobDataTable.Rows[i];
+
+
+                        l_Job.CriteriaID = l_Row["criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["criteria_id"]);
+                        l_Job.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
+                        l_Job.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
+                        l_Job.CriteriaName = l_Row["criteria_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["criteria_name"]);
+                        l_Job.CriteriaDescription = l_Row["criteria_description"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["criteria_description"]);
+
+                        l_JobCollection.Add(l_Job);
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_JobCollection;
+
+
         }
     }
 }

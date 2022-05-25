@@ -17,6 +17,9 @@ namespace HRAnalytics.BL
         public const string USERTYPE = "@UserType";
         public const string CANDIDATEID = "@CandidateID";
         public const string SCHEDULEID = "@ScheduleID";
+        public const string CRITERIAID = "@criteria_id";
+        public const string CREATEDBY = "@CreatedBy";
+        public const string SUBCRITERIADESCRIPTION = "@sub_criteria_description";
 
 
     }
