@@ -40,6 +40,28 @@ namespace HRAnalytics.WebAPI.Controllers
             return Ok(l_jobCollection);
         }
 
+        [HttpGet]
+        [Route("GetEvaluationCriteria")]
+        public IActionResult GetEvaluationCriteria()
+        {
+            #region Declarations
+            JobCollection l_jobCollection;
+            #endregion
+            try
+            {
+                l_jobCollection = _jobBL.GetEvaluationCriteria();
 
+                if (l_jobCollection == null || l_jobCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_jobCollection);
+        }
     }
 }

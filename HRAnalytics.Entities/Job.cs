@@ -13,6 +13,10 @@ namespace HRAnalytics.Entities
         public string? JobName { get; set; }
 
         public string? JobDescription { get; set; }
+
+        public string? CriteriaName { get; set; }
+
+        public string? DateCreated { get; set; }
     }
 
     public class JobCollection: List<Job>

@@ -10,5 +10,6 @@ namespace HRAnalytics.BL.Interfaces
     public interface IJobBL
     {
         JobCollection GetAllJobs();
+        JobCollection GetEvaluationCriteria();
     }
 }
