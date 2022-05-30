@@ -25,9 +25,6 @@
 .c_eval {
     float: left;
     width: 100%;
-    background: #EDEBED url(../Images/dem2.jpg) no-repeat center center;
-    background-size: cover;
-    height: 100vh;
     padding: 15px;
 }
 
@@ -101,9 +98,141 @@ input.form-control {
     width: auto;
 }
 
+ /*interviewer table CSS */
+
+.interviewer_table {
+    padding-top: 30px;
+}
+.interviewer_table th{
+    color:#fff;
+}
+    .interviewer_table td {
+        color: #fff;
+    }
+
+
+/*    Ends     */
+
+/*    role crieria css starts             */
+
+
+.role_cri {
+    padding: 0px 15px;
+    max-width:400px;
+}
+
+    .role_cri #jd {
+        height: 150px !important;
+    }
+    .role_cri input.form-control {
+        width:100% !important;
+    }
+
+#bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index:-5;
+}
+
+    #bg img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        min-width: 50%;
+        min-height: 50%;
+    }
+
+/*     ends            */
+
+/*    candidate evaluation css starts             */
+
+.checkbox-inline input {
+    margin-right:5px;
+}
+.eval_cri {
+    padding: 0px 15px;
+    max-width: 500px;
+}
+
+    .eval_cri #jd {
+        height: 150px !important;
+    }
+
+    .eval_cri input.form-control {
+        width: 100% !important;
+    }
+
+
+
+/*     ends            */
+
+
+/*     Reporting starts            */
+
+.reporting {
+}
+
+    .reporting h3 {
+        color: #fff;
+        font-size: 22px;
+    }
+
+.reporting_wrap {
+    background: rgba(37,41,88,0.8);
+    text-align: center;
+    margin: 0 15px;
+    margin-top: 25px; 
+    padding: 15px;
+}
+.reporting .candidates {
+    display:inline-block;
+}
+.reporting .candidates p {
+    color: #fff;
+    font-size: 20px;
+}
+    .reporting .candidates p span {
+        border: 1px solid #fff;
+        border-radius: 25px;
+        padding: 5px 8px;
+        font-size: 22px;
+    }
+
+.reporting table {
+    background: rgba(0,0,0,0.7)
+}
+
+.reporting th {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+}
+
+.reporting td {
+    color: #fff;
+}
+
+
+/*     ends            */
+
+/* final result CSS starts*/
+
+.final_result .custom_table {   
+    margin-top:15px;
+    text-align:center;
+}
+
+
+/* ends    */
+
+
 @media only screen and (min-width: 0px) and (max-width: 767px) {
-
-
     .c_eval h2 {
         padding: 10px;
         font-size: 18px;
