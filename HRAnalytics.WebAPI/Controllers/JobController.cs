@@ -60,9 +60,9 @@ namespace HRAnalytics.WebAPI.Controllers
             {
                 throw;
             }
-
             return Ok(l_jobCollection);
         }
+
         [HttpPost]
         [Route("SaveSubCriteria")]
         public IActionResult SaveSubCriteria(string LoggedInUser, [FromBody] Job job)
@@ -78,6 +78,8 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok();
         }
+
+
         [HttpGet]
         [Route("GetCriteriaForJob")]
         public IActionResult GetCriteriaForJob(int argJobId)
