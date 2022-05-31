@@ -10,6 +10,9 @@
 	</head>
 	<body>
 <div class="c_eval">
+    <div id="bg">
+<img src="../Images/dem2.jpg" alt="">
+</div>
    <div class="col-md-12">
       <h2>Candidate Evaluation</h2>
    </div>
@@ -105,5 +108,31 @@ document.getElementById("comment").innerHTML = obj.comment;
  
          $("#ratings").html(listItems);
      });
+</script>
+<script>
+    $(document).ready(function () {
+  $("candidate_pr").submit(function (event) {
+    var formData = {
+      c_name: $("#c_name").val(),
+      role: $("#role").val(),
+      teamsk: $("#teamsk").val(),
+      desc: $("#desc").val(),
+      comment: $("#comment").val(),
+      ratings: $("#ratings").val()
+    };
+
+    $.ajax({
+      type: "POST",  
+      url: "process.php",
+      data: formData,
+      dataType: "json",
+      encode: true,
+    }).done(function (data) {
+      console.log(data);
+    });
+
+    event.preventDefault();
+  });
+});
 </script>
 </body>
