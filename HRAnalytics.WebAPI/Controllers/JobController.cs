@@ -101,6 +101,46 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_jobCollection);
         }
+
+        [HttpGet]
+        [Route("GetRoles")]
+        public IActionResult GetRoles()
+        {
+            #region Declarations
+            JobCollection l_jobCollection;
+            #endregion
+            try
+            {
+                l_jobCollection = _jobBL.GetAllJobs();
+
+                if (l_jobCollection == null || l_jobCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_jobCollection);
+        }
+
+        [HttpPost]
+        [Route("SaveRole")]
+        public IActionResult SaveRole(string LoggedInUser, [FromBody] Job job)
+        {
+            try
+            {
+                _jobBL.SaveRole(LoggedInUser, job);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
+        }
     }
 
 }
