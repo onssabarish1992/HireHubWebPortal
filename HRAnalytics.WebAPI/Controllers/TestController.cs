@@ -8,8 +8,8 @@ namespace HRAnalytics.WebAPI.Controllers
     public class TestController : ControllerBase
     {
         [HttpGet]
-        [Route("Test")]
-        public IActionResult GetTestJobs()
+        [Route("HealthCheck")]
+        public IActionResult CheckHealth()
         {
             return Ok("Hii...System is up...");
         }
