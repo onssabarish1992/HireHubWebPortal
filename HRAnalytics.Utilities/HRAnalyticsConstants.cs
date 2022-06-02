@@ -8,6 +8,7 @@
         public const string C_ERROR_CONST = "ERROR";
 
         public const string C_SCHEDULEINTERVIEW_CONST = "SCHEDULEINTERVIEWSUCCESSMESSAGE";
+        public const string C_SETJOBCRITERIAINSERTSUCCESS_CONST = "SETJOBCRITERIAINSERTSUCCESS";
         #endregion
     }
 }

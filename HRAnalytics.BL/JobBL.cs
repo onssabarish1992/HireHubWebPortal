@@ -227,13 +227,13 @@ namespace HRAnalytics.BL
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.POSITION, argJob.Position, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.COMPENSATOIN, argJob.Compensation, DbType.Double));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBDESCRITPTION, argJob.JobDescription, DbType.String));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CLOSINGDATE, argJob.ClosingDate, DbType.DateTime));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CLOSINGDATE, argJob.ClosingDate.HasValue? argJob.ClosingDate:DBNull.Value, DbType.DateTime));
 
                     //Call stored procedure
                     l_HRAnalyticsDBManager.Insert(StoredProcedure.SET_JOBCRITERIA, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

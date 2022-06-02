@@ -32,7 +32,7 @@ namespace HRAnalytics.Entities
 
         public double Compensation { get; set; }
 
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
     }
 

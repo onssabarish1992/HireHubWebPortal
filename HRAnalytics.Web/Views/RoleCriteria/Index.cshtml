@@ -1,8 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using HRAnalytics.Web.Models
 @{
 }
+
+@model JobRoleViewModel
 <head>
 		<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
 	</head>
@@ -16,59 +16,72 @@
    </div>
    <div class="col-md-12">
       <div class="candidate_evaluation role_cri">
-         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" onsubmit="submitForm();return false">
+         <partial name="_partialStatusMessage" />
+
+         <form id="candidate_pr" class="form-horizontal" action="/" method="POST">
+
+             @Html.AntiForgeryToken()
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-               <label class="control-label" for="role">Job Role:</label>
-               <select class="form-control" id="role">
-                  <option selected>Select Job Role</option>
-                  <option>Vp</option>
-                  <option>Project Manager</option>
-                  <option>Tech Lead</option>
-                  <option>4</option>
-               </select>
-            </div>
+				<label class="control-label" asp-for="@Model.JobCriteriaViewModel.JobId">Role:</label>
+				@Html.DropDownListFor(m => m.JobCriteriaViewModel.JobId, ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "role" })
+				<span asp-validation-for="@Model.JobCriteriaViewModel.JobId" class="text-danger"></span>
+			</div>
+
             <div class="form-group">
-               <label class="control-label" for="position">Position:</label>
-               <input type="text" class="form-control" id="position" placeholder="Enter Position" required>
+               <label class="control-label" asp-for="@Model.JobCriteriaViewModel.Position">Position:</label>
+               <input type="text" asp-for="@Model.JobCriteriaViewModel.Position" class="form-control" id="p_name" placeholder="Enter Position" aria-required="true">
+				<span asp-validation-for="@Model.JobCriteriaViewModel.Position" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-               <label class="control-label" for="Compensation">Compensation:</label>
-               <input type="text" class="form-control" id="compensation" placeholder="Enter Compensations" required>
+               <label class="control-label" asp-for="@Model.JobCriteriaViewModel.Compensation">Compensation:</label>
+               <input type="text" asp-for="@Model.JobCriteriaViewModel.Compensation" class="form-control" id="p_name" placeholder="Enter Compensation" aria-required="true">
+				<span asp-validation-for="@Model.JobCriteriaViewModel.Compensation" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-               <label class="control-label" for="Compensation">Job Description:</label>
-               <textarea name="" id="jd" rows="10" columns="150" class="form-control" required></textarea>
+               <label class="control-label" asp-for="@Model.JobCriteriaViewModel.JobDescription">Job Description:</label>
+               <input type="text" asp-for="@Model.JobCriteriaViewModel.JobDescription" class="form-control" id="p_name" placeholder="Enter Job Description" aria-required="true">
+				<span asp-validation-for="@Model.JobCriteriaViewModel.JobDescription" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-               <label class="control-label" for="Compensation">Closing Date:</label>
-               <input type="text" class="form-control" id="closing_date"  required>
-            </div>
+				<label class="control-label" asp-for="@Model.JobCriteriaViewModel.ClosingDate">Closing Date:</label>
+				<div class='input-group date'>
+					@Html.EditorFor(m => m.JobCriteriaViewModel.ClosingDate, new {@class = "form-control datepicker" , @id = "datepicker1" })
+				</div>
+				<span asp-validation-for="@Model.JobCriteriaViewModel.ClosingDate" class="text-danger"></span>
+			</div>
+
             <div class="sub-btn">
-               <button type="submit" id='submitButton' class="btn btn-primary">Create</button>
+               <button type="submit" id='submitButton' formaction="@Url.Action("SaveJobRole","RoleCriteria")" class="btn btn-primary">Create</button>
             </div>
          </form>
       </div>
-      <div class="custom_table">
-         <table class="table table-bordered">
-            <thead>
-               <tr>
-                  <th>Role</th>
-                  <th>Position</th>
-                  <th>Compensations</th>
-                  <th>Job Description</th>
-                  <th>Actions</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Software Developer</td>
-                  <td>Senior</td>
-                  <td>tbd</td>
-                  <td>This is a dummy content</td>
-                  <td>Passed</td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
+      <partial name="_partialJobRoles"/>
+    
    </div>
 </div>
+
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+
+    <script>
+        $(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
+}
