@@ -20,6 +20,10 @@ namespace HRAnalytics.BL
         public const string CRITERIAID = "@criteria_id";
         public const string CREATEDBY = "@CreatedBy";
         public const string SUBCRITERIADESCRIPTION = "@sub_criteria_description";
+        public const string POSITION = "@Position";
+        public const string COMPENSATOIN = "@Compensation";
+        public const string JOBDESCRITPTION = "@JobDescription";
+        public const string CLOSINGDATE = "@ClosingDate";
 
 
     }

@@ -1,9 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using HRAnalytics.Web.Models
 @{
 }
-@model CandidateViewModel
+
+@model JobRoleViewModel
 <head>
 		<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
 	</head>
@@ -13,105 +12,76 @@
 <img src="../Images/dem2.jpg" alt="">
 </div>
    <div class="col-md-12">
-       <div class="eval_head">
       <h2>Role Criteria Entry</h2>
-      </div>
    </div>
+   <div class="col-md-12">
       <div class="candidate_evaluation role_cri">
-         <form id="role_criteria" class="form-horizontal" action="/" method="POST">
-		    <div class="row">
-		    <div class="col-md-6">
+         <partial name="_partialStatusMessage" />
+
+         <form id="candidate_pr" class="form-horizontal" action="/" method="POST">
+
+             @Html.AntiForgeryToken()
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-               <label class="control-label" for="role">Job Role:</label>
-               <select class="form-control" id="role" name="job_role">
-                  <option value="">Select Job Role</option>
-                  <option value="">Vp</option>
-                  <option value="">Project Manager</option>
-                  <option value="">Tech Lead</option>
-                  <option value="">4</option>
-               </select>
+				<label class="control-label" asp-for="@Model.JobCriteriaViewModel.JobId">Role:</label>
+				@Html.DropDownListFor(m => m.JobCriteriaViewModel.JobId, ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "role" })
+				<span asp-validation-for="@Model.JobCriteriaViewModel.JobId" class="text-danger"></span>
+			</div>
+
+            <div class="form-group">
+               <label class="control-label" asp-for="@Model.JobCriteriaViewModel.Position">Position:</label>
+               <input type="text" asp-for="@Model.JobCriteriaViewModel.Position" class="form-control" id="p_name" placeholder="Enter Position" aria-required="true">
+				<span asp-validation-for="@Model.JobCriteriaViewModel.Position" class="text-danger"></span>
             </div>
-			</div>
-		    <div class="col-md-6">
+
             <div class="form-group">
-               <label class="control-label" for="position">Position:</label>
-               <input type="text" class="form-control" id="position" name="role_position" placeholder="Enter Position">
+               <label class="control-label" asp-for="@Model.JobCriteriaViewModel.Compensation">Compensation:</label>
+               <input type="text" asp-for="@Model.JobCriteriaViewModel.Compensation" class="form-control" id="p_name" placeholder="Enter Compensation" aria-required="true">
+				<span asp-validation-for="@Model.JobCriteriaViewModel.Compensation" class="text-danger"></span>
             </div>
-			</div>
-			</div>
-			<div class="row">
-		    <div class="col-md-12">
+
             <div class="form-group">
-               <label class="control-label" for="Compensation">Compensation(In Euros):</label>
-               <input type="text" class="form-control" pattern="[0-9]*" id="compensation" name="compensation" placeholder="Enter Compensations">
+               <label class="control-label" asp-for="@Model.JobCriteriaViewModel.JobDescription">Job Description:</label>
+               <input type="text" asp-for="@Model.JobCriteriaViewModel.JobDescription" class="form-control" id="p_name" placeholder="Enter Job Description" aria-required="true">
+				<span asp-validation-for="@Model.JobCriteriaViewModel.JobDescription" class="text-danger"></span>
             </div>
-			</div>
-			</div>
-					    <div class="row">
-		    <div class="col-md-12">
+
             <div class="form-group">
-               <label class="control-label" for="job_decription">Job Description:</label>
-               <textarea name="job_decription" id="jd" rows="10" columns="150" class="form-control"></textarea>
-            </div>
-			</div>
-			</div>
-			<div class="row">
-		    <div class="col-md-12">
-            <div class="form-group">
-               <label class="control-label" asp-for="@Model.InterviewSchedule" for="closing_date">Closing Date:</label>
-               	<div class='input-group date' ">
-					@Html.EditorFor(m => m.InterviewSchedule, new {@class = "form-control datepicker" , @id = "datepicker1"})
+				<label class="control-label" asp-for="@Model.JobCriteriaViewModel.ClosingDate">Closing Date:</label>
+				<div class='input-group date'>
+					@Html.EditorFor(m => m.JobCriteriaViewModel.ClosingDate, new {@class = "form-control datepicker" , @id = "datepicker1" })
 				</div>
-            </div>
+				<span asp-validation-for="@Model.JobCriteriaViewModel.ClosingDate" class="text-danger"></span>
 			</div>
-			</div>
+
             <div class="sub-btn">
-               <button type="submit" id='submitButton' class="btn btn-primary">Create</button>
+               <button type="submit" id='submitButton' formaction="@Url.Action("SaveJobRole","RoleCriteria")" class="btn btn-primary">Create</button>
             </div>
          </form>
       </div>
-      <div class="custom_table">
-         <table class="table table-bordered">
-            <thead>
-               <tr>
-                  <th>Role</th>
-                  <th>Position</th>
-                  <th>Compensations</th>
-                  <th>Job Description</th>
-                  <th>Actions</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Software Developer</td>
-                  <td>Senior</td>
-                  <td>tbd</td>
-                  <td>This is a dummy content</td>
-                  <td>Passed</td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
+      <partial name="_partialJobRoles"/>
+    
+   </div>
 </div>
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script>
-$(document).ready(function() {
-    $("#role_criteria").validate({
-        rules: {
-            role_position: 'required',
-            job_role: 'required',
-            compensation: 'required',
-            job_decription: 'required',
-            closing_date: 'required'
-        },
-        messages: {
-            role_position: '*Role Position is Mandatory',
-            job_role: '*Job Role is Mandatory',
-            compensation: '*Compensation is Mandatory',
-            job_decription: '*Job Description is Mandatory',
-            closing_date: '*Closing Date is required'
-        },
-    });
-});
-  </script>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+
+    <script>
+        $(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
+}

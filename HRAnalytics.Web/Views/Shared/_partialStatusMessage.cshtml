@@ -1,0 +1,16 @@
+﻿@*This partial view is used to display the success and error message at the top of the page after save/edit operations*@
+
+@if (ViewBag.SuccessMessage != null)
+{
+	<div class="alert alert-success">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		@ViewBag.SuccessMessage
+	</div>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		@ViewBag.ErrorMessage
+	</div>
+}

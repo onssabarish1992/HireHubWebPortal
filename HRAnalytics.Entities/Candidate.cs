@@ -12,13 +12,13 @@
 
         public DateTime InterviewTimeStamp { get; set; }
 
-        public string InterviewerName { get; set; }
+        public string? InterviewerName { get; set; }
 
-        public string JobName { get; set; }
+        public string? JobName { get; set; }
 
         public int JobId { get; set; }
 
-        public string DateCreated { get; set; }
+        public string? DateCreated { get; set; }
 
         public int ScheduleID { get; set; }
     }
