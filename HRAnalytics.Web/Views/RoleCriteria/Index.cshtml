@@ -18,40 +18,40 @@
       </div>
    </div>
       <div class="candidate_evaluation role_cri">
-         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" onsubmit="submitForm();return false">
+         <form id="role_criteria" class="form-horizontal" action="/" method="POST">
 		    <div class="row">
 		    <div class="col-md-6">
             <div class="form-group">
                <label class="control-label" for="role">Job Role:</label>
-               <select class="form-control" id="role">
-                  <option selected>Select Job Role</option>
-                  <option>Vp</option>
-                  <option>Project Manager</option>
-                  <option>Tech Lead</option>
-                  <option>4</option>
+               <select class="form-control" id="role" name="job_role">
+                  <option value="">Select Job Role</option>
+                  <option value="">Vp</option>
+                  <option value="">Project Manager</option>
+                  <option value="">Tech Lead</option>
+                  <option value="">4</option>
                </select>
             </div>
 			</div>
 		    <div class="col-md-6">
             <div class="form-group">
                <label class="control-label" for="position">Position:</label>
-               <input type="text" class="form-control" id="position" placeholder="Enter Position" required>
+               <input type="text" class="form-control" id="position" name="role_position" placeholder="Enter Position">
             </div>
 			</div>
 			</div>
 			<div class="row">
 		    <div class="col-md-12">
             <div class="form-group">
-               <label class="control-label" for="Compensation">Compensation:</label>
-               <input type="text" class="form-control" id="compensation" placeholder="Enter Compensations" required>
+               <label class="control-label" for="Compensation">Compensation(In Euros):</label>
+               <input type="text" class="form-control" pattern="[0-9]*" id="compensation" name="compensation" placeholder="Enter Compensations">
             </div>
 			</div>
 			</div>
 					    <div class="row">
 		    <div class="col-md-12">
             <div class="form-group">
-               <label class="control-label" for="Compensation">Job Description:</label>
-               <textarea name="" id="jd" rows="10" columns="150" class="form-control" required></textarea>
+               <label class="control-label" for="job_decription">Job Description:</label>
+               <textarea name="job_decription" id="jd" rows="10" columns="150" class="form-control"></textarea>
             </div>
 			</div>
 			</div>
@@ -59,8 +59,8 @@
 		    <div class="col-md-12">
             <div class="form-group">
                <label class="control-label" asp-for="@Model.InterviewSchedule" for="closing_date">Closing Date:</label>
-               	<div class='input-group date'>
-					@Html.EditorFor(m => m.InterviewSchedule, new {@class = "form-control datepicker" , @id = "datepicker1" })
+               	<div class='input-group date' ">
+					@Html.EditorFor(m => m.InterviewSchedule, new {@class = "form-control datepicker" , @id = "datepicker1"})
 				</div>
             </div>
 			</div>
@@ -93,3 +93,25 @@
          </table>
       </div>
 </div>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+$(document).ready(function() {
+    $("#role_criteria").validate({
+        rules: {
+            role_position: 'required',
+            job_role: 'required',
+            compensation: 'required',
+            job_decription: 'required',
+            closing_date: 'required'
+        },
+        messages: {
+            role_position: '*Role Position is Mandatory',
+            job_role: '*Job Role is Mandatory',
+            compensation: '*Compensation is Mandatory',
+            job_decription: '*Job Description is Mandatory',
+            closing_date: '*Closing Date is required'
+        },
+    });
+});
+  </script>
