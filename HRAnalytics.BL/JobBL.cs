@@ -193,9 +193,11 @@ namespace HRAnalytics.BL
                         DataRow l_Row = l_JobDataTable.Rows[i];
 
                         l_Job.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
-                        l_Job.Position = l_Row["position_count"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["position"]);
+                        l_Job.Position = l_Row["position_count"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["position_count"]);
                         l_Job.Compensation = l_Row["compensation"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["compensation"]);
                         l_Job.JobDescription = l_Row["job_description"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_description"]);
+                        l_Job.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
+                        l_Job.ClosingDate = l_Row["closing_date"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(l_Row["closing_date"]);
                         l_JobCollection.Add(l_Job);
 
                     }
@@ -223,7 +225,8 @@ namespace HRAnalytics.BL
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJob.JobId, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.POSITION, argJob.Position, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.COMPENSATOIN, argJob.Compensation, DbType.Double));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBDESCRITPTION, argLoggedInUser, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBDESCRITPTION, argJob.JobDescription, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CLOSINGDATE, argJob.ClosingDate, DbType.DateTime));
 
                     //Call stored procedure
                     l_HRAnalyticsDBManager.Insert(StoredProcedure.SET_JOBCRITERIA, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);

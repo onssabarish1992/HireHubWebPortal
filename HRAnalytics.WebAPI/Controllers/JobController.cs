@@ -111,7 +111,7 @@ namespace HRAnalytics.WebAPI.Controllers
             #endregion
             try
             {
-                l_jobCollection = _jobBL.GetAllJobs();
+                l_jobCollection = _jobBL.GetRoles();
 
                 if (l_jobCollection == null || l_jobCollection.Count == 0)
                 {
@@ -136,7 +136,7 @@ namespace HRAnalytics.WebAPI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                BadRequest();
             }
 
             return Ok();

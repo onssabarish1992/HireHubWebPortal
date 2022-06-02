@@ -23,6 +23,7 @@ namespace HRAnalytics.BL
         public const string POSITION = "@Position";
         public const string COMPENSATOIN = "@Compensation";
         public const string JOBDESCRITPTION = "@JobDescription";
+        public const string CLOSINGDATE = "@ClosingDate";
 
 
     }
