@@ -12,8 +12,10 @@
     box-shadow: 5px 5px 15px 5px #000000;
 }
 
-.candidate_evaluation { 
-    margin-top: 30px;
+.candidate_evaluation {
+    margin: 30px 0px;
+    background: rgba(37,41,88,0.8);
+    padding: 15px 15px 10px 15px;
 }
 .candidate_evaluation label {
     color:#fff;
@@ -117,8 +119,14 @@ input.form-control {
 
 
 .role_cri {
-    padding: 0px 15px;
-    max-width:400px;
+    padding: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+.role_cri .date input {
+    width: 100%;
+    height: 40px;
 }
 
     .role_cri #jd {
@@ -156,8 +164,15 @@ input.form-control {
     margin-right:5px;
 }
 .eval_cri {
-    padding: 0px 15px;
     max-width: 500px;
+    background: rgba(37,41,88,0.8);
+    padding: 15px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+.eval_head {
+    text-align: center;
+    margin-bottom: 15px;
 }
 
     .eval_cri #jd {

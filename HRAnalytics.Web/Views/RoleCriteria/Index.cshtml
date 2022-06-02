@@ -3,6 +3,7 @@
 *@
 @{
 }
+@model CandidateViewModel
 <head>
 		<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
 	</head>
@@ -12,11 +13,14 @@
 <img src="../Images/dem2.jpg" alt="">
 </div>
    <div class="col-md-12">
+       <div class="eval_head">
       <h2>Role Criteria Entry</h2>
+      </div>
    </div>
-   <div class="col-md-12">
       <div class="candidate_evaluation role_cri">
          <form id="candidate_pr" class="form-horizontal" action="/" method="POST" onsubmit="submitForm();return false">
+		    <div class="row">
+		    <div class="col-md-6">
             <div class="form-group">
                <label class="control-label" for="role">Job Role:</label>
                <select class="form-control" id="role">
@@ -27,22 +31,40 @@
                   <option>4</option>
                </select>
             </div>
+			</div>
+		    <div class="col-md-6">
             <div class="form-group">
                <label class="control-label" for="position">Position:</label>
                <input type="text" class="form-control" id="position" placeholder="Enter Position" required>
             </div>
+			</div>
+			</div>
+			<div class="row">
+		    <div class="col-md-12">
             <div class="form-group">
                <label class="control-label" for="Compensation">Compensation:</label>
                <input type="text" class="form-control" id="compensation" placeholder="Enter Compensations" required>
             </div>
+			</div>
+			</div>
+					    <div class="row">
+		    <div class="col-md-12">
             <div class="form-group">
                <label class="control-label" for="Compensation">Job Description:</label>
                <textarea name="" id="jd" rows="10" columns="150" class="form-control" required></textarea>
             </div>
+			</div>
+			</div>
+			<div class="row">
+		    <div class="col-md-12">
             <div class="form-group">
-               <label class="control-label" for="Compensation">Closing Date:</label>
-               <input type="text" class="form-control" id="closing_date"  required>
+               <label class="control-label" asp-for="@Model.InterviewSchedule" for="closing_date">Closing Date:</label>
+               	<div class='input-group date'>
+					@Html.EditorFor(m => m.InterviewSchedule, new {@class = "form-control datepicker" , @id = "datepicker1" })
+				</div>
             </div>
+			</div>
+			</div>
             <div class="sub-btn">
                <button type="submit" id='submitButton' class="btn btn-primary">Create</button>
             </div>
@@ -70,5 +92,4 @@
             </tbody>
          </table>
       </div>
-   </div>
 </div>
