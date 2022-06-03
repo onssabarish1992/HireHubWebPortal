@@ -31,7 +31,7 @@
 
             <div class="form-group">
                <label class="control-label" asp-for="@Model.JobCriteriaViewModel.Position">Position:</label>
-               <input type="text" asp-for="@Model.JobCriteriaViewModel.Position" class="form-control" id="p_name" placeholder="Enter Position" aria-required="true">
+               <input type="number" asp-for="@Model.JobCriteriaViewModel.Position" class="form-control" id="p_name" placeholder="Enter Position" aria-required="true">
 				<span asp-validation-for="@Model.JobCriteriaViewModel.Position" class="text-danger"></span>
             </div>
 
