@@ -10,10 +10,22 @@ namespace HRAnalytics.Web.Controllers
 {
     public class RoleCriteriaController : HRAnalyticsBaseController
     {
+        #region Page level declarations
+        HttpClient client;
+        private readonly IConfiguration _configuration;
+        private readonly string apiBaseURL;
+        #endregion
+
 
         public RoleCriteriaController(IConfiguration configuration):base(configuration)
         {
-            
+            _configuration = configuration;
+            apiBaseURL = _configuration.GetValue<string>(
+                "APIBaseURL");
+            client = new HttpClient();
+            client.BaseAddress = new Uri(apiBaseURL);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
 
