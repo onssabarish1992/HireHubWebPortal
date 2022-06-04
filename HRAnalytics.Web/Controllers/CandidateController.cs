@@ -29,12 +29,34 @@ namespace HRAnalytics.Web.Controllers
 
         public async Task<IActionResult> Candidate(int argScheduleID)
         {
-            var candidateScoreInfo = await GetCandidateScore(argScheduleID);
-            CandidateScoreViewModel l_candidateViewModel = ConvertCandidateScoreToViewModel(candidateScoreInfo);
+            CandidateScoreViewModel l_Score = new CandidateScoreViewModel();
+
+            //Check if data exists in TempData
+            if(TempData[HRAnalyticsConstants.C_SAVEDRATING_CONST]!=null)
+            {
+                l_Score = TempData[HRAnalyticsConstants.C_SAVEDRATING_CONST] as CandidateScoreViewModel;
+            }
+            else
+            {
+                var candidateScoreInfo = await GetCandidateScore(argScheduleID);
+                l_Score = ConvertCandidateScoreToViewModel(candidateScoreInfo);
+            }
+            
+            //Success Message
+            if (TempData[HRAnalyticsConstants.C_SAVERATINGSUCCESS_CONST] != null)
+            {
+                ViewBag.SuccessMessage = "Ratings Saved Successfully!!";
+            }
+
+            //Error message
+            if (TempData[HRAnalyticsConstants.C_SAVERATINGERROR_CONST] != null)
+            {
+                ViewBag.ErrorMessage = "Some error in application!!";
+            }
 
             ViewBag.RatingScale = CreateRatingList();
 
-            return View(l_candidateViewModel);
+            return View(l_Score);
         }
 
 
@@ -87,7 +109,8 @@ namespace HRAnalytics.Web.Controllers
                         CandidateId = candidateScoreInfo.Candidate.CandidateID ,
                         CandidateName = candidateScoreInfo.Candidate.CandidateName,
                         RoleName = candidateScoreInfo.Candidate.JobName,
-                        ScheduleID = candidateScoreInfo.Candidate.ScheduleID
+                        ScheduleID = candidateScoreInfo.Candidate.ScheduleID,
+                        IsRated = candidateScoreInfo.Candidate.IsRated
                     };
 
                     l_CandidateScoreViewModel.candidateDetail = l_InterviewCandidateViewModel;
@@ -169,7 +192,7 @@ namespace HRAnalytics.Web.Controllers
                     if (l_Message.IsSuccessStatusCode)
                     {
                         TempData[HRAnalyticsConstants.C_SCHEDULEINTERVIEW_CONST] = HRAnalyticsConstants.C_SUCCESS_CONST;
-
+                        TempData.Remove(HRAnalyticsConstants.C_SAVEDRATING_CONST);
                         return RedirectToAction("Index", "Candidate");
                     }
                     else
@@ -271,8 +294,6 @@ namespace HRAnalytics.Web.Controllers
             }
             return l_Candidate;
         }
-            
-
 
         /// <summary>
         /// API call to get the candidate score
@@ -303,6 +324,117 @@ namespace HRAnalytics.Web.Controllers
                 throw;
             }
             return l_candidateScore;
+        }
+
+        /// <summary>
+        /// This method is used to save the candidate rating
+        /// </summary>
+        /// <param name="argCandidateScoreViewModel"></param>
+        /// <param name="argScheduleID"></param>
+        /// <returns></returns>
+        private async Task<HttpResponseMessage> SaveCandidateRating(CandidateScoreViewModel argCandidateScoreViewModel, int argScheduleID)
+        {
+            #region Declarations
+            HttpResponseMessage l_Response = new HttpResponseMessage();
+            List<CandidateEvaluation> l_CandidateEvaluation;
+            string l_SaveCandidateRatingURL = apiBaseURL + "api/CandidateScore/SaveRatings?argLoggedInUser=" + GetLoggedInUserID() + "&argScheduleID=" + argScheduleID;
+            #endregion
+
+            try
+            {
+                l_CandidateEvaluation = ConvertCandidateRatingtoEntity(argCandidateScoreViewModel);
+                if (l_CandidateEvaluation != null)
+                {
+                    l_Response = await client.PostAsJsonAsync(l_SaveCandidateRatingURL, l_CandidateEvaluation);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_Response;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="argCandidateScoreViewModel"></param>
+        /// <returns></returns>
+        private List<CandidateEvaluation> ConvertCandidateRatingtoEntity(CandidateScoreViewModel argCandidateScoreViewModel)
+        {
+            #region Declarations
+            List<CandidateEvaluation> l_CandidateEvaluation = new List<CandidateEvaluation>();
+            CandidateEvaluation l_Evaluation;
+            #endregion
+            try
+            {
+                if(argCandidateScoreViewModel!=null && argCandidateScoreViewModel.candidateRatings!=null && argCandidateScoreViewModel.candidateRatings.Count > 0)
+                {
+                    foreach (var item in argCandidateScoreViewModel.candidateRatings)
+                    {
+                        l_Evaluation = new CandidateEvaluation();
+                        l_Evaluation.CriteriaId = item.CriteriaId;
+                        l_Evaluation.CriteriaName = item.CriteriaName;
+                        l_Evaluation.CriteriaScore = item.Rating.HasValue?item.Rating.Value:0;
+                        l_Evaluation.CriteriaDescription = item.CriteriaDescription;
+                        l_Evaluation.CriteriaComments = item.Comments;
+                        l_Evaluation.JobId = item.JobId.HasValue ? item.JobId.Value : 0;
+
+                        l_CandidateEvaluation.Add(l_Evaluation);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return l_CandidateEvaluation;
+        }
+
+        /// <summary>
+        /// Save the candidate rating
+        /// </summary>
+        /// <param name="argCandidateScore"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveCandidateRating(CandidateScoreViewModel argCandidateScore)
+        {
+            #region Declaration
+            HttpResponseMessage l_Message = new HttpResponseMessage();
+            #endregion
+            int l_ScheduleID = 0;
+            if (ModelState.IsValid)
+            {
+                if (argCandidateScore != null && argCandidateScore.candidateDetail!=null)
+                {
+                    l_ScheduleID = argCandidateScore.candidateDetail.ScheduleID.HasValue ? argCandidateScore.candidateDetail.ScheduleID.Value : 0; 
+                    l_Message = await SaveCandidateRating(argCandidateScore, l_ScheduleID);
+
+                    if (l_Message.IsSuccessStatusCode)
+                    {
+                        TempData[HRAnalyticsConstants.C_SAVERATINGSUCCESS_CONST] = HRAnalyticsConstants.C_SUCCESS_CONST;
+                        return RedirectToAction("Candidate", "Candidate", new { argScheduleID = l_ScheduleID });
+                    }
+                    else
+                    {
+                        
+                        TempData[HRAnalyticsConstants.C_SAVEDRATING_CONST] = argCandidateScore;
+                        TempData[HRAnalyticsConstants.C_SAVERATINGERROR_CONST] = HRAnalyticsConstants.C_SAVERATINGERROR_CONST;
+                        return RedirectToAction("Candidate", "Candidate", new { argScheduleID = l_ScheduleID });
+                    }
+                }
+            }
+            else
+            {
+                TempData[HRAnalyticsConstants.C_SAVEDRATING_CONST] = argCandidateScore;
+                TempData[HRAnalyticsConstants.C_SAVERATINGERROR_CONST] = HRAnalyticsConstants.C_SAVERATINGERROR_CONST;
+                return RedirectToAction("Candidate", "Candidate", new { argScheduleID = l_ScheduleID });
+            }
+            return RedirectToAction("Candidate", "Candidate", new { argScheduleID = l_ScheduleID });
         }
     }
 }
