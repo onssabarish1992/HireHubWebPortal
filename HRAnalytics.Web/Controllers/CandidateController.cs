@@ -27,10 +27,97 @@ namespace HRAnalytics.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Candidate()
+        public async Task<IActionResult> Candidate(int argScheduleID)
         {
+            var candidateScoreInfo = await GetCandidateScore(argScheduleID);
+            CandidateScoreViewModel l_candidateViewModel = ConvertCandidateScoreToViewModel(candidateScoreInfo);
 
-            return View();
+            ViewBag.RatingScale = CreateRatingList();
+
+            return View(l_candidateViewModel);
+        }
+
+
+        /// <summary>
+        /// Create dropdown for rating scale
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectListItem> CreateRatingList()
+        {
+            List<SelectListItem> ratingScale = new List<SelectListItem>() {
+                new SelectListItem {
+                    Text = "1", Value = "1"
+                },
+                new SelectListItem {
+                    Text = "2", Value = "2"
+                },
+                new SelectListItem {
+                    Text = "3", Value = "3"
+                },
+                new SelectListItem {
+                    Text = "4", Value = "4"
+                },
+                new SelectListItem {
+                    Text = "5", Value = "5"
+                },
+            };
+
+            return ratingScale;
+
+        }
+
+
+
+        /// <summary>
+        /// Cpnvert to view model
+        /// </summary>
+        /// <param name="candidateScoreInfo"></param>
+        /// <returns></returns>
+        private CandidateScoreViewModel ConvertCandidateScoreToViewModel(CandidateScore candidateScoreInfo)
+        {
+            CandidateScoreViewModel l_CandidateScoreViewModel = new();
+            //InterviewCandidateViewModel l_InterviewCandidateViewModel = new();
+            List<CandidateRatingViewModel> l_CandidateRatings = new();
+            CandidateRatingViewModel l_CandidateRatingViewModel;
+            try
+            {
+                if(candidateScoreInfo!=null && candidateScoreInfo.Candidate!=null)
+                {
+                    InterviewCandidateViewModel l_InterviewCandidateViewModel = new InterviewCandidateViewModel{ 
+                        CandidateId = candidateScoreInfo.Candidate.CandidateID ,
+                        CandidateName = candidateScoreInfo.Candidate.CandidateName,
+                        RoleName = candidateScoreInfo.Candidate.JobName,
+                        ScheduleID = candidateScoreInfo.Candidate.ScheduleID
+                    };
+
+                    l_CandidateScoreViewModel.candidateDetail = l_InterviewCandidateViewModel;
+
+                    if (candidateScoreInfo.Evaluation!=null && candidateScoreInfo.Evaluation.Count > 0)
+                    {
+                        foreach (var rating in candidateScoreInfo.Evaluation)
+                        {
+                            l_CandidateRatingViewModel = new CandidateRatingViewModel();
+                            l_CandidateRatingViewModel.CriteriaId = rating.CriteriaId;
+                            l_CandidateRatingViewModel.CriteriaName = rating.CriteriaName;
+                            l_CandidateRatingViewModel.CriteriaDescription = rating.CriteriaDescription;
+                            l_CandidateRatingViewModel.Rating = rating.CriteriaScore;
+                            l_CandidateRatingViewModel.Comments = rating.CriteriaComments;
+                            l_CandidateRatingViewModel.JobId = rating.JobId;
+
+
+                            l_CandidateRatings.Add(l_CandidateRatingViewModel);
+                        }
+
+                        l_CandidateScoreViewModel.candidateRatings = l_CandidateRatings;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_CandidateScoreViewModel;
         }
 
         /// <summary>
@@ -183,6 +270,39 @@ namespace HRAnalytics.Web.Controllers
                 throw;
             }
             return l_Candidate;
+        }
+            
+
+
+        /// <summary>
+        /// API call to get the candidate score
+        /// </summary>
+        /// <param name="argScheduleID"></param>
+        /// <returns></returns>
+        public async Task<CandidateScore> GetCandidateScore(int argScheduleID)
+        {
+            #region Declarations
+            CandidateScore l_candidateScore = new();
+            string l_UserURL = string.Empty;
+            #endregion
+            try
+            {
+                l_UserURL = apiBaseURL + "api/CandidateScore/GetCandidateScore?argScheduleID=" + argScheduleID;
+
+                HttpResponseMessage l_UserData = await client.GetAsync(l_UserURL);
+
+                if (l_UserData != null && l_UserData.IsSuccessStatusCode)
+                {
+                    var l_UserResponse = l_UserData.Content.ReadAsStringAsync().Result;
+                    l_candidateScore = JsonConvert.DeserializeObject<CandidateScore>(l_UserResponse);
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_candidateScore;
         }
     }
 }
