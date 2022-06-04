@@ -39,5 +39,21 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_candidateScore);
         }
+
+        [HttpPost]
+        [Route("SaveRatings")]
+        public IActionResult SaveRatings(string argLoggedInUser, int argScheduleID, [FromBody] List<CandidateEvaluation> argCandidateEvaluations)
+        {
+            try
+            {
+                _candiadateScoreBL.SaveInterviewRatings(argLoggedInUser, argScheduleID, argCandidateEvaluations);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
+        }
     }
 }

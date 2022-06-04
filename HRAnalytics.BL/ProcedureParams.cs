@@ -24,7 +24,7 @@ namespace HRAnalytics.BL
         public const string COMPENSATOIN = "@Compensation";
         public const string JOBDESCRITPTION = "@JobDescription";
         public const string CLOSINGDATE = "@ClosingDate";
-
+        public const string RATINGXML = "@InterviewRatingsXML";
 
     }
 }

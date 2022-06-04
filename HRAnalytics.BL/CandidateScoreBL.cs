@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace HRAnalytics.BL
 {
@@ -86,6 +87,64 @@ namespace HRAnalytics.BL
                 throw;
             }
             return candidateScore;
+        }
+
+        /// <summary>
+        /// BL method to save interview ratings
+        /// </summary>
+        /// <param name="argLoggedInUserID"></param>
+        /// <param name="argScheduleID"></param>
+        /// <param name="argCandidateEvaluations"></param>
+        public void SaveInterviewRatings(string argLoggedInUserID, int argScheduleID, List<CandidateEvaluation> argCandidateEvaluations)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            XElement l_ratingXML;
+            try
+            {
+                l_ratingXML = GenerateRatingXML(argCandidateEvaluations, argScheduleID);
+
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUserID, DbType.String));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.RATINGXML, l_ratingXML.ToString(), DbType.Xml));
+
+                //Call stored procedure
+                l_HRAnalyticsDBManager.Insert(StoredProcedure.INSERT_INTERVIEWERRATINGS, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Generate XML from schedule ID and ratings
+        /// </summary>
+        /// <param name="argCandidateEvaluations"></param>
+        /// <param name="argScheduleID"></param>
+        /// <returns></returns>
+        private XElement GenerateRatingXML(List<CandidateEvaluation> argCandidateEvaluations, int argScheduleID)
+        {
+            XElement l_ratingXML;
+            try
+            {
+                l_ratingXML = new XElement("Criterias",
+                    from rating in argCandidateEvaluations
+                    select new XElement("Criteria",
+                    new XElement("ScheduleId", argScheduleID),
+                    new XElement("JobId", rating.JobId),
+                    new XElement("CriteriaId", rating.CriteriaId),
+                    new XElement("CriteriaScore", rating.CriteriaScore),
+                    new XElement("CriteriaComments", rating.CriteriaComments)
+                    ));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_ratingXML;
         }
     }
 }
