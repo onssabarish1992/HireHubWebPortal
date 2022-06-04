@@ -1,8 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using HRAnalytics.Web.Models
 @{
+    IEnumerable<SelectListItem> ratings = ViewBag.RatingScale;
 }
+
+@model CandidateScoreViewModel
 
 
 	<head>
@@ -20,15 +21,19 @@
       <div class="candidate_evaluation">
          <div class="form-group">
             <label class="control-label" for="c_name">Candidate Name:</label>
-            <p id="cname"></p>
+            <p id="cname">@Model.candidateDetail.CandidateName</p>
          </div>
          <div class="form-group">
             <label class="control-label" for="role">Role:</label>
-            <p id="role"></p>
+            <p id="role">@Model.candidateDetail.RoleName</p>
          </div>
       </div>
       <div class="custom_table">
-         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" onsubmit="submitForm();return false">
+         <form id="candidate_pr" class="form-horizontal" action="/" method="POST">
+
+             @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <table class="table table-bordered">
                <thead>
                   <tr>
@@ -39,100 +44,47 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr>
-                     <td id="teamsk"></td>
-                     <td id="desc"></td>
-                     <td>
-<select id="ratings" required class="form-control"></select>   
-                     </td>
-                     <td>
-                        <textarea name="" id="comment" rows="5" class="form-control" required></textarea>
-                     </td>
-                  </tr>
+
+                  @if(Model.candidateRatings!=null && Model.candidateRatings.Count > 0)
+                    {
+                          for(int i=0;i<Model.candidateRatings.Count;i++)
+                          {
+                              <tr>
+                             <td>@Model.candidateRatings[i].CriteriaName</td>
+                             <td>@Model.candidateRatings[i].CriteriaDescription</td>
+                             <td>
+                                 @Html.DropDownListFor(m => m.candidateRatings[i].Rating, ratings, "--Select--", new { @class = "form-control", @id = "role" })
+                                 <span asp-validation-for="@Model.candidateRatings[i].Rating" class="text-danger"></span>
+                             </td>
+                             <td>
+                                 @Html.TextAreaFor(m=>m.candidateRatings[i].Comments, new { @class = "form-control", @rows=3 })
+                                 <span asp-validation-for="@Model.candidateRatings[i].Comments" class="text-danger"></span>
+                             </td>
+                             </tr>
+                          }
+                     }
+                    else
+                    {
+                      <td colspan="4">No criterias available</td>      
+                    }
 
                </tbody>
 
             </table>
 							                 <div class="sub-btn">
-                  <button type="submit" id='submitButton' class="btn btn-primary">Save</button>
+                  <button type="submit" id='submitButton' class="btn btn-primary" formaction="@Url.Action("SaveRatings","Candidate")">Save</button>
                </div>
          </form>
       </div>
    </div>   
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script> 
-<script>
-      
-function submitForm(){
-var can_name = $('#c_name').val();
-var txtarea= $('#txtarea').val();
-var select_rating= $('#select_rating').val();
-}
- 
-    </script>
-    <script>
-const txt = '{"name":"Ashima Sharma", "role":"Project Manager", "evaluation_criteria":"Team Skills", "desc":"Perfect fit for the job position", "comment": "This is a dummy comment" }'
-const obj = JSON.parse(txt);
-document.getElementById("cname").innerHTML = obj.name;
-document.getElementById("role").innerHTML = obj.role;
-document.getElementById("teamsk").innerHTML = obj.evaluation_criteria;
-document.getElementById("desc").innerHTML = obj.desc;
-document.getElementById("comment").innerHTML = obj.comment;
 
-  var jsonData = {
-      "Table": [{
-          "ratingid": "0",
-          "rating": "1"
-      }, {
-          "ratingid": "1",
-          "rating": "2"
-      }, {
-          "ratingid": "2",
-          "rating": "3"
-      }, {
-          "ratingid": "3",
-          "rating": "4"
-      }, {
-          "ratingid": "4",
-          "rating": "5"
-      }]
-  };
- 
-     $(document).ready(function () {
-         var listItems = '<option selected="selected" value="0">- Select Rating -</option>';
- 
-      for (var i = 0; i < jsonData.Table.length; i++) {
-             listItems += "<option value='" + jsonData.Table[i].ratingid + "'>" + jsonData.Table[i].rating + "</option>";
-         }
- 
-         $("#ratings").html(listItems);
-     });
-</script>
-<script>
-    $(document).ready(function () {
-  $("candidate_pr").submit(function (event) {
-    var formData = {
-      c_name: $("#c_name").val(),
-      role: $("#role").val(),
-      teamsk: $("#teamsk").val(),
-      desc: $("#desc").val(),
-      comment: $("#comment").val(),
-      ratings: $("#ratings").val()
-    };
 
-    $.ajax({
-      type: "POST",  
-      url: "process.php",
-      data: formData,
-      dataType: "json",
-      encode: true,
-    }).done(function (data) {
-      console.log(data);
-    });
-
-    event.preventDefault();
-  });
-});
-</script>
 </body>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

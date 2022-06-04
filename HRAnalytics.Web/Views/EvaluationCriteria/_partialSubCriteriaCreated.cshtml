@@ -1,0 +1,31 @@
+﻿
+@model CriteriaViewModel
+
+<div class="custom_table">
+         <table class="table table-bordered">
+             <thead>
+               <tr>
+                  <th>Role</th>
+                  <th>SubCriteria</th>
+                  <th>Description</th>
+               </tr>
+            </thead>
+            <tbody>
+                @if(Model.CriteriasCreated!=null && Model.CriteriasCreated.Count > 0)
+                    {
+                        @foreach(var role in Model.CriteriasCreated)
+                        {
+                            <tr>
+                            <td>@role.JobName</td>
+                            <td>@role.CriteriaName</td>
+                            <td>@role.CriteriaDescription</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <td colspan = "3">No subcriterias created</td>
+                    }
+             </tbody>
+         </table>
+      </div>

@@ -1,11 +1,13 @@
-﻿@*
-For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using HRAnalytics.Web.Models
+@model CriteriaViewModel
 @{
+    IEnumerable<SelectListItem> Criterias = ViewBag.Citeria;
 }
+
 <head>
-   <link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
 </head>
+
 <div class="c_eval">
    <div id="bg">
       <img src="../Images/dem2.jpg" alt="">
@@ -18,107 +20,57 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
   
       <div class="candidate_evaluation role_cri eval_cri">
-         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" onsubmit="submitForm();return false">
-		    <div class="row">
-		  <div class="col-md-6">
+
+          <partial name="_partialStatusMessage" />
+
+         <form id="candidate_pr" class="form-horizontal"  method="POST">
+             @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*Role Dropdown*@
+             <div class="form-group">
+				<label class="control-label" asp-for="@Model.Criteria.JobId">Job Role:</label>
+				@Html.DropDownListFor(m => m.Criteria.JobId, ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "job-role" })
+				<span asp-validation-for="@Model.Criteria.JobId" class="text-danger"></span>
+			</div>
+
+            @*SubCriteria Dropdown*@
             <div class="form-group">
-               <label class="control-label" for="role">Job Role:</label>
-               <select class="form-control" id="role" name="job_role">
-                  <option value="" selected>Select Job Role</option>
-                  <option value="">Vp</option>
-                  <option value="">Project Manager</option>
-                  <option value="">Tech Lead</option>
-                  <option value="">4</option>
-               </select>
-            </div>
+				<label class="control-label" asp-for="@Model.Criteria.CriteriaId">Job Criteria:</label>
+                @Html.DropDownListFor(m => m.Criteria.CriteriaId, Criterias, "--Select--", new { @class = "form-control", id="job-criteria"})
+				<span asp-validation-for="@Model.Criteria.CriteriaId" class="text-danger"></span>
 			</div>
-			 <div class="col-md-6">
+
+            @*Criteria Description*@
             <div class="form-group">
-               <label class="control-label" for="position">Position:</label>
-               <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position">
+               <label class="control-label" asp-for="@Model.Criteria.CriteriaDescription">Criteria Description:</label>
+               @Html.TextAreaFor(m=>m.Criteria.CriteriaDescription,new {@class="form-control",@rows=10,@cols=150})
+               <span asp-validation-for="@Model.Criteria.CriteriaDescription" class="text-danger"></span>
             </div>
-			</div>
-			</div>
-			   <div class="row">
-			 <div class="col-md-12">
-            <div class="form-group">
-               <label class="control-label" for="eval_cri" name="eval_criteria">Evalution Criteria:</label>
-               <label class="checkbox-inline"><input type="checkbox" value="">Team Work</label>
-               <label class="checkbox-inline"><input type="checkbox" value="">Synergy</label>
-               <label class="checkbox-inline"><input type="checkbox" value="">Others</label>
-            </div>
-			</div>
-			</div>
-			   <div class="row">
-			 <div class="col-md-12">
-            <div class="form-group">
-               <label class="control-label" for="Compensation">Job Description:</label>
-               <textarea name="job_decription" id="jd" rows="10" columns="150" class="form-control"></textarea>
-            </div>
-			 </div>
-			  <div class="col-md-12">
-            <div class="form-group">
-               <label class="control-label" for="priority">Priority:</label>
-               <select class="form-control" id="priority" name="priority">
-                  <option value="" selected>Select Priority</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-               </select>
-            </div>
-			</div>
-			</div>
-			 <div class="col-md-12">
+
+          
             <div class="sub-btn">
-               <button type="submit" id='submitButton' class="btn btn-primary">Create</button>
+               <button type="submit" id='submitButton' class="btn btn-primary" formaction="@Url.Action("SaveJobCriteria","EvaluationCriteria")">Create</button>
             </div>
-			</div>
+			
          </form>
       </div>
-      <div class="custom_table">
-         <table class="table table-bordered">
-            <thead>
-               <tr>
-                  <th>Role</th>
-                  <th>Position</th>
-                  <th>Compensations</th>
-                  <th>Job Description</th>
-                  <th>Actions</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Software Developer</td>
-                  <td>Senior</td>
-                  <td>tbd</td>
-                  <td>This is a dummy content</td>
-                  <td>Passed</td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
-  
-</div>
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script>
-$(document).ready(function() {
-    $("#candidate_pr").validate({
-        rules: {
-            position: 'required',
-            job_role: 'required',
-            eval_criteria: 'required',
-            job_decription: 'required',
-            priority: 'required'
-        },
-        messages: {
-            position: '*Position is Mandatory',
-            job_role: '*Job Role is Mandatory',
-            eval_criteria: '*Evaluation Criteria is Mandatory',
-            job_decription: '*Job Description is Mandatory',
-            priority: '*Priority is required'
-        },
-    });
-});
-  </script>
+      <partial name="_partialSubCriteriaCreated"/>
+
+   </div>
+
+
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/JobCriteria.js"></script>
+
+    <script type="text/javascript">
+          var URL = {};
+          URL["GetCriteriaForJobs"] = "@Url.Action("GetCriteriaForJobs", "EvaluationCriteria")";
+    </script>
+
+}

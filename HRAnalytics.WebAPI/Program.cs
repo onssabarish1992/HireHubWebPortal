@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IJobBL, JobBL>();
 builder.Services.AddScoped<ICandidateBL, CandidateBL>();
 
+builder.Services.AddScoped<ICandidateScore, CandidateScoreBL>();
+
 
 
 var app = builder.Build();

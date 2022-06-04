@@ -139,7 +139,7 @@ namespace HRAnalytics.BL
             {
                 l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJobId, DbType.Int32));
 
-                l_JobDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_CRITERIAFORJOB, CommandType.StoredProcedure);
+                l_JobDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_CRITERIAFORJOB, CommandType.StoredProcedure, l_Parameters.ToArray());
 
                 if (l_JobDataTable != null && l_JobDataTable.Rows.Count > 0)
                 {

@@ -19,5 +19,8 @@ namespace HRAnalytics.BL
         public const string GET_JOBCRITERIA = "usp_get_JobCriteria";
         public const string SET_JOBCRITERIA = "usp_sav_JobCriteria";
 
+        public const string GET_CANDIDATEINTERVIEWQUESTIONS = "usp_getInterviewQuestions";
+        public const string INSERT_INTERVIEWERRATINGS = "usp_sav_InterviewRatings";
+
     }
 }
