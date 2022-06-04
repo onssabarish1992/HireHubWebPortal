@@ -434,6 +434,9 @@ namespace HRAnalytics.Web.Controllers
                 TempData[HRAnalyticsConstants.C_SAVERATINGERROR_CONST] = HRAnalyticsConstants.C_SAVERATINGERROR_CONST;
                 return RedirectToAction("Candidate", "Candidate", new { argScheduleID = l_ScheduleID });
             }
+
+            TempData[HRAnalyticsConstants.C_SAVEDRATING_CONST] = argCandidateScore;
+            TempData[HRAnalyticsConstants.C_SAVERATINGERROR_CONST] = HRAnalyticsConstants.C_SAVERATINGERROR_CONST;
             return RedirectToAction("Candidate", "Candidate", new { argScheduleID = l_ScheduleID });
         }
     }
