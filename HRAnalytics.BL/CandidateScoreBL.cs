@@ -60,6 +60,7 @@ namespace HRAnalytics.BL
                     l_Candidateinfo.JobId = l_CandidateInfoTable.Rows[0]["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_CandidateInfoTable.Rows[0]["job_id"]);
                     l_Candidateinfo.JobName = l_CandidateInfoTable.Rows[0]["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_CandidateInfoTable.Rows[0]["job_name"]);
                     l_Candidateinfo.CandidateName = l_CandidateInfoTable.Rows[0]["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_CandidateInfoTable.Rows[0]["candidate_name"]);
+                    l_Candidateinfo.IsRated = l_CandidateInfoTable.Rows[0]["is_candidate_rated"] == DBNull.Value ? false : Convert.ToBoolean(l_CandidateInfoTable.Rows[0]["is_candidate_rated"]);
 
                     candidateScore.Candidate = l_Candidateinfo;
                 }

@@ -17,6 +17,7 @@ namespace HRAnalytics.Web.Models
         public string Comments { get; set; }
 
         public int? JobId { get; set; }
+
     }
 
     public class InterviewCandidateViewModel
@@ -28,6 +29,8 @@ namespace HRAnalytics.Web.Models
         public string? RoleName { get; set; }
 
         public int? ScheduleID { get; set; }
+
+        public bool? IsRated { get; set; }
     }
 
     public class CandidateScoreViewModel

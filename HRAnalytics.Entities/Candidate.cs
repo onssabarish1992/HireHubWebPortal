@@ -21,6 +21,8 @@
         public string? DateCreated { get; set; }
 
         public int ScheduleID { get; set; }
+
+        public bool? IsRated { get; set; }
     }
 
     public class CandidateCollection: List<Candidate>
