@@ -40,7 +40,7 @@ namespace HRAnalytics.BL
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUser, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CANDIDATENAME, argCandidate.CandidateName, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argCandidate.JobId, DbType.Int32));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.PROJECTNAME, argCandidate.ProjectName, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.PROJECTNAME, string.IsNullOrEmpty(argCandidate.ProjectName)?DBNull.Value: argCandidate.ProjectName, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.INTERVIEWERID, argCandidate.InterviewerID, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.INTERVIEWTIMESTAMP, argCandidate.InterviewTimeStamp, DbType.DateTime));
 

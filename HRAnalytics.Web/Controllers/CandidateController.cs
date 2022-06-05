@@ -282,7 +282,7 @@ namespace HRAnalytics.Web.Controllers
                 if (argCandidateViewModel != null)
                 {
                     l_Candidate.CandidateName = argCandidateViewModel.CandidateName;
-                    l_Candidate.ProjectName = argCandidateViewModel.Project;
+                    l_Candidate.ProjectName = string.IsNullOrEmpty(argCandidateViewModel.Project)?String.Empty: argCandidateViewModel.Project;
                     l_Candidate.InterviewerID = argCandidateViewModel.UserID;
                     l_Candidate.InterviewTimeStamp = argCandidateViewModel.InterviewSchedule;
                     l_Candidate.JobId = argCandidateViewModel.JobId;
