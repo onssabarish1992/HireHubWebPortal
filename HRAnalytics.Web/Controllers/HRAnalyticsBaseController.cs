@@ -8,9 +8,9 @@ namespace HRAnalytics.Web.Controllers
 {
     public class HRAnalyticsBaseController : Controller
     {
-        public readonly IConfiguration _configuration;
-        public HttpClient client;
-        public readonly string apiBaseURL;
+        private readonly IConfiguration _configuration;
+        HttpClient client;
+        private readonly string apiBaseURL;
         public HRAnalyticsBaseController(IConfiguration configuration)
         {
             _configuration = configuration;
