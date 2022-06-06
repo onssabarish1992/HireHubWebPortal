@@ -4,10 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationInsightsResourceId>/subscriptions/cb8c7c50-dfad-49ec-a692-68269f6642b1/resourceGroups/PrescriptiveAnalyticsv2/providers/microsoft.insights/components/HRAnalyticsWebAPIAppInsights</ApplicationInsightsResourceId>
+    <UserSecretsId>1f4c9351-e6c5-4800-9fb2-8b106ba610d8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.8" />
+    <PackageReference Include="Google.OrTools" Version="9.3.10497" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
