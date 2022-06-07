@@ -30,7 +30,7 @@ namespace HRAnalytics.Web.Controllers
             #endregion
             try
             {
-                l_CandidateURL = apiBaseURL + "api/CandidateScore/GetCandidateForInterviewer?argInterviewerID=" + GetLoggedInUserID();
+                l_CandidateURL = apiBaseURL + "api/Candidate/GetCandidateForInterviewer?argInterviewerID=" + GetLoggedInUserID();
 
                 HttpResponseMessage l_UserData = await client.GetAsync(l_CandidateURL);
 
@@ -61,6 +61,8 @@ namespace HRAnalytics.Web.Controllers
                 candidateViewModel.JobName = item.JobName;
                 candidateViewModel.InterviewSchedule = item.InterviewTimeStamp;
                 candidateViewModel.ScheduleID = item.ScheduleID;
+
+                lst_candidate.Add(candidateViewModel);
             }
 
             return lst_candidate;
