@@ -14,6 +14,8 @@ builder.Services.AddScoped<IJobBL, JobBL>();
 builder.Services.AddScoped<ICandidateBL, CandidateBL>();
 
 builder.Services.AddScoped<ICandidateScore, CandidateScoreBL>();
+builder.Services.AddScoped<ISolverBL, SolverBL>();
+
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 
