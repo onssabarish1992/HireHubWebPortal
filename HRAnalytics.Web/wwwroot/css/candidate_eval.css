@@ -117,7 +117,9 @@ input.form-control {
     .interviewer_table td {
         color: #fff;
     }
-
+    .interviewer_table .table {
+        background: rgba(0,0,0,0.7);
+    }
 
 /*    Ends     */
 
@@ -125,7 +127,7 @@ input.form-control {
 
 
 .role_cri {
-    padding: 20px;
+    padding: 30px;
     max-width: 450px;
     margin: 0 auto;
     margin-bottom: 25px;
@@ -141,10 +143,12 @@ input.form-control {
     .role_cri input.form-control {
         width:100% !important;
     }
-
+.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;    
+}
 #bg {
     position: fixed;
-    top: -50%;
+    top: -50%;    
     left: -50%;
     width: 200%;
     height: 200%;
