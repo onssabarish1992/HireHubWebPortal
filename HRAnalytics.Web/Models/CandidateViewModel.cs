@@ -21,5 +21,7 @@ namespace HRAnalytics.Web.Models
 
         [Required(ErrorMessage = "Please select interviewer")]
         public string? UserID { get; set; }
+
+        public int? ScheduleID { get; set; }
     }
 }
