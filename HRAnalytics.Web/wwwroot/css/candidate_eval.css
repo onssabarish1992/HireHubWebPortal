@@ -11,7 +11,31 @@
     -webkit-box-shadow: 5px 5px 15px 3px #000000;
     box-shadow: 5px 5px 15px 5px #000000;
 }
+#logoutForm button {
+    padding: 0px !important;
+    margin-top: 9px !important;
+}
+.navbar {
+    margin-bottom: 0px !important;
+    -webkit-box-shadow: 5px 5px 15px 3px #000000;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+    transition: all 0.3s ease-in-out 0s;
+    text-decoration: none;
+    padding: 10px !important;
+    font-family: var(--bs-body-font-family) !important;
+    font-size: 15px;
+}
 
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #03d6d2 !important;
+    }
+
+.app_logo {
+    padding-bottom: 10px;
+}
 .candidate_evaluation {
     margin: 30px 0px;
     background: rgba(37,41,88,0.8);
@@ -146,6 +170,10 @@ input.form-control {
 .navbar-light .navbar-nav .nav-link {
     color: #fff !important;    
 }
+.navbar-brand {
+    height: inherit !important;
+    padding: 0px 10px !important;
+}
 #bg {
     position: fixed;
     top: -50%;    
@@ -278,6 +306,12 @@ input.form-control {
     }
 
     .candidate_evaluation {
-        padding: 0 20px;
+        padding: 30px;
+    }
+    .c_eval {
+        padding: 15px 0px;
+    }
+    .custom_table th {
+        font-size: 16px;
     }
 }

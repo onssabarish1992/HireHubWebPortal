@@ -3,11 +3,15 @@
 @{
     ViewData["Title"] = "Register";
 }
+   <div id="bg">
+      <img src="/Images/dem2.jpg" alt="">
+   </div>
+   <div class="login_wrap">
+    <h1></h1>
+<div class="login-logo"> 
+    <img src="/Images/hirehub-logo.png" alt="">
+    </div>      
 
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
             <hr />
@@ -44,7 +48,7 @@
             <br />
             <div class="form-floating">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
+                <label asp-for="Input.ConfirmPassword"></label>   
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <br />
@@ -52,7 +56,6 @@
         </form>
     </div>
    
-</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

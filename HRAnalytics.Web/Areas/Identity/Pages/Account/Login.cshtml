@@ -4,14 +4,18 @@
 @{
     ViewData["Title"] = "Log in";
 }
+   <div id="bg">       
+      <img src="/Images/dem2.jpg" alt="">  
+   </div> 
 <div class="login_wrap">
-<div class="login-logo"><img src="../Images/hirehub-logo.png" alt=""></div>  
-<div class="row">
-    <div class="col-md-4">
+<div class="login-logo">  
+    <img src="/Images/hirehub-logo.png" alt="">        
+    </div>    
         <section>
-            <form id="account" method="post">
+            <form id="account" method="post">  
+                <h2>SIGN IN</h2>
                 <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
                 <div class="form-floating">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                     <label asp-for="Input.Email" class="form-label"></label>
@@ -34,17 +38,15 @@
                 </div>
                 <br />
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Login</button>
                 </div>
                 <div>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                    <p>  
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="register">Register as a new user</a>
                     </p>
                 </div>
             </form>
         </section>
-    </div>
-</div>
 </div>
 
 @section Scripts {
