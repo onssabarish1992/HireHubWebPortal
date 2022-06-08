@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<GlobalScoreViewModel>
+<head>
+    <link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
+</head>
+
+<div class="c_eval final_result">
+    <div id="bg">
+        <img src="../Images/dem2.jpg" alt="">
+    </div>
+    <div class="col-md-12">
+        <h2>Final Result</h2>
+    </div>
+    <div class="container">
+        <div class="custom_table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Job Role</th>
+                        <th>Number of Selected Candidates</th>
+                        <th>Candidate Name</th>
+                        <th>Compensation(EUR)</th>
+                        <th>Decision</th>
+                        <th>Actual Compensation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        @foreach (var role in Model)
+                        {
+                            <tr>
+                                <td>@role.JobName</td>
+                                <td>2</td>
+                                <td>@role.CandidateName</td>
+                                <td>@role.ProposedCompensation</td>
+                                <td>@role.IsHired</td>
+                                <td>@role.ActualCompensation</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                    <td colspan="6">No Candidates created</td>
+                }
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+

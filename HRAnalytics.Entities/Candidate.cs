@@ -23,6 +23,12 @@
         public int ScheduleID { get; set; }
 
         public bool? IsRated { get; set; }
+
+        public int? IsHired { get; set; }
+
+        public double ProposedCompensation { get; set; }
+
+        public double ActualCompensation { get; set; }
     }
 
     public class CandidateCollection: List<Candidate>

@@ -189,6 +189,49 @@ namespace HRAnalytics.BL
             }
             return l_CandidateCollection;
         }
+
+
+        public CandidateCollection GetGlobalScores()
+        {
+            #region Declarations
+            CandidateCollection l_GlobalScore = new();
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            DataTable l_CandidateDataTable;
+            Candidate l_Candidate;
+            int l_CandidateCount;
+            #endregion
+            try
+            {
+               
+                l_CandidateDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_GLOBAL_SCORE, CommandType.StoredProcedure);
+
+                if (l_CandidateDataTable != null && l_CandidateDataTable.Rows.Count > 0)
+                {
+                    l_CandidateCount = l_CandidateDataTable.Rows.Count;
+                    for (int i = 0; i < l_CandidateCount; i++)
+                    {
+                        l_Candidate = new Candidate();
+
+                        DataRow l_Row = l_CandidateDataTable.Rows[i];
+
+                        l_Candidate.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
+                        l_Candidate.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
+                        l_Candidate.CandidateName = l_Row["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["candidate_name"]);
+                        l_Candidate.IsHired = l_Row["is_hired"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["is_hired"]);
+                        l_Candidate.ProposedCompensation = l_Row["proposed_compensation"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["proposed_compensation"]);
+                        l_Candidate.ActualCompensation = l_Row["actual_compensation"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["actual_compensation"]);
+                        
+                        l_GlobalScore.Add(l_Candidate);
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_GlobalScore;
+        }
     }
 
 }

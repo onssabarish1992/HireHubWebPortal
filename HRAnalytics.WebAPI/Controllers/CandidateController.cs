@@ -102,5 +102,29 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_CandidateCollection);
         }
+
+        [HttpGet]
+        [Route("GetGlobalScores")]
+        public IActionResult GetGlobalScores()
+        {
+            #region Declarations
+            CandidateCollection l_GlobalScore;
+            #endregion
+            try
+            {
+                l_GlobalScore = _candiadateBL.GetGlobalScores();
+
+                if (l_GlobalScore == null || l_GlobalScore.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_GlobalScore);
+        }
     }
 }
