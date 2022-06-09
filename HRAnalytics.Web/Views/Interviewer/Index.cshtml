@@ -12,7 +12,7 @@
 <div class="interviewer_table">
     <div class="container">
 
-        <table class="table table-bordered">
+        <table id="tbl_Candidates" class="table table-bordered">
             <thead>
                 <tr>
                     <th>Candidate Name</th>
@@ -26,7 +26,7 @@
                     @foreach (var role in Model)
                     {
                         <tr>
-                            <td>@role.CandidateName</td>
+                            <td>@Html.ActionLink(role.CandidateName,"Candidate","Candidate",new { argScheduleID = role.ScheduleID},new {target = "_blank"})</td>
                             <td>@role.InterviewSchedule</td>
                             <td>@role.JobName</td>
                         </tr>
@@ -42,3 +42,21 @@
 
     </div>
 </div>
+
+@section scripts
+{
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/fc-4.1.0/fh-3.2.3/r-2.3.0/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/fc-4.1.0/fh-3.2.3/r-2.3.0/datatables.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        initialiseDataTable();
+    })
+    function initialiseDataTable() {
+        $('#tbl_Candidates').DataTable({
+            responsive: true
+        });
+}
+</script>
+}
+

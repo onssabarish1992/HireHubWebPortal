@@ -11,6 +11,7 @@ namespace HRAnalytics.Web.Models
 
         public string? FullName { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "MM/dd/yyyy hh:mm tt")]
         [Required(ErrorMessage = "Please select interview schedule")]
         public DateTime InterviewSchedule { get; set; }
 
