@@ -1,8 +1,8 @@
 ﻿
 @model CriteriaViewModel
 
-<div class="custom_table">
-         <table class="table table-bordered">
+<div class="custom_table table-responsive">
+         <table id="tbl_eval" class="table ">
              <thead>
                <tr>
                   <th>Role</th>
@@ -29,3 +29,21 @@
              </tbody>
          </table>
       </div>
+
+
+
+      @section scripts
+{
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        initialiseDataTable();
+    })
+    function initialiseDataTable() {
+        $('#tbl_eval').DataTable({
+            responsive: true
+        });
+}
+</script>
+}

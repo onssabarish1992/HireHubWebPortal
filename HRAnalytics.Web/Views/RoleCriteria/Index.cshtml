@@ -83,7 +83,18 @@
 
     <script>
         $(function () {
-            $('.datepicker').datepicker();
+            $('.datepicker').datepicker(); 
         });
     </script>
+    <script type="text/javascript"> 
+
+    $(document).ready(function(){
+        initialiseDataTable();
+    })
+    function initialiseDataTable() {
+        $('#tbl_role').DataTable({
+            responsive: true
+        });
+}
+</script>
 }
