@@ -72,5 +72,16 @@
           var URL = {};
           URL["GetCriteriaForJobs"] = "@Url.Action("GetCriteriaForJobs", "EvaluationCriteria")";
     </script>
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        initialiseDataTable();
+    })
+    function initialiseDataTable() {
+        $('#tbl_eval').DataTable({
+            responsive: true
+        });
+}
+</script>
 
 }

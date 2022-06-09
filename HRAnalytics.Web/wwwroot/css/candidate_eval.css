@@ -115,7 +115,7 @@
 }
 
 .custom_table select {
-    color: #000;
+    color: #fff;
     width: 100%;
 }
 
@@ -328,6 +328,22 @@ table.dataTable.no-footer {
 .dataTables_info {
     margin-left:15px;
 }
+ .custom_table {
+    background: rgba(0,0,0,0.7);
+}
+#tbl_eval {
+    padding:30px;
+}
+#tbl_role {
+    padding: 30px;
+}
+#tbl_eval_paginate a {
+    color: #fff !important;
+}
+#tbl_role_paginate a {
+    color: #fff !important;
+}
+
 /* ends    */
 .field-validation-error span {
     color: red;
