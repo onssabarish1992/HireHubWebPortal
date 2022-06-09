@@ -61,6 +61,7 @@ namespace HRAnalytics.Web.Controllers
                 candidateViewModel.JobName = item.JobName;
                 candidateViewModel.InterviewSchedule = item.InterviewTimeStamp;
                 candidateViewModel.ScheduleID = item.ScheduleID;
+                candidateViewModel.Status = item.InterviewStatus;
 
                 lst_candidate.Add(candidateViewModel);
             }

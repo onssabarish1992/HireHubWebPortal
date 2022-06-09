@@ -24,5 +24,7 @@ namespace HRAnalytics.Web.Models
         public string? UserID { get; set; }
 
         public int? ScheduleID { get; set; }
+
+        public string? Status { get; set; }
     }
 }

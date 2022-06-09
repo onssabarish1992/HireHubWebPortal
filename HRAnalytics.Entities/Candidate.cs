@@ -29,6 +29,8 @@
         public double ProposedCompensation { get; set; }
 
         public double ActualCompensation { get; set; }
+
+        public string InterviewStatus { get; set; }
     }
 
     public class CandidateCollection: List<Candidate>

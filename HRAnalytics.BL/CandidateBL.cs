@@ -177,6 +177,7 @@ namespace HRAnalytics.BL
                         l_Candidate.ScheduleID =  l_Row["schedule_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["schedule_id"]);
                         l_Candidate.JobId =  l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
                         l_Candidate.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
+                        l_Candidate.InterviewStatus = l_Row["interview_status"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["interview_status"]);
 
                         l_CandidateCollection.Add(l_Candidate);
 

@@ -18,6 +18,7 @@
                     <th>Candidate Name</th>
                     <th>Interview Schedule</th>
                     <th>Job Name</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                             <td>@Html.ActionLink(role.CandidateName,"Candidate","Candidate",new { argScheduleID = role.ScheduleID},new {target = "_blank"})</td>
                             <td>@role.InterviewSchedule</td>
                             <td>@role.JobName</td>
+                            <td>@role.Status</td>
                         </tr>
                     }
                 }
