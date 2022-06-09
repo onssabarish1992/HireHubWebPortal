@@ -115,6 +115,11 @@ body {
 .login_wrap h2 {
     color: #fff;
     padding-top: 15px;
+    font-size: 24px;
+}
+.field-validation-error span {
+    color: red;
+    font-weight: bold;
 }
 
 
