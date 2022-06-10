@@ -36,6 +36,8 @@ namespace HRAnalytics.Entities
 
         public double SubCriteriaWeightage { get; set; }
 
+        public int JobCriteriaID { get; set; }
+
     }
 
     public class JobCollection: List<Job>

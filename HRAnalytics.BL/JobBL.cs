@@ -3,6 +3,13 @@ using HRAnalytics.DAL;
 using HRAnalytics.Entities;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace HRAnalytics.BL
 {
@@ -200,6 +207,7 @@ namespace HRAnalytics.BL
                         l_Job.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
                         l_Job.ClosingDate = l_Row["closing_date"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(l_Row["closing_date"]);
                         l_Job.Weightage = l_Row["weightage"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["weightage"]);
+                        l_Job.JobCriteriaID = l_Row["job_criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_criteria_id"]);
                         l_JobCollection.Add(l_Job);
                     }
                 }
@@ -239,5 +247,58 @@ namespace HRAnalytics.BL
             }
 
         }
+
+        private static bool NextCombination(IList<int> num, int n, int k)
+        {
+            bool finished;
+
+            var changed = finished = false;
+
+            if (k <= 0) return false;
+
+            for (var i = k - 1; !finished && !changed; i--)
+            {
+                if (num[i] < n - 1 - (k - 1) + i)
+                {
+                    num[i]++;
+
+                    if (i < k - 1)
+                        for (var j = i + 1; j < k; j++)
+                            num[j] = num[j - 1] + 1;
+                    changed = true;
+                }
+                finished = i == 0;
+            }
+
+            return changed;
+        }
+
+
+        static IEnumerable<IEnumerable<T>>
+        GetCombinations<T>(IEnumerable<T> list, int length) where T : IComparable
+        {
+            if (length == 1) return list.Select(t => new T[] { t });
+            return GetCombinations(list, length - 1)
+                .SelectMany(t => list.Where(o => o.CompareTo(t.Last()) > 0),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
+
+        public MakeCombination(int roles)
+        {
+            int countP = 0, countC = 0;
+            const int k = 2;
+            foreach (IEnumerable<string> i in GetCombinations(roles, k))
+            {
+                Console.WriteLine(string.Join(" ", i));
+                countP++;
+            }
+            Console.WriteLine("Count : " + countP);
+
+            Console.ReadKey();
+        }
+
+        public Dictionary<int,int> GenerateCombinations()
+
+
     }
-}
+    }
