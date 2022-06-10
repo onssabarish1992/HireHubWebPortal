@@ -34,6 +34,8 @@ namespace HRAnalytics.Entities
 
         public DateTime? ClosingDate { get; set; }
 
+        public double SubCriteriaWeightage { get; set; }
+
     }
 
     public class JobCollection: List<Job>
