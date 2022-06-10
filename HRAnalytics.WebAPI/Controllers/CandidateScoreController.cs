@@ -56,12 +56,13 @@ namespace HRAnalytics.WebAPI.Controllers
             return Ok();
         }
 
+
         [HttpGet]
         [Route("GetAllCandidateScore")]
         public IActionResult GetAllCandidateScore()
         {
             #region Declarations
-            List<CandidateEvaluation> l_scoreEvaluation;
+            List<CandidateEvaluation> l_scoreEvaluation=new();
             #endregion
             try
             {
@@ -78,6 +79,24 @@ namespace HRAnalytics.WebAPI.Controllers
             }
 
             return Ok(l_scoreEvaluation);
+        }
+
+        [HttpPost]
+        [Route("SaveScores")]
+        public IActionResult SaveScores(string argLoggedInUser, int argScheduleID, [FromBody] List<Candidate> argGlobalScores)
+        {
+            try
+            {
+                _candiadateScoreBL.SaveGlobalScores(argLoggedInUser, argScheduleID, argGlobalScores);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
+
         }
     }
 }

@@ -148,6 +148,7 @@ namespace HRAnalytics.BL
             return l_ratingXML;
         }
 
+
         /// <summary>
         /// Get All candidate scores for
         /// </summary>
@@ -195,5 +196,51 @@ namespace HRAnalytics.BL
         }
 
 
+        public void SaveGlobalScores(string argLoggedInUserID, int argScheduleID, List<Candidate> argGlobalScores)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            XElement l_ratingXML;
+            try
+            {
+                l_ratingXML = GenerateScoresXML(argGlobalScores, argScheduleID);
+
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUserID, DbType.String));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SCORESXML, l_ratingXML.ToString(), DbType.Xml));
+
+                //Call stored procedure
+                l_HRAnalyticsDBManager.Insert(StoredProcedure.SAVE_GLOBAL_SCORE, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private XElement GenerateScoresXML(List<Candidate> argGlobalScores, int argScheduleID)
+        {
+            XElement l_ratingXML;
+            try
+            {
+                l_ratingXML = new XElement("Scores",
+                    from scr in argGlobalScores
+                    select new XElement("Score",
+                    new XElement("candidate_id", scr.CandidateID),
+                    new XElement("schedule_id", argScheduleID),
+                    new XElement("job_id", scr.JobId),
+                    new XElement("is_hired", scr.IsHired),
+                    new XElement("proposed_compensation", scr.ProposedCompensation),
+                    new XElement("actual_compensation", scr.ActualCompensation)
+                    ));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_ratingXML;
+        }
     }
 }
