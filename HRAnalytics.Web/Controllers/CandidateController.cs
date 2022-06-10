@@ -297,6 +297,7 @@ namespace HRAnalytics.Web.Controllers
                     l_Candidate.InterviewerID = argCandidateViewModel.UserID;
                     l_Candidate.InterviewTimeStamp = argCandidateViewModel.InterviewSchedule;
                     l_Candidate.JobId = argCandidateViewModel.JobId;
+                    l_Candidate.InterviewStatus = String.Empty;
                 }
             }
             catch (Exception)
@@ -391,6 +392,7 @@ namespace HRAnalytics.Web.Controllers
                         l_Evaluation.CriteriaDescription = item.CriteriaDescription;
                         l_Evaluation.CriteriaComments = item.Comments;
                         l_Evaluation.JobId = item.JobId.HasValue ? item.JobId.Value : 0;
+                        l_Evaluation.CandidateName = String.Empty;
 
                         l_CandidateEvaluation.Add(l_Evaluation);
                     }

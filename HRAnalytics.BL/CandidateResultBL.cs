@@ -18,6 +18,10 @@ namespace HRAnalytics.BL
             _IScoreBL = argScoreBL;
         }
 
+        /// <summary>
+        /// This method is used to save 
+        /// </summary>
+        /// <returns></returns>
         public List<Candidate> GetCandidateResult()
         {
             #region Declaration
@@ -47,6 +51,13 @@ namespace HRAnalytics.BL
             return candidateList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="l_roles"></param>
+        /// <param name="l_criterias"></param>
+        /// <param name="l_scores"></param>
+        /// <returns></returns>
         private List<Candidate> GetCandidateRankings(JobCollection l_roles, JobCollection l_criterias, List<CandidateEvaluation> l_scores)
         {
             #region Declaration
@@ -118,7 +129,7 @@ namespace HRAnalytics.BL
                         l_criteriaValue.criteria = l_Criteria;
                         l_criteriaValue.Value = cd.CriteriaScore;
 
-                        //Add criter
+                        //Add criteria values 
                         l_CriteriaValues.Add(l_criteriaValue);
 
                     }
