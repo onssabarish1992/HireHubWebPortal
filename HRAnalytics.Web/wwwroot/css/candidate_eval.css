@@ -118,6 +118,9 @@
     /*color: #fff;*/
     width: 100%;
 }
+.custom_table select option {
+    color: #000;
+}
 
 input.form-control {
     width: auto;
@@ -330,6 +333,9 @@ table.dataTable.no-footer {
 }
  .custom_table {
     background: rgba(0,0,0,0.7);
+}
+.dataTables_wrapper .dataTables_filter input {
+    color: #fff;
 }
 #tbl_eval {
     padding:30px;
