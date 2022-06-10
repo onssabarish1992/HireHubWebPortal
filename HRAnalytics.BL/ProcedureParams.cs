@@ -25,6 +25,7 @@ namespace HRAnalytics.BL
         public const string JOBDESCRITPTION = "@JobDescription";
         public const string CLOSINGDATE = "@ClosingDate";
         public const string RATINGXML = "@InterviewRatingsXML";
+        public const string SCORESXML = "@GlobalScoresXML";
 
     }
 }

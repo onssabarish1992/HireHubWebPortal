@@ -13,6 +13,10 @@ namespace HRAnalytics.BL.Interfaces
 
         void SaveInterviewRatings(string argLoggedInUserID, int argScheduleID, List<CandidateEvaluation> argCandidateEvaluations);
 
+
         List<CandidateEvaluation> GetAllCandidateScores();
+
+        void SaveGlobalScores(string argLoggedInUser, int argScheduleID, List<Candidate> argGlobalScores);
+
     }
 }
