@@ -78,6 +78,8 @@ namespace HRAnalytics.BL
 
                         DataRow l_Row = l_JobDataTable.Rows[i];
 
+                        l_Job.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
+                        l_Job.CriteriaID = l_Row["criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["criteria_id"]);
                         l_Job.DateCreated = l_Row["date_created"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["date_created"]);
                         l_Job.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
                         l_Job.CriteriaName = l_Row["criteria_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["criteria_name"]);

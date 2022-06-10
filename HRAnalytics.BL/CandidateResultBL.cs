@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRAnalytics.BL
 {
-    public class CandidateResultBL
+    public class CandidateResultBL: ICandidateResult
     {
         private IJobBL _IJobBL;
         private ICandidateScore _IScoreBL;

@@ -12,7 +12,7 @@ namespace HRAnalytics.WebAPI.Controllers
     {
         private readonly TelemetryClient _telemetryClient;
 
-        ICandidateBL _candiadateBL;
+        private ICandidateBL _candiadateBL;
 
         public CandidateController(TelemetryClient telemetryClient, ICandidateBL candidateBL)
         {
