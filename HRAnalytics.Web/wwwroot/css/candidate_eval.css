@@ -371,3 +371,6 @@ table.dataTable.no-footer {
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
  
 }
+input[type=search] {
+    color: #fff !important;
+}
