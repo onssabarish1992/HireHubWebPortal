@@ -199,8 +199,8 @@ namespace HRAnalytics.BL
                         l_Job.JobDescription = l_Row["job_description"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_description"]);
                         l_Job.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
                         l_Job.ClosingDate = l_Row["closing_date"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(l_Row["closing_date"]);
+                        l_Job.Weightage = l_Row["weightage"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["weightage"]);
                         l_JobCollection.Add(l_Job);
-
                     }
                 }
             }
