@@ -1,4 +1,5 @@
-﻿using HRAnalytics.Entities;
+﻿using HRAnalytics.BL.Interfaces;
+using HRAnalytics.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace HRAnalytics.BL
 {
     public class CandidateResultBL
     {
-        public CandidateResultBL()
+        private IJobBL _IJobBL;
+        public CandidateResultBL(IJobBL argJobBL)
         {
-
+            _IJobBL = argJobBL;
         }
 
         public List<Candidate> GetCandidateResult()
@@ -21,6 +23,13 @@ namespace HRAnalytics.BL
             #endregion
             try
             {
+                //Fetch all the roles
+                var l_roles = _IJobBL.GetRoles();
+
+                //Fetch all evaluation criterias
+                var l_criterias = _IJobBL.GetEvaluationCriteria();
+                
+                
 
             }
             catch (Exception)

@@ -55,5 +55,29 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("GetAllCandidateScore")]
+        public IActionResult GetAllCandidateScore()
+        {
+            #region Declarations
+            List<CandidateEvaluation> l_scoreEvaluation;
+            #endregion
+            try
+            {
+                l_scoreEvaluation = _candiadateScoreBL.GetAllCandidateScores();
+
+                if (l_scoreEvaluation == null || l_scoreEvaluation.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok(l_scoreEvaluation);
+        }
     }
 }

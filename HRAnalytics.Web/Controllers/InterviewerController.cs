@@ -9,6 +9,7 @@ namespace HRAnalytics.Web.Controllers
     {
         public InterviewerController(IConfiguration configuration) : base(configuration)
         {
+
         }
 
         public async Task<IActionResult> Index()

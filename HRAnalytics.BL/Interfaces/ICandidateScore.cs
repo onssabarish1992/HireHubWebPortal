@@ -12,5 +12,7 @@ namespace HRAnalytics.BL.Interfaces
         CandidateScore GetCandidateScore(int argScheduleID);
 
         void SaveInterviewRatings(string argLoggedInUserID, int argScheduleID, List<CandidateEvaluation> argCandidateEvaluations);
+
+        List<CandidateEvaluation> GetAllCandidateScores();
     }
 }

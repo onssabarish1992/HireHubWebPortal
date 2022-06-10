@@ -147,5 +147,53 @@ namespace HRAnalytics.BL
 
             return l_ratingXML;
         }
+
+        /// <summary>
+        /// Get All candidate scores for
+        /// </summary>
+        /// <returns></returns>
+        public List<CandidateEvaluation> GetAllCandidateScores()
+        {
+            #region Declarations
+            List<CandidateEvaluation> l_CandidateEvaluations = new List<CandidateEvaluation>();
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            DataTable l_CandidateDataTable;
+            CandidateEvaluation l_CandidateEvaluation;
+            int l_CandidateCount;
+            #endregion
+            try
+            {
+                l_CandidateDataTable = l_HRAnalyticsDBManager.GetDataTable(StoredProcedure.GET_ALLCANDIDATE_RATINGS, CommandType.StoredProcedure);
+
+                if (l_CandidateDataTable != null && l_CandidateDataTable.Rows.Count > 0)
+                {
+                    l_CandidateCount = l_CandidateDataTable.Rows.Count;
+                    for (int i = 0; i < l_CandidateCount; i++)
+                    {
+                        l_CandidateEvaluation = new CandidateEvaluation();
+                        DataRow l_Row = l_CandidateDataTable.Rows[i];
+
+                        l_CandidateEvaluation.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
+                        l_CandidateEvaluation.CriteriaId = l_Row["criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["criteria_id"]);
+                        l_CandidateEvaluation.CriteriaName = l_Row["criteria_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["criteria_name"]);
+                        l_CandidateEvaluation.CriteriaDescription = l_Row["sub_criteria_description"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["sub_criteria_description"]);
+                        l_CandidateEvaluation.CriteriaScore = l_Row["criteria_score"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["criteria_score"]);
+                        l_CandidateEvaluation.CriteriaComments = l_Row["criteria_comments"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["criteria_comments"]);
+                        l_CandidateEvaluation.CandidateID = l_Row["candidate_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["candidate_id"]);
+                        l_CandidateEvaluation.CandidateName = l_Row["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["candidate_name"]);
+
+                        l_CandidateEvaluations.Add(l_CandidateEvaluation);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_CandidateEvaluations;
+        }
+
+
     }
 }

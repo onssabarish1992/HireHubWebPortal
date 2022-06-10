@@ -19,5 +19,8 @@ namespace HRAnalytics.Entities
         public int CriteriaScore { get; set; }
 
         public string CriteriaComments { get; set; }
+
+        public int CandidateID { get; set; }
+        public string CandidateName { get; set; }
     }
 }
