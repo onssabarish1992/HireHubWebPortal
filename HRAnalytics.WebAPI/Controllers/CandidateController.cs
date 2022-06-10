@@ -2,6 +2,7 @@
 using HRAnalytics.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ApplicationInsights;
 
 namespace HRAnalytics.WebAPI.Controllers
 {
@@ -9,10 +10,13 @@ namespace HRAnalytics.WebAPI.Controllers
     [ApiController]
     public class CandidateController : ControllerBase
     {
+        private readonly TelemetryClient _telemetryClient;
+
         ICandidateBL _candiadateBL;
 
-        public CandidateController(ICandidateBL candidateBL)
+        public CandidateController(TelemetryClient telemetryClient, ICandidateBL candidateBL)
         {
+            _telemetryClient = telemetryClient;
             _candiadateBL = candidateBL;
         }
 
@@ -24,8 +28,10 @@ namespace HRAnalytics.WebAPI.Controllers
             {
                 _candiadateBL.SaveCandidateInterviewSchedule(LoggedInUser, Candidate);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateController model...");
+                _telemetryClient.TrackException(ex);
                 throw;
             }
 
@@ -48,8 +54,10 @@ namespace HRAnalytics.WebAPI.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateController model...");
+                _telemetryClient.TrackException(ex);
                 throw;
             }
 
@@ -72,8 +80,10 @@ namespace HRAnalytics.WebAPI.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateController model...");
+                _telemetryClient.TrackException(ex);
                 throw;
             }
 
@@ -95,8 +105,10 @@ namespace HRAnalytics.WebAPI.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateController model...");
+                _telemetryClient.TrackException(ex);
                 throw;
             }
 
@@ -119,8 +131,10 @@ namespace HRAnalytics.WebAPI.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateController model...");
+                _telemetryClient.TrackException(ex);
                 throw;
             }
 

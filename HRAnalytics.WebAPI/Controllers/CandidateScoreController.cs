@@ -2,19 +2,28 @@
 using HRAnalytics.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ApplicationInsights;
 
 namespace HRAnalytics.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CandidateScoreController : ControllerBase
+
     {
+        private readonly TelemetryClient _telemetryClient;
+
         ICandidateScore _candiadateScoreBL;
 
-        public CandidateScoreController(ICandidateScore candidateScore)
+
+        public CandidateScoreController(TelemetryClient telemetryClient, ICandidateScore candiadateScoreBL)
+
         {
-            _candiadateScoreBL = candidateScore;
+            _telemetryClient = telemetryClient;
+            _candiadateScoreBL = candiadateScoreBL;
         }
+
+     
 
         [HttpGet]
         [Route("GetCandidateScore")]
@@ -32,8 +41,11 @@ namespace HRAnalytics.WebAPI.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateScoreController model...");
+                _telemetryClient.TrackException(ex);
+
                 throw;
             }
 
@@ -48,8 +60,10 @@ namespace HRAnalytics.WebAPI.Controllers
             {
                 _candiadateScoreBL.SaveInterviewRatings(argLoggedInUser, argScheduleID, argCandidateEvaluations);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _telemetryClient.TrackTrace("Exception caught while CandidateScoreController model...");
+                _telemetryClient.TrackException(ex);
                 throw;
             }
 
