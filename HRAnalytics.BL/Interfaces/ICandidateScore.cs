@@ -16,7 +16,7 @@ namespace HRAnalytics.BL.Interfaces
 
         List<CandidateEvaluation> GetAllCandidateScores();
 
-        void SaveGlobalScores(string argLoggedInUser, int argScheduleID, List<Candidate> argGlobalScores);
+        void SaveGlobalScores(string argLoggedInUser, List<Candidate> argGlobalScores);
 
     }
 }

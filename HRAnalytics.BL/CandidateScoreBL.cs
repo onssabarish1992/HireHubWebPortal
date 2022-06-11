@@ -196,7 +196,7 @@ namespace HRAnalytics.BL
         }
 
 
-        public void SaveGlobalScores(string argLoggedInUserID, int argScheduleID, List<Candidate> argGlobalScores)
+        public void SaveGlobalScores(string argLoggedInUserID, List<Candidate> argGlobalScores)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
             List<IDbDataParameter> l_Parameters = new();
@@ -204,7 +204,7 @@ namespace HRAnalytics.BL
             XElement l_ratingXML;
             try
             {
-                l_ratingXML = GenerateScoresXML(argGlobalScores, argScheduleID);
+                l_ratingXML = GenerateScoresXML(argGlobalScores);
 
                 l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUserID, DbType.String));
                 l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SCORESXML, l_ratingXML.ToString(), DbType.Xml));
@@ -214,12 +214,11 @@ namespace HRAnalytics.BL
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        private XElement GenerateScoresXML(List<Candidate> argGlobalScores, int argScheduleID)
+        private XElement GenerateScoresXML(List<Candidate> argGlobalScores)
         {
             XElement l_ratingXML;
             try
@@ -228,9 +227,12 @@ namespace HRAnalytics.BL
                     from scr in argGlobalScores
                     select new XElement("Score",
                     new XElement("candidate_id", scr.CandidateID),
-                    new XElement("schedule_id", argScheduleID),
+                    new XElement("schedule_id", scr.ScheduleID),
                     new XElement("job_id", scr.JobId),
+                    new XElement("global_score", scr.GlobalScore),
+                    new XElement("local_score", scr.LocalScore),
                     new XElement("is_hired", scr.IsHired),
+                    new XElement("is_recommended", scr.IsRecommended),
                     new XElement("proposed_compensation", scr.ProposedCompensation),
                     new XElement("actual_compensation", scr.ActualCompensation)
                     ));

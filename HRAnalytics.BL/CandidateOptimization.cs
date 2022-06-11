@@ -15,12 +15,17 @@ namespace HRAnalytics.BL
         private IJobBL _IJobBL;
         private ICandidateResult _ICandidateBL;
         private ISolverBL _ISolverBL;
+        private ICandidateScore _ICandidateScore;
 
-        public CandidateOptimization(IJobBL argJobBL, ICandidateResult argCandidateBL, ISolverBL argSolverBL)
+        public CandidateOptimization(IJobBL argJobBL, 
+                                     ICandidateResult argCandidateBL, 
+                                     ISolverBL argSolverBL,
+                                     ICandidateScore argCandidateScore)
         {
             _IJobBL = argJobBL;
             _ICandidateBL = argCandidateBL;
             _ISolverBL = argSolverBL;
+            _ICandidateScore = argCandidateScore;
         }
 
         public List<Candidate> GetOptimumResult()
@@ -53,7 +58,6 @@ namespace HRAnalytics.BL
             }
             catch (Exception)
             {
-
                 throw;
             }
 

@@ -17,6 +17,8 @@ namespace HRAnalytics.Web.Models
 		public double? ProposedCompensation { get; set; }
 
 		public bool? IsHired { get; set; }
+
+		public string? Recommendation { get; set; }
 	}
 }
 

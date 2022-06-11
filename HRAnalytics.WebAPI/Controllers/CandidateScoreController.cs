@@ -15,12 +15,17 @@ namespace HRAnalytics.WebAPI.Controllers
 
         ICandidateScore _candiadateScoreBL;
 
+        ICandidateOptimization _candidateOptimization;
 
-        public CandidateScoreController(TelemetryClient telemetryClient, ICandidateScore candiadateScoreBL)
+
+        public CandidateScoreController(TelemetryClient telemetryClient, 
+                                        ICandidateScore candiadateScoreBL,
+                                        ICandidateOptimization candidateOptimization)
 
         {
             _telemetryClient = telemetryClient;
             _candiadateScoreBL = candiadateScoreBL;
+            _candidateOptimization = candidateOptimization;
         }
 
      
@@ -97,12 +102,12 @@ namespace HRAnalytics.WebAPI.Controllers
 
         [HttpPost]
         [Route("SaveScores")]
-        public IActionResult SaveScores(string argLoggedInUser, int argScheduleID, [FromBody] List<Candidate> argGlobalScores)
+        public IActionResult SaveScores(string argLoggedInUser)
         {
             try
             {
-                _candiadateScoreBL.SaveGlobalScores(argLoggedInUser, argScheduleID, argGlobalScores);
-
+                List<Candidate> l_GlobalScores = _candidateOptimization.GetOptimumResult();
+                _candiadateScoreBL.SaveGlobalScores(argLoggedInUser, l_GlobalScores);
             }
             catch (Exception)
             {

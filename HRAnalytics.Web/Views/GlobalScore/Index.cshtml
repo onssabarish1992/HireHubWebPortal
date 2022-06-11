@@ -23,11 +23,9 @@
                 <thead>
                     <tr>
                         <th>Job Role</th>
-                        <th>Number of Selected Candidates</th>
                         <th>Candidate Name</th>
                         <th>Compensation(EUR)</th>
-                        <th>Decision</th>
-                        <th>Actual Compensation</th>
+                        <th>Recommendation</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,17 +35,15 @@
                         {
                             <tr>
                                 <td>@role.JobName</td>
-                                <td>2</td>
                                 <td>@role.CandidateName</td>
-                                <td>@role.ProposedCompensation</td>
-                                <td>@role.IsHired</td>
                                 <td>@role.ActualCompensation</td>
+                                <td>@role.Recommendation</td>
                             </tr>
                         }
                     }
                     else
                     {
-                    <td colspan="6">No Candidates created</td>
+                    <td colspan="5">No Candidates created</td>
                 }
                     </tbody>
                 </table>

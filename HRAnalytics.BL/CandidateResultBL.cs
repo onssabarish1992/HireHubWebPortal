@@ -89,7 +89,7 @@ namespace HRAnalytics.BL
                         var alternativeResult = _ITopsisBL.ComputeTopsisScore(alternatives, criterias);
 
                         //Create the candidate dataset
-                        l_candidatesSet.AddRange(CreateCandidateScores(alternativeResult, l_scores, role.JobId,role.Weightage));
+                        l_candidatesSet.AddRange(CreateCandidateScores(alternativeResult, l_scores, role));
                     }
                 }
             }
@@ -110,8 +110,7 @@ namespace HRAnalytics.BL
         /// <returns></returns>
         private List<Candidate> CreateCandidateScores(List<Alternative> argAlternativeResult, 
                                                       List<CandidateEvaluation> l_scores, 
-                                                      int argJobId,
-                                                      double argWeightage)
+                                                      Job argRole)
         {
             #region Declaration
             List<Candidate> l_Candidate = new List<Candidate>();
@@ -123,11 +122,12 @@ namespace HRAnalytics.BL
                 foreach (var alternative in argAlternativeResult)
                 {
                     candidate = new Candidate();
-                    candidate.JobId = argJobId;
+                    candidate.JobId = argRole.JobId;
                     candidate.CandidateID = Convert.ToInt32(alternative.Name);
-                    candidate.ScheduleID = l_scores.Where(x => x.CandidateID == candidate.CandidateID && x.JobId == argJobId).Select(y => y.ScheduleID.Value).FirstOrDefault();
+                    candidate.ScheduleID = l_scores.Where(x => x.CandidateID == candidate.CandidateID && x.JobId == argRole.JobId).Select(y => y.ScheduleID.Value).FirstOrDefault();
                     candidate.LocalScore = alternative.calculatedPerformance;
-                    candidate.GlobalScore = candidate.LocalScore * argWeightage;
+                    candidate.GlobalScore = candidate.LocalScore * argRole.Weightage;
+                    candidate.ActualCompensation = argRole.Compensation;
                     l_Candidate.Add(candidate);
                 }
             }

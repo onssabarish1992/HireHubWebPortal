@@ -219,6 +219,7 @@ namespace HRAnalytics.BL
                         l_Candidate.JobName = l_Row["job_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["job_name"]);
                         l_Candidate.CandidateName = l_Row["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["candidate_name"]);
                         l_Candidate.IsHired = l_Row["is_hired"] == DBNull.Value ? false : Convert.ToBoolean(l_Row["is_hired"]);
+                        l_Candidate.IsRecommended = l_Row["is_recommeded"] == DBNull.Value ? false : Convert.ToBoolean(l_Row["is_recommeded"]);
                         l_Candidate.ProposedCompensation = l_Row["proposed_compensation"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["proposed_compensation"]);
                         l_Candidate.ActualCompensation = l_Row["actual_compensation"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["actual_compensation"]);
                         
