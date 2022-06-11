@@ -36,6 +36,8 @@
 
         public double GlobalScore { get; set; }
 
+        public bool? IsRecommended { get; set; }
+
 
     }
 

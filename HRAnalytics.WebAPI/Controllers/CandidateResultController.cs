@@ -11,12 +11,16 @@ namespace HRAnalytics.WebAPI.Controllers
     public class CandidateResultController : ControllerBase
     {
         private ICandidateResult _candidateResult;
+        private ICandidateOptimization _candidateOptimization;
         private readonly TelemetryClient _telemetryClient;
 
-        public CandidateResultController(ICandidateResult argCandidate, TelemetryClient argTelemetryClient)
+        public CandidateResultController(ICandidateResult argCandidate, 
+                                         TelemetryClient argTelemetryClient,
+                                         ICandidateOptimization argCandidateOptimization)
         {
             _candidateResult = argCandidate;
             _telemetryClient = argTelemetryClient;
+            _candidateOptimization = argCandidateOptimization;
         }
 
         [HttpGet]
@@ -29,6 +33,32 @@ namespace HRAnalytics.WebAPI.Controllers
             try
             {
                 l_CandidateCollection = _candidateResult.GetCandidateResult();
+
+                if (l_CandidateCollection == null || l_CandidateCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackTrace("Exception caught within GetCandidateResult method...");
+                _telemetryClient.TrackException(ex);
+                throw;
+            }
+
+            return Ok(l_CandidateCollection);
+        }
+
+        [HttpGet]
+        [Route("GetOptimizeCandidateResult")]
+        public IActionResult OptimizeCandidateResult()
+        {
+            #region Declarations
+            List<Candidate> l_CandidateCollection;
+            #endregion
+            try
+            {
+                l_CandidateCollection = _candidateOptimization.GetOptimumResult();
 
                 if (l_CandidateCollection == null || l_CandidateCollection.Count == 0)
                 {

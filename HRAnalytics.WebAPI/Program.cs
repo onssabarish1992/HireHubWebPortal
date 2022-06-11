@@ -19,6 +19,8 @@ builder.Services.AddScoped<ITopsis, Topsis>();
 
 builder.Services.AddScoped<ICandidateResult, CandidateResultBL>();
 
+builder.Services.AddScoped<ICandidateOptimization, CandidateOptimization>();
+
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 
