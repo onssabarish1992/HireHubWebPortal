@@ -12,10 +12,12 @@ namespace HRAnalytics.BL
     {
         private IJobBL _IJobBL;
         private ICandidateScore _IScoreBL;
-        public CandidateResultBL(IJobBL argJobBL, ICandidateScore argScoreBL)
+        private ITopsis _ITopsisBL;
+        public CandidateResultBL(IJobBL argJobBL, ICandidateScore argScoreBL, ITopsis argTopsisBL)
         {
             _IJobBL = argJobBL;
             _IScoreBL = argScoreBL;
+            _ITopsisBL = argTopsisBL;
         }
 
         /// <summary>
@@ -61,8 +63,10 @@ namespace HRAnalytics.BL
         private List<Candidate> GetCandidateRankings(JobCollection l_roles, JobCollection l_criterias, List<CandidateEvaluation> l_scores)
         {
             #region Declaration
-            List<Candidate> l_candidates = new List<Candidate>();
+            List<Alternative> l_aggregatedResults = new List<Alternative>();
+            List<Candidate> l_candidatesSet = new List<Candidate>();
             #endregion
+
             try
             {
                 foreach (var role in l_roles)
@@ -80,16 +84,59 @@ namespace HRAnalytics.BL
 
                         //Create required alternatives for topsis
                         List<Alternative> alternatives = GetAlternativesForTheCriteria(l_reqdCandidates, criterias);
+
+                        //Compute Topsis score for that job role
+                        var alternativeResult = _ITopsisBL.ComputeTopsisScore(alternatives, criterias);
+
+                        //Create the candidate dataset
+                        l_candidatesSet.AddRange(CreateCandidateScores(alternativeResult, l_scores, role.JobId,role.Weightage));
                     }
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
 
-            return l_candidates;
+            return l_candidatesSet;
+        }
+
+        /// <summary>
+        /// Create the candidate object from alternatives 
+        /// </summary>
+        /// <param name="argAlternativeResult"></param>
+        /// <param name="l_scores"></param>
+        /// <param name="argJobId"></param>
+        /// <returns></returns>
+        private List<Candidate> CreateCandidateScores(List<Alternative> argAlternativeResult, 
+                                                      List<CandidateEvaluation> l_scores, 
+                                                      int argJobId,
+                                                      double argWeightage)
+        {
+            #region Declaration
+            List<Candidate> l_Candidate = new List<Candidate>();
+            Candidate candidate;
+            #endregion
+
+            try
+            {
+                foreach (var alternative in argAlternativeResult)
+                {
+                    candidate = new Candidate();
+                    candidate.JobId = argJobId;
+                    candidate.CandidateID = Convert.ToInt32(alternative.Name);
+                    candidate.ScheduleID = l_scores.Where(x => x.CandidateID == candidate.CandidateID && x.JobId == argJobId).Select(y => y.ScheduleID.Value).FirstOrDefault();
+                    candidate.LocalScore = alternative.calculatedPerformance;
+                    candidate.GlobalScore = candidate.LocalScore * argWeightage;
+                    l_Candidate.Add(candidate);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_Candidate;
         }
 
         /// <summary>
@@ -106,41 +153,36 @@ namespace HRAnalytics.BL
             Alternative l_alternative;
             CriteriaValue l_criteriaValue;
             Criteria l_Criteria;
-            List<CriteriaValue> l_CriteriaValues = new();
+            List<CriteriaValue> l_CriteriaValues;
             #endregion
             try
             {
-                var groupCandidatesByID = from candidate in argReqdCandidates
-                                          group candidate by candidate.CandidateID into groupedCandidates
-                                          orderby groupedCandidates.Key
-                                          select groupedCandidates;
+                var distinctCandidates = argReqdCandidates.Select(x => x.CandidateID).Distinct();
 
-                foreach (var candidate in groupCandidatesByID)
+                foreach (var candidate in distinctCandidates)
                 {
-                    var l_reqdCandidates = argReqdCandidates.Where(x => x.CandidateID == candidate.Key);
                     l_alternative = new Alternative();
+                    l_alternative.Name = Convert.ToString(candidate);
 
-                    foreach (var cd in l_reqdCandidates)
+                    //Form the distinct criteria for each candidate
+                    var candidateCriterias = argReqdCandidates.Where(x => x.CandidateID == candidate);
+
+                    //Reset the list
+                    l_CriteriaValues = new List<CriteriaValue>();
+
+                    foreach (var criteria in candidateCriterias)
                     {
-                        //Form criteria values
                         l_criteriaValue = new CriteriaValue();
-                        l_Criteria = argCriterias.Where(x => x.Name == Convert.ToString(cd.CriteriaId)).FirstOrDefault();
-
-                        l_criteriaValue.criteria = l_Criteria;
-                        l_criteriaValue.Value = cd.CriteriaScore;
-
-                        //Add criteria values 
+                        l_criteriaValue.Value = argReqdCandidates.Where(x => x.CandidateID == candidate 
+                                                && x.CriteriaId == criteria.CriteriaId)
+                                                .Select(y=>y.CriteriaScore).FirstOrDefault();
+                        l_criteriaValue.criteria = argCriterias.Where(x => x.Name == Convert.ToString(criteria.CriteriaId)).FirstOrDefault();
                         l_CriteriaValues.Add(l_criteriaValue);
-
                     }
 
-                    //Create alternatives
                     l_alternative.criteriaValues = l_CriteriaValues;
-                    l_alternative.Name = Convert.ToString(candidate.Key);
                     l_alternatives.Add(l_alternative);
                 }
-
-                
             }
             catch (Exception)
             {
@@ -168,7 +210,7 @@ namespace HRAnalytics.BL
                 {
                     l_Criteria = new Criteria();
                     l_Criteria.Name = Convert.ToString(criteria.CriteriaID);
-                    l_Criteria.Weight = criteria.Weightage;
+                    l_Criteria.Weight = criteria.SubCriteriaWeightage;
                     l_Criteria.IsNegative = false; //Will be set as false for all the entries
 
                     l_criterias.Add(l_Criteria);

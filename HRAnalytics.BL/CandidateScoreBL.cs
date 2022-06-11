@@ -182,7 +182,7 @@ namespace HRAnalytics.BL
                         l_CandidateEvaluation.CriteriaComments = l_Row["criteria_comments"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["criteria_comments"]);
                         l_CandidateEvaluation.CandidateID = l_Row["candidate_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["candidate_id"]);
                         l_CandidateEvaluation.CandidateName = l_Row["candidate_name"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["candidate_name"]);
-
+                        l_CandidateEvaluation.ScheduleID = l_Row["schedule_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["schedule_id"]);
                         l_CandidateEvaluations.Add(l_CandidateEvaluation);
                     }
                 }

@@ -22,5 +22,7 @@ namespace HRAnalytics.Entities
 
         public int CandidateID { get; set; }
         public string CandidateName { get; set; }
+
+        public int? ScheduleID{ get; set; }
     }
 }

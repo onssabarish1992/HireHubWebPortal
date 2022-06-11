@@ -32,7 +32,11 @@
 
         public string? InterviewStatus { get; set; }
 
-        
+        public double LocalScore{ get; set; }
+
+        public double GlobalScore { get; set; }
+
+
     }
 
     public class CandidateCollection: List<Candidate>
