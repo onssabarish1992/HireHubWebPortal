@@ -356,9 +356,12 @@ table.dataTable.no-footer {
 #tbl_Candidates {
     border: 1px solid #fff;
 }
-.custom_table {
-    background: rgba(0,0,0,0.7);
+#tbl_Candidates td{
+    text-align:center;
 }
+    .custom_table {
+        background: rgba(0,0,0,0.7);
+    }
 .dataTables_wrapper .dataTables_filter input {
     color: #fff;
 }
