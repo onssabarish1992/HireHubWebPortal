@@ -38,11 +38,16 @@
 }
 .candidate_evaluation {
     margin: 30px 0px;
-    background: rgba(37,41,88,0.8);
+    background: rgba(37,41,88,0.9);
     padding: 15px 15px 10px 15px;
+    display: inline-block;
+    width: 450px;
+}
+#candidate_pr select {
+    color:#000 !important;
 }
 .candidate_evaluation label {
-    color:#fff;
+    color: #fff;
 }
     .candidate_evaluation p {
         color: #fff;
@@ -101,21 +106,27 @@
 
 .custom_table th {
     color: #fff;
-    background:rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.7);
+    border-top: 1px solid #fff !important
 }
 
 .custom_table td {
     color: #fff;
     background: rgba(0,0,0,0.6);
 }
-
+#txtar {
+    height: 150px !important;
+}
+#candidate_pr textarea {
+    height: 150px !important;
+} 
 .custom_table textarea {
     width: 100%;
     color: #000;
 }
 
 .custom_table select {
-    /*color: #fff;*/
+    color: #fff;
     width: 100%;
 }
 .custom_table select option {
@@ -157,6 +168,7 @@ input.form-control {
     max-width: 450px;
     margin: 0 auto;
     margin-bottom: 25px;
+    display:block;
 }
 .role_cri .date input {
     width: 100%;
@@ -209,6 +221,7 @@ input.form-control {
     padding: 15px;
     margin: 0 auto;
     margin-bottom: 15px;
+    display: block;
 }
 .eval_head {
     text-align: center;
@@ -331,7 +344,19 @@ table.dataTable.no-footer {
 .dataTables_info {
     margin-left:15px;
 }
- .custom_table {
+.footer {
+    float:left;
+    width:100%;
+    color: #fff !important;
+    clear: both;
+    position: relative !important;
+    background: rgba(0,0,0,0.7);
+    line-height: 45px !important;
+}
+#tbl_Candidates {
+    border: 1px solid #fff;
+}
+.custom_table {
     background: rgba(0,0,0,0.7);
 }
 .dataTables_wrapper .dataTables_filter input {

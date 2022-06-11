@@ -43,7 +43,7 @@
 
             @*Criteria Description*@
             <div class="form-group">
-               <label class="control-label" asp-for="@Model.Criteria.CriteriaDescription">Criteria Description:</label>
+               <label class="control-label" asp-for="@Model.Criteria.CriteriaDescription">Criteria Description:</label>  
                @Html.TextAreaFor(m=>m.Criteria.CriteriaDescription,new {@class="form-control",@rows=10,@cols=150})
                <span asp-validation-for="@Model.Criteria.CriteriaDescription" class="text-danger"></span>
             </div>

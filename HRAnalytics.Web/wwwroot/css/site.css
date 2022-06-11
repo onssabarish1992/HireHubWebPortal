@@ -121,6 +121,15 @@ body {
     color: red;
     font-weight: bold;
 }
+.footer {
+    float: left;
+    width: 100%;
+    color: #fff !important;
+    clear: both;
+    position: relative !important;
+    background: rgba(0,0,0,0.7);
+    line-height: 45px !important;
+}
 
 
 /* Ends  */
