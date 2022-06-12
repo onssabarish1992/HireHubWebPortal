@@ -25,8 +25,7 @@ body {
     float:right !important;
 }
 #logoutForm button {
-    padding:0px !important;
-    margin-top:9px !important;
+    padding:8px !important;
 }
 .margin-none {
     padding:0px !important;
@@ -142,9 +141,5 @@ body {
     }
     .navbar-light .navbar-toggler {
         background:#fff;
-    }
-    #logoutForm button {
-        margin-top: 0px !important;
-        margin-left: 10px;
     }
 }

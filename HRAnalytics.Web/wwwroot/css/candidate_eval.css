@@ -12,8 +12,7 @@
     box-shadow: 5px 5px 15px 5px #000000;
 }
 #logoutForm button {
-    padding: 0px !important;
-    margin-top: 9px !important;
+    padding: 10px !important;
 }
 .navbar {
     margin-bottom: 0px !important;
@@ -57,6 +56,7 @@
     float: left;
     width: 100%;
     padding: 15px;
+    margin-bottom: 50px;
 }
 
     .c_eval h2 {
@@ -113,6 +113,7 @@
 .custom_table td {
     color: #fff;
     background: rgba(0,0,0,0.6);
+    border: 1px solid #fff;
 }
 #txtar {
     height: 150px !important;
@@ -302,6 +303,93 @@ input.form-control {
 }
 /*     ends            */
 
+/*     Homepage CSS starts           */
+
+
+.homepage {
+    background: rgba(0,0,0,0.7);
+    overflow-x: hidden;
+}
+
+    .homepage p, h2, h3, h4, li {
+        color: #fff;
+    }
+
+    .homepage .left_content p {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .homepage .left_content {
+        padding: 30px;
+        border-right: 1px solid #fff;
+    }
+
+        .homepage .left_content ul {
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+            .homepage .left_content ul li {
+                font-size: 18px;
+            }
+
+        .homepage .left_content h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .homepage .left_content h2 {
+            text-align: center;
+        }
+
+        .homepage .left_content .home_panel1 {
+            text-align: center;
+            background: #808080;
+            padding: 30px;
+        }
+
+        .homepage .left_content .home_panel2 {
+            text-align: center;
+            background: #0000FF;
+            padding: 30px;
+        }
+
+        .homepage .left_content .home_panel3 {
+            text-align: center;
+            background: #00FF00;
+            padding: 30px;
+        }
+
+    .homepage .right_content {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+        .homepage .right_content a {
+            text-decoration: none;
+            color: #000;
+            background: #fff;
+            padding: 15px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out 0s;
+        }
+
+            .homepage .right_content a:hover {
+                color: #fff;
+                background: #000;
+            }
+
+        .homepage .right_content p {
+            color: #fff;
+            margin: 30px 0px;
+            font-size: 24px;
+        }
+
+
+/*     ends            */
+
 
 
 /* global score CSS starts*/
@@ -353,7 +441,7 @@ table.dataTable.no-footer {
     background: rgba(0,0,0,0.7);
     line-height: 45px !important;
 }
-#tbl_Candidates {
+#tbl_Candidates { 
     border: 1px solid #fff;
 }
 #tbl_Candidates td{
@@ -393,6 +481,7 @@ table.dataTable.no-footer {
 
     .candidate_evaluation {
         padding: 30px;
+        max-width: 100%;
     }
     .c_eval {
         padding: 15px 0px;
