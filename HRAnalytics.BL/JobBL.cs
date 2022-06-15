@@ -78,6 +78,7 @@ namespace HRAnalytics.BL
 
                         DataRow l_Row = l_JobDataTable.Rows[i];
 
+                        l_Job.SubCriteriaId = l_Row["sub_criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["sub_criteria_id"]);
                         l_Job.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
                         l_Job.CriteriaID = l_Row["criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["criteria_id"]);
                         l_Job.DateCreated = l_Row["date_created"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["date_created"]);
@@ -86,7 +87,6 @@ namespace HRAnalytics.BL
                         l_Job.SubCriteriaDescription = l_Row["sub_criteria_description"] == DBNull.Value ? string.Empty : Convert.ToString(l_Row["sub_criteria_description"]);
                         l_Job.SubCriteriaWeightage = l_Row["weightage"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["weightage"]);
                         l_JobCollection.Add(l_Job);
-
                     }
                 }
             }
@@ -195,6 +195,7 @@ namespace HRAnalytics.BL
 
                         DataRow l_Row = l_JobDataTable.Rows[i];
 
+                        l_Job.JobCriteriaId = l_Row["job_criteria_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_criteria_id"]);
                         l_Job.JobId = l_Row["job_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["job_id"]);
                         l_Job.Position = l_Row["position_count"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["position_count"]);
                         l_Job.Compensation = l_Row["compensation"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["compensation"]);
