@@ -21,6 +21,8 @@ builder.Services.AddScoped<ICandidateResult, CandidateResultBL>();
 
 builder.Services.AddScoped<ICandidateOptimization, CandidateOptimization>();
 
+builder.Services.AddScoped<IAHP, AHP>();
+
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 

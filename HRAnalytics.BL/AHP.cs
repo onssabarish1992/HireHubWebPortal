@@ -1,22 +1,28 @@
 ﻿using HRAnalytics.BL.Interfaces;
+using HRAnalytics.DAL;
 using HRAnalytics.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace HRAnalytics.BL
 {
     public class AHP: IAHP
     {
         private IJobBL _jobBL;
-        public AHP(IJobBL jobBL)
+        private readonly IConfiguration _configuration;
+        public AHP(IJobBL jobBL, IConfiguration configuration)
         {
             _jobBL = jobBL;
+            _configuration = configuration;
         }
 
-        public void SavePairs(int argEntityID, int? argParentEntityID)
+        public void SavePairs(int argEntityID, int? argParentEntityID, string argLoggedInUser)
         {
             List<AHPPair> l_FinalPairs=new List<AHPPair>();
             try
@@ -51,6 +57,8 @@ namespace HRAnalytics.BL
 
                     l_FinalPairs = CreateAHPPairs(l_PairsGenerated, argEntityID);
                 }
+
+                SavAHPPairs(argLoggedInUser, l_FinalPairs);
             }
             catch (Exception)
             {
@@ -100,7 +108,7 @@ namespace HRAnalytics.BL
                 {
                     for (int i = 0; i < argPairs.Count; i++)
                     {
-                        for (int j = 1 + 1; j < argPairs.Count; j++)
+                        for (int j = i + 1; j < argPairs.Count; j++)
                         {
                             l_pairs.Add(string.Concat(argPairs[i], "|", argPairs[j]));
                         }
@@ -113,6 +121,51 @@ namespace HRAnalytics.BL
             }
 
             return l_pairs;
+        }
+
+
+        public void SavAHPPairs(string argLoggedInUserID, List<AHPPair> argAHPPairs)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            XElement l_pairXML;
+            try
+            {
+                l_pairXML = GeneratePAIRSXML(argAHPPairs);
+
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUserID, DbType.String));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.PAIRSXML, l_pairXML.ToString(), DbType.Xml));
+
+                //Call stored procedure
+                l_HRAnalyticsDBManager.Insert(StoredProcedure.SAVE_AHP_PAIRS, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private XElement GeneratePAIRSXML(List<AHPPair> argAHPPairs)
+        {
+            XElement l_PairXML;
+            try
+            {
+                l_PairXML = new XElement("Pairs",
+                    from scr in argAHPPairs
+                    select new XElement("Pair",
+                    new XElement("Pair1", scr.Pair1),
+                    new XElement("Pair2", scr.Pair2),
+                    new XElement("EntityId", scr.EntityId),
+                    new XElement("ParentEntityId", scr.ParentEntityId)
+                    ));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_PairXML;
         }
     }
 }
