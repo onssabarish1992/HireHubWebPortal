@@ -35,6 +35,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="EvaluationCriteria" asp-action="Index">Set Criteria</a>
                         </li>
+                        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="elements" onclick="$('#drp').toggle();" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Manage</a>
+        <div class="dropdown-menu dropdown-primary pb-0" id="drp" aria-labelledby="elements">
+          <a class="dropdown-item" href="element1.html">Element1</a>
+          <a class="dropdown-item" href="element2.html">Element2</a>
+          <a class="dropdown-item" href="element3.html">Element3</a> 
+        </div>
+      </li>
                     </ul>
                      <partial name="_LoginPartial"/>
                 </div>
@@ -47,8 +56,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted" style="position:absolute !important;">
-        <div class="container">
+    <footer class="border-top footer text-muted" style="position:absolute !important;"> 
+        <div class="container"> 
             &copy; 2022 - HRAnalytics.Web - <!--<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>-->
         </div>
     </footer>
@@ -57,6 +66,17 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+        <script>
+            function myFunction() {
+  var x = document.getElementById("drp");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>
