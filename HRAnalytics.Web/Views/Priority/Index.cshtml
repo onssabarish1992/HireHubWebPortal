@@ -6,6 +6,7 @@
 <head>
    
     <link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
+    	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
 </head>
 
 
@@ -13,19 +14,32 @@
 <div id="bg">
 <img src="../Images/dem2.jpg" alt=""> 
 </div>
+
 <div class="range_parent">
-           <div class="eval_head"> 
+<div class="container">
+               <div class="eval_head"> 
       <h2>Set Priority</h2> 
       </div>
-<div class="container"> 
-<form>
-    <div data-role="rangeslider">  
-        <label for="range-10a">Job Role 1<span>Job Role 2</span></label> 
-        <input type="range" name="range-10a" id="range-10a" min="0" max="10" step="1" value="1">
-        <input type="range" name="range-10b" id="range-10b" min="0" max="10" step="1" value="10">
-    </div>
-</form>
-</div>
+   <div class="range_slider">
+      <div class="range">
+         <div class="row">
+            <div class="col-md-2">
+               <h3>Job Role 1</h3>
+            </div>
+            <div class="col-md-8">
+               <div class="range_wrap">
+                  <div id="slider"></div>
+               </div>
+			    Priority Value:
+               <input type="text" id="radiusAmount" >
+            </div>
+            <div class="col-md-2">
+               <h4>Job Role 2</h4>
+            </div>
+         </div>
+      </div>
+   </div>
+</div> 
 </div>
 </div>
 
@@ -35,4 +49,35 @@
 
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function() {
+        var valMap = [9, 8, 7, 6, 5, 4, 3, 2, 1,2,3,4,5,6,7,8,9];
+
+        $("#slider").slider({
+                max: valMap.length - 1,
+				value: [8],
+                slide: function(event, ui) {
+                    $("#radiusAmount").val(valMap[ui.value]);
+                }
+            })
+            .each(function() {
+
+                var opt = $(this).data().uiSlider.options;
+
+                var vals = opt.max - opt.min;
+
+
+                var arrayLength = valMap.length;
+                for (var i = 0; i < arrayLength; i++) {
+
+                    var el = $('<label>' + (valMap[i]) + '</label>').css('left', (i / vals * 100) + '%');
+
+                    $("#slider").append(el);
+
+                }
+
+            });
+    });
+
+</script>

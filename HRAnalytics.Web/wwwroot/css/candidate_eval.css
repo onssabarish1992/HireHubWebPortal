@@ -33,7 +33,7 @@
     }
 
 .app_logo {
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 .candidate_evaluation {
     margin: 30px 0px;
@@ -149,9 +149,10 @@ input.form-control {
 .interviewer_table {
     padding-top: 30px;
 }
-.interviewer_table th{
-    color:#fff;
-}
+    .interviewer_table th {
+        color: #fff;
+        text-align: center !important;
+    }
     .interviewer_table td {
         color: #fff;
     }
@@ -305,20 +306,114 @@ input.form-control {
 
 /*     priority starts            */
 
-.range_parent {
-    margin:25px 0px;   
-
-}  
-.range_parent label span {
-    float:right;
+.range_wrap {
+    padding: 0px 10px 50px 10px;
 }
+
+#nlVal {
+    display: inline-block;
+}
+
+#slider {
+    width: 100%;
+    height: 10px;
+    background: #444;
+    border-radius: 50px;
+}
+
+    #slider label {
+        position: absolute;
+        width: 20px;
+        margin-top: 20px;
+        margin-left: -2px;
+        text-align: left;
+        font-size: 13px;
+    }
+
+        #slider label::before {
+            background-color: #ccc;
+            content: "";
+            height: 8px;
+            left: 2px;
+            position: absolute;
+            top: -12px;
+            width: 1px;
+        }
+
+
+.ui-slider-handle.ui-state-default.ui-corner-all {
+    border-radius: 0px;
+    background: #00c7d7;
+    width: 20px;
+    height: 20px;
+    top: -5px;
+    cursor: grab;
+    transition: all .2s linear;
+}
+
+    .ui-slider-handle.ui-state-default.ui-corner-all::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 9px;
+        background-color: #fff;
+        left: 10px;
+        top: 5px;
+    }
+
+    .ui-slider-handle.ui-state-default.ui-corner-all::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 9px;
+        background-color: #fff;
+        left: 6px;
+        top: 5px;
+    }
+
+
+.ui-slider-handle.ui-state-active,
+.ui-slider-handle.ui-state-hover,
+.ui-slider-handle.ui-state-focus {
+    border: none;
+    outline: 0;
+}
+
+.range_slider {
+    margin: 0 auto;
+    background: rgba(255,255,255,0.8);
+    padding: 25px 0px 10px 0px;
+    margin-top: 50px;
+}
+
+.range h3 {
+    color: #000;
+    display: inline-block;
+    font-size: 15px;
+    margin: 0;
+    float: right;
+    font-weight: bold;
+}
+
+.range h4 {
+    color: #000;
+    display: inline-block;
+    float: right;
+    font-size: 15px;
+    margin: 0;
+    float: left;
+    font-weight: bold;
+}
+
+
+
 /*     ends            */
-
+.dropdown-item {
+    text-decoration: none !important;
+    font-size: 16px;
+}
 /*     Homepage CSS starts           */
-
-
 .homepage {
-    background: rgba(0,0,0,0.7);
     overflow-x: hidden;
 }
 
@@ -332,9 +427,21 @@ input.form-control {
     }
 
     .homepage .left_content {
+        background: rgba(0,0,0,0.7);
+        margin: 15px;
         padding: 30px;
-        border-right: 1px solid #fff;
+        position: relative;
     }
+
+        .homepage .left_content:after {
+            content: '';
+            height: 85%;
+            width: 3px;
+            position: absolute;
+            right: -25px;
+            top: 30px;
+            background-color: #fff;
+        }
 
         .homepage .left_content ul {
             max-width: 430px;
@@ -348,33 +455,69 @@ input.form-control {
         .homepage .left_content h1 {
             text-align: center;
             color: #fff;
+            padding: 20px 0px 30px 0px;
         }
 
         .homepage .left_content h2 {
             text-align: center;
+            padding-bottom: 10px;
+            font-weight: bold;
         }
+.login-logo {
+    text-align: center;
+    background: rgba(0,0,0,0.9);
+    padding: 15px 20px 25px 20px;
+    margin-bottom: 50px;
+}
 
         .homepage .left_content .home_panel1 {
             text-align: center;
             background: #808080;
             padding: 30px;
+            font-size: 12px;
+        }
+
+            .homepage .left_content .home_panel1 p {
+                font-size: 12px;
+            }
+
+        .homepage .left_content .home_panel2 p {
+            font-size: 12px;
+        }
+
+        .homepage .left_content .home_panel3 p {
+            font-size: 12px;
+        }
+        .homepage .left_content .home_panel1 h4 {
+            font-size: 18px;
+        }
+
+        .homepage .left_content .home_panel2 h4 {
+            font-size: 18px;
+        }
+
+        .homepage .left_content .home_panel3 h4 {
+            font-size: 18px;
         }
 
         .homepage .left_content .home_panel2 {
             text-align: center;
             background: #0000FF;
             padding: 30px;
+            font-size: 12px;
         }
 
         .homepage .left_content .home_panel3 {
             text-align: center;
             background: #00FF00;
             padding: 30px;
+            font-size: 12px;
         }
 
     .homepage .right_content {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 100px;
+        margin-bottom: 50px;
     }
 
         .homepage .right_content a {
@@ -397,6 +540,13 @@ input.form-control {
             margin: 30px 0px;
             font-size: 24px;
         }
+
+.home_closing p {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
+
 
 
 /*     ends            */
@@ -452,8 +602,9 @@ table.dataTable.no-footer {
     background: rgba(0,0,0,0.7);
     line-height: 45px !important;
 }
-#tbl_Candidates { 
+#tbl_Candidates {
     border: 1px solid #fff;
+    padding: 30px;
 }
 #tbl_Candidates td{
     text-align:center;
@@ -476,7 +627,13 @@ table.dataTable.no-footer {
 #tbl_role_paginate a {
     color: #fff !important;
 }
-
+#tbl_Candidates_paginate a {
+    color: #fff !important;
+}
+#tbl_Candidates a {
+    color: #fff;
+    font-size: 18px;
+}
 /* ends    */
 .field-validation-error span {
     color: red;
@@ -500,11 +657,40 @@ table.dataTable.no-footer {
     .custom_table th {
         font-size: 16px;
     }
+    .dropdown-item {
+        color:#fff;
+    }
  
 }
-@media only screen and (min-width: 768px) and (max-width: 1200px) {
- 
-}
-input[type=search] {
-    color: #fff !important;
+@media only screen and (min-width: 768px) and (max-width: 1080px) {
+    .homepage .home_panel1 h3 {
+        font-size: 16px;
+    }
+
+    .homepage .home_panel2 h3 {
+        font-size: 16px;
+    }
+
+    .homepage .home_panel3 h3 {
+        font-size: 16px;
+    }
+
+    .homepage .home_panel1 h2 {
+        font-size: 18px;
+        padding-bottom: 0px;
+    }
+
+    .homepage .home_panel2 h2 {
+        font-size: 18px;
+        padding-bottom: 0px;
+    }
+
+    .homepage .home_panel3 h2 {
+        font-size: 18px;
+        padding-bottom: 0px;
+    }
+
+    .homepage .right_content {
+        margin-top: 30px;
+    }
 }
