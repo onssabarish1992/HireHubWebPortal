@@ -24,6 +24,7 @@ namespace HRAnalytics.BL
         public const string GET_GLOBAL_SCORE = "usp_getGlobalScores";
         public const string GET_ALLCANDIDATE_RATINGS = "usp_getAllCandidateRatings";
         public const string SAVE_GLOBAL_SCORE = "usp_sav_GlobalScores";
+        public const string UPDATE_COMPENSATION = "usp_UpdateCompensation";
 
 
     }

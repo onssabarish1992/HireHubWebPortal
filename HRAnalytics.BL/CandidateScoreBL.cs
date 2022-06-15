@@ -242,5 +242,30 @@ namespace HRAnalytics.BL
 
             return l_ratingXML;
         }
+
+
+        public void UpdateCompensation(string argLoggedInUser, int argGlobalScoreID, bool argIsHired, double argActualCompensation)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            try
+            {
+                
+
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ACTUALCOMPENSATION, argGlobalScoreID, DbType.String));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ISHIRED, argIsHired, DbType.String));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.GLOBALSCORE, argActualCompensation, DbType.String));
+
+
+                //Call stored procedure
+                l_HRAnalyticsDBManager.Insert(StoredProcedure.UPDATE_COMPENSATION, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

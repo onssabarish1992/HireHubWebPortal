@@ -18,5 +18,7 @@ namespace HRAnalytics.BL.Interfaces
 
         void SaveGlobalScores(string argLoggedInUser, int argScheduleID, List<Candidate> argGlobalScores);
 
+        void UpdateCompensation(string argLoggedInUserID, int argGlobalScoreID, bool argIsHired, double argActualCompensation);
+
     }
 }

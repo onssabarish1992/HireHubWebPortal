@@ -26,6 +26,9 @@ namespace HRAnalytics.BL
         public const string CLOSINGDATE = "@ClosingDate";
         public const string RATINGXML = "@InterviewRatingsXML";
         public const string SCORESXML = "@GlobalScoresXML";
+        public const string GLOBALSCORE = "@global_score_id";
+        public const string ISHIRED = "@is_hired";
+        public const string ACTUALCOMPENSATION = "@actual_compensation";
 
     }
 }

@@ -98,5 +98,24 @@ namespace HRAnalytics.WebAPI.Controllers
             return Ok();
 
         }
+
+        [HttpPost]
+        [Route("SaveScores")]
+        public IActionResult UpdateCompensation(string argLoggedInUser, int argGlobalScoreID, bool argIsHired, double argActualCompensation)
+        {
+            try
+            {
+                _candiadateScoreBL.UpdateCompensation(argLoggedInUser,argGlobalScoreID,  argIsHired,  argActualCompensation);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
+
+        }
+
+
     }
 }
