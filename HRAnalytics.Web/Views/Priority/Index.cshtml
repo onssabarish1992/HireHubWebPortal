@@ -28,11 +28,12 @@
             </div>
             <div class="col-md-8">
                <div class="range_wrap">
-                  <div class="sliders"></div>
+                  	<div id="1" class="sliders"></div>
                </div>
                <div class="prior_input">
-			    Priority Value:
-               <input type="text" id="radiusAmount" >
+			    <label for="kpa1">Priority Value:</label>
+			
+               <input type="text" class="kpa1" >
                </div>
             </div>
             <div class="col-md-2">
@@ -42,9 +43,7 @@
       </div>
    </div>
 
-   <!-- slider 2-->
-
-    <!-- <div class="range_slider">
+      <div class="range_slider"> 
       <div class="range">
          <div class="row">
             <div class="col-md-2">
@@ -52,21 +51,20 @@
             </div>
             <div class="col-md-8">
                <div class="range_wrap">
-                  <div id="slider2"></div>
+                   <div id="2" class="sliders"></div>
                </div>
-               <div class="prior_input">
-			    Priority Value:
-               <input type="text" id="radiusAmount2" >
-                </div>
+               <div class="">
+			     <label for="kpa2">Priority Value:</label>
+				
+               <input type="text" class="kpa2"  >
+               </div>
             </div>
             <div class="col-md-2">
                <h4>Job Role 2</h4>
             </div>
          </div>
       </div>
-   </div> -->
-
-   <!--   ends   -->
+   </div>
 </div> 
 </div>
 </div>
@@ -86,7 +84,8 @@
                 max: valMap.length - 1,
 				value: [8],
                 slide: function(event, ui) {
-                    $(".prior_input input").val(valMap[ui.value]); 
+                    var id = $(this).attr("id");
+					$("input[class*=" + id + "]").val(valMap[ui.value]);
                 }
             })
             .each(function() {
@@ -109,35 +108,3 @@
     });
 
 </script>
-
-<!--<script>
-    $(function() {
-        var valMap = [9, 8, 7, 6, 5, 4, 3, 2, 1,2,3,4,5,6,7,8,9];
-
-        $("#slider2").slider({
-                max: valMap.length - 1,
-				value: [8],
-                slide: function(event, ui) {
-                    $("#radiusAmount2").val(valMap[ui.value]);
-                }
-            })
-            .each(function() {
-
-                var opt = $(this).data().uiSlider.options;
-
-                var vals = opt.max - opt.min;
-
-
-                var arrayLength = valMap.length;
-                for (var i = 0; i < arrayLength; i++) {
-
-                    var el = $('<label>' + (valMap[i]) + '</label>').css('left', (i / vals * 100) + '%');
-
-                    $("#slider2").append(el);
-
-                }
-
-            });
-    });
-
-</script>-->
