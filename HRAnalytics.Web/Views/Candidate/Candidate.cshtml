@@ -7,6 +7,7 @@
 
 
 	<head>
+       
 		<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />  
 	</head>
 	<body>
@@ -16,13 +17,13 @@
 </div>
    <div class="col-md-12"> 
        <<div class="eval_head">
-      <h2>Candidate Evaluation</h2>
+      <h2>Candidate Evaluation</h2> 
       </div>
    </div>
    <div class="col-md-12">
       <div class="candidate_evaluation">
          <div class="form-group">
-            <label class="control-label" for="c_name">Candidate Name:</label>
+            <label class="control-label" for="c_name">Candidate Name:</label> 
             <p id="cname">@Model.candidateDetail.CandidateName</p>
          </div>
          <div class="form-group">
@@ -30,8 +31,13 @@
             <p id="role">@Model.candidateDetail.RoleName</p>
          </div>
       </div>
+      <div class="row can_close">
+          <div class="col-md-4">
+       <partial name="_partialStatusMessage" />
+            </div>
+       </div>
       <div class="custom_table">
-          <partial name="_partialStatusMessage" />
+         
 
          <form id="candidate_pr" class="form-horizontal" action="/" method="POST">
 
@@ -125,3 +131,4 @@
     <partial name="_ValidationScriptsPartial" />
 
 }
+
