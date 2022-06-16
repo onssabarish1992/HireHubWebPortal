@@ -1,12 +1,6 @@
 ﻿using HRAnalytics.BL.Interfaces;
 using HRAnalytics.Entities;
 using HRAnalyticsPrescriptiveAPI.Entities;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRAnalytics.BL
 {

@@ -27,6 +27,9 @@ namespace HRAnalytics.BL
         public const string RATINGXML = "@InterviewRatingsXML";
         public const string SCORESXML = "@GlobalScoresXML";
         public const string PAIRSXML = "@AHPPairsXML";
+        public const string ACTUALCOMPENSATION = "@actual_compensation";
+        public const string ISHIRED = "@is_hired";
+        public const string GLOBALSCOREID = "@global_score_id";
 
     }
 }

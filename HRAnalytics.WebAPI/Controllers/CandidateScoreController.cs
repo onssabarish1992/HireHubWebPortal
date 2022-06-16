@@ -117,5 +117,23 @@ namespace HRAnalytics.WebAPI.Controllers
             return Ok();
 
         }
+
+        [HttpPost]
+        [Route("SaveResult")]
+        public IActionResult SaveResult(double argCompensation, bool argIsHired, int argGlobalID)
+        {
+            try
+            {
+                
+                _candiadateScoreBL.SaveResult(argCompensation, argIsHired, argGlobalID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
+
+        }
     }
 }

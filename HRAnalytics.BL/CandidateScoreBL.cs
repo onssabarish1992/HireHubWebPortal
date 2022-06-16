@@ -244,5 +244,27 @@ namespace HRAnalytics.BL
 
             return l_ratingXML;
         }
+
+        public void SaveResult(double argCompensation, bool argIsHired, int argGlobalID)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+
+            try
+            {
+                
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ACTUALCOMPENSATION, argCompensation, DbType.Decimal));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ISHIRED, argIsHired, DbType.Boolean));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.GLOBALSCOREID, argGlobalID, DbType.Int32));
+
+                //Call stored procedure
+                l_HRAnalyticsDBManager.Insert(StoredProcedure.SAVE_RESULT, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
