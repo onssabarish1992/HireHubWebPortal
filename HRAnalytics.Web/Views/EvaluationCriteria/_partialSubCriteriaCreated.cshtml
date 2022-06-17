@@ -9,6 +9,7 @@
                   <th>Role</th>
                   <th>SubCriteria</th>
                   <th>Description</th>
+                  <th>Delete</th>
                </tr>
             </thead>
             <tbody>
@@ -20,6 +21,7 @@
                             <td>@role.JobName</td>
                             <td>@role.CriteriaName</td>
                             <td>@role.CriteriaDescription</td>
+                            <td>@Html.ActionLink("Delete", "DeleteItem", "EvaluationCriteria", new { argID = role.SubCriteriaID })</td>
                             </tr>
                         }
                     }

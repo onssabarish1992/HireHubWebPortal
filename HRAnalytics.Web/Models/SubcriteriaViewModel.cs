@@ -16,6 +16,12 @@ namespace HRAnalytics.Web.Models
         public string? JobName { get; set; }
         public string? CriteriaName { get; set; }
         public int? CriteriaCount { get; set; }
+
+        public int? SubCriteriaID { get; set; }
+
+        public string? Mode { get; set; }
+
+        public string? SubCriteriaDescription { get; set; }
     }
 
     public class CriteriaViewModel
@@ -23,5 +29,6 @@ namespace HRAnalytics.Web.Models
         public SubcriteriaViewModel? Criteria { get; set; }
 
         public List<SubcriteriaViewModel>? CriteriasCreated { get; set; }
+
     }
 }

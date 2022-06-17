@@ -46,6 +46,7 @@ namespace HRAnalytics.Web.Controllers
                     subCriteria.JobName = role.JobName;
                     subCriteria.CriteriaName = role.CriteriaName;
                     subCriteria.CriteriaDescription = role.SubCriteriaDescription;
+                    subCriteria.SubCriteriaID = role.SubCriteriaId;
                     subCriteriasCreated.Add(subCriteria);
                 }
 
@@ -161,6 +162,7 @@ namespace HRAnalytics.Web.Controllers
             {
                 if (argSuCriteria != null)
                 {
+                    argSuCriteria.Criteria.Mode = "Create";
                     l_Message = await SaveSubCriteria(argSuCriteria.Criteria);
 
                     if (l_Message.IsSuccessStatusCode)
@@ -237,6 +239,8 @@ namespace HRAnalytics.Web.Controllers
                     l_job.JobId = argSubCriteria.JobId;
                     l_job.CriteriaID = argSubCriteria.CriteriaId;
                     l_job.SubCriteriaDescription = argSubCriteria.CriteriaDescription;
+                    l_job.Mode = argSubCriteria.Mode;
+                    l_job.SubCriteriaId = argSubCriteria.SubCriteriaID;
                 }
             }
             catch (Exception)
@@ -244,6 +248,75 @@ namespace HRAnalytics.Web.Controllers
                 throw;
             }
             return l_job;
+        }
+
+        [HttpDelete]
+        public async Task<HttpResponseMessage> DeleteJobCriteria(SubcriteriaViewModel argJobCriteria)
+        {
+            #region Declarations
+            HttpResponseMessage l_Response = new HttpResponseMessage();
+            // Job l_Job;
+            Job l_job = new();
+            string l_SaveJobRoleURL = apiBaseURL + "api/Job/SaveSubCriteria?LoggedInUser=" + GetLoggedInUserID();
+
+
+
+            #endregion
+            try
+            {
+                if (argJobCriteria != null)
+                {
+                    l_job.JobId = argJobCriteria.JobId;
+                    l_job.CriteriaID = argJobCriteria.CriteriaId;
+                    l_job.SubCriteriaDescription = argJobCriteria.SubCriteriaDescription;
+                    l_job.SubCriteriaId = argJobCriteria.SubCriteriaID;
+                    l_job.Mode = argJobCriteria.Mode;
+                    l_job = ConvertJobCriteriaViewModeltoEntity(argJobCriteria);
+
+                    if (l_job != null)
+                    {
+                        l_Response = await client.PostAsJsonAsync(l_SaveJobRoleURL, l_job);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_Response;
+        }
+
+        private Job ConvertJobCriteriaViewModeltoEntity(SubcriteriaViewModel argJobCriteria)
+        {
+            Job l_job = new();
+            try
+            {
+                if (argJobCriteria != null)
+                {
+                    l_job.JobId = argJobCriteria.JobId;
+                    l_job.CriteriaID = argJobCriteria.CriteriaId;
+                    l_job.SubCriteriaDescription = argJobCriteria.SubCriteriaDescription;
+                    l_job.SubCriteriaId = argJobCriteria.SubCriteriaID;
+                    l_job.Mode = argJobCriteria.Mode;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_job;
+        }
+
+        public async Task<ActionResult> DeleteItem(int argID)
+        {
+            SubcriteriaViewModel l_vwmodel = new();
+            l_vwmodel.Mode = "Delete";
+            l_vwmodel.SubCriteriaID = argID;
+
+            await DeleteJobCriteria(l_vwmodel);
+
+            return RedirectToAction("Index");
         }
     }
 }

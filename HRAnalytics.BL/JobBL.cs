@@ -112,10 +112,10 @@ namespace HRAnalytics.BL
                 {
                     //Create Parameters
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CRITERIAID, argJob.CriteriaID, DbType.Int32));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIADESCRIPTION, argJob.SubCriteriaDescription, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIADESCRIPTION, string.IsNullOrEmpty(argJob.SubCriteriaDescription) ? DBNull.Value : argJob.SubCriteriaDescription, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJob.JobId, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CREATEDBY, argLoggedInUser, DbType.String));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIAID, argJob.SubCriteriaId, DbType.Int32));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIAID, argJob.SubCriteriaId == null || !argJob.SubCriteriaId.HasValue ? DBNull.Value : argJob.SubCriteriaId, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.MODE, argJob.Mode, DbType.String));
 
                     //Call stored procedure
