@@ -14,7 +14,7 @@ namespace HRAnalytics.Web.Models
         public double Compensation { get; set; }
 
         [Required(ErrorMessage = "Please enter Job Description")]
-        public string JobDescription { get; set; }
+        public string? JobDescription { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? ClosingDate { get; set; }
@@ -22,6 +22,8 @@ namespace HRAnalytics.Web.Models
         public string? JobName { get; set; }
 
         public int? JobCriteriaID { get; set; }
+
+        public string? Mode { get; set; }
 
 
     }
@@ -32,9 +34,9 @@ namespace HRAnalytics.Web.Models
 
         public List<JobCriteriaViewModel>? CiiteriasCreated { get; set; }
 
-        public int? JobCriteriaID { get; set; }
+        //public int? JobCrtID { get; set; }
 
-        public string? Mode { get; set; }
+        //public string? Mde { get; set; }
 
     }
 }

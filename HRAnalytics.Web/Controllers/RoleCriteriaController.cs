@@ -146,19 +146,52 @@ namespace HRAnalytics.Web.Controllers
             return RedirectToAction("Index", "Candidate");
         }
 
+
+        private async Task<HttpResponseMessage> SaveJobCriteria(JobRoleViewModel argJobCriteria)
+        {
+            #region Declarations
+            HttpResponseMessage l_Response = new HttpResponseMessage();
+            Job l_Job;
+            string l_SaveJobRoleURL = apiBaseURL + "api/Job/SaveRole?LoggedInUser=" + GetLoggedInUserID();
+            #endregion
+            try
+            {
+                if (argJobCriteria != null)
+                {
+                    argJobCriteria.JobCriteriaViewModel.Mode = "Create";
+                    l_Job = ConvertJobCriteriaViewModeltoEntity(argJobCriteria.JobCriteriaViewModel);
+                    if (l_Job != null)
+                    {
+                        l_Response = await client.PostAsJsonAsync(l_SaveJobRoleURL, l_Job);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+
+            return l_Response;
+        }
+
         /// <summary>
         /// Save Job Criteria using API call
         /// </summary>
         /// <param name="argJobCriteria"></param>
         /// <returns></returns>s
         [HttpDelete]
-        public async Task<HttpResponseMessage> SaveJobCriteria(JobRoleViewModel argJobCriteria)
+        public async Task<HttpResponseMessage> DeleteJobCriteria(JobCriteriaViewModel argJobCriteria)
         {
             #region Declarations
             HttpResponseMessage l_Response = new HttpResponseMessage();
             // Job l_Job;
             Job l_job = new();
             string l_SaveJobRoleURL = apiBaseURL + "api/Job/SaveRole?LoggedInUser=" + GetLoggedInUserID();
+
+           
+
             #endregion
             try
             {
@@ -169,11 +202,14 @@ namespace HRAnalytics.Web.Controllers
                     l_job.Compensation = argJobCriteria.Compensation;
                     l_job.JobDescription = argJobCriteria.JobDescription;
                     l_job.ClosingDate = argJobCriteria.ClosingDate.HasValue ? argJobCriteria.ClosingDate : null;
-                    l_Job = ConvertJobCriteriaViewModeltoEntity(argJobCriteria.j);
-                    //if (l_Job != null)
-                    //{
-                    //    l_Response = await client.PostAsJsonAsync(l_SaveJobRoleURL, l_Job);
-                    //}
+                    l_job.JobCriteriaId = argJobCriteria.JobCriteriaID;
+                    l_job.Mode = argJobCriteria.Mode;
+                    l_job = ConvertJobCriteriaViewModeltoEntity(argJobCriteria);
+
+                    if (l_job != null)
+                    {
+                        l_Response = await client.PostAsJsonAsync(l_SaveJobRoleURL, l_job);
+                    }
                 }
             }
             catch (Exception)
@@ -202,6 +238,8 @@ namespace HRAnalytics.Web.Controllers
                     l_job.Compensation = argJobCriteria.Compensation;
                     l_job.JobDescription = argJobCriteria.JobDescription;
                     l_job.ClosingDate = argJobCriteria.ClosingDate.HasValue? argJobCriteria.ClosingDate:null;
+                    l_job.JobCriteriaId = argJobCriteria.JobCriteriaID;
+                    l_job.Mode = argJobCriteria.Mode;
                 }
             }
             catch (Exception)
@@ -213,11 +251,11 @@ namespace HRAnalytics.Web.Controllers
 
         public async Task<ActionResult> DeleteItem(int argID)
         {
-            JobRoleViewModel l_vwmodel = new();
+            JobCriteriaViewModel l_vwmodel = new();
             l_vwmodel.Mode = "Delete";
             l_vwmodel.JobCriteriaID = argID;
 
-            await SaveJobCriteria(l_vwmodel);
+            await DeleteJobCriteria(l_vwmodel);
 
             return RedirectToAction("Index");
         }

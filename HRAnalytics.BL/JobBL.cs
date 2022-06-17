@@ -231,10 +231,10 @@ namespace HRAnalytics.BL
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJob.JobId, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.POSITION, argJob.Position, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.COMPENSATOIN, argJob.Compensation, DbType.Double));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBDESCRITPTION, argJob.JobDescription, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBDESCRITPTION, string.IsNullOrEmpty(argJob.JobDescription)?DBNull.Value: argJob.JobDescription, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CLOSINGDATE, argJob.ClosingDate.HasValue? argJob.ClosingDate:DBNull.Value, DbType.DateTime));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.MODE, argJob.Mode, DbType.DateTime));
-                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBCRITERIAID, argJob.JobCriteriaId,DbType.Int32));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.MODE, argJob.Mode, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBCRITERIAID, argJob.JobCriteriaId ==null || !argJob.JobCriteriaId.HasValue ? DBNull.Value : argJob.JobCriteriaId,DbType.Int32));
 
                     //Call stored procedure
                     l_HRAnalyticsDBManager.Insert(StoredProcedure.SET_JOBCRITERIA, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
