@@ -30,6 +30,8 @@ namespace HRAnalytics.BL
         public const string ACTUALCOMPENSATION = "@actual_compensation";
         public const string ISHIRED = "@is_hired";
         public const string GLOBALSCOREID = "@global_score_id";
-
+        public const string MODE = "@Mode";
+        public const string JOBCRITERIAID="@job_criteria_id";
+        public const string SUBCRITERIAID = "@sub_criteria_id";
     }
 }

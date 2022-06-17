@@ -11,6 +11,7 @@
                   <th>Position</th>
                   <th>Compensation</th>
                   <th>Job Description</th>
+                  <th>Delete</th>
                </tr>
             </thead>
             <tbody>
@@ -19,16 +20,20 @@
                         @foreach(var role in Model.CiiteriasCreated)
                         {
                             <tr>
-                            <td>@role.JobName</td>
-                            <td>@role.Position</td>
-                            <td>@role.Compensation</td>
-                            <td>@role.JobDescription</td>
+                                <td>@role.JobName</td>
+                                <td>@role.Position</td>
+                                <td>@role.Compensation</td>
+                                <td>@role.JobDescription</td>
+                                @*<td>@Html.ActionLink("Delete","SaveJobCriteria","RoleCriteria", new { JobCriteriaId=role.JobCriteriaID })</td>*@                               
+                                <td>@Html.ActionLink("Delete", "DeleteItem", "RoleCriteria", new { argID = role.JobCriteriaID })</td>
+
+
                             </tr>
                         }
                     }
                     else
                     {
-                        <td colspan = "4">No criterias created</td>
+                        <td colspan = "5">No criterias created</td>
                     }
 
              </tbody>

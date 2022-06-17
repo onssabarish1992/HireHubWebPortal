@@ -20,6 +20,10 @@ namespace HRAnalytics.Web.Models
         public DateTime? ClosingDate { get; set; }
 
         public string? JobName { get; set; }
+
+        public int? JobCriteriaID { get; set; }
+
+
     }
 
     public class JobRoleViewModel
@@ -27,5 +31,10 @@ namespace HRAnalytics.Web.Models
         public JobCriteriaViewModel? JobCriteriaViewModel { get; set; }
 
         public List<JobCriteriaViewModel>? CiiteriasCreated { get; set; }
+
+        public int? JobCriteriaID { get; set; }
+
+        public string? Mode { get; set; }
+
     }
 }

@@ -40,6 +40,8 @@ namespace HRAnalytics.Entities
 
         public int? SubCriteriaId { get; set; }
 
+        public string? Mode { get; set; }
+
     }
 
     public class JobCollection: List<Job>
