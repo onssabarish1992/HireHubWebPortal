@@ -152,7 +152,7 @@ namespace HRAnalytics.Web.Controllers
         /// <param name="argJobCriteria"></param>
         /// <returns></returns>s
         [HttpDelete]
-        public async Task<HttpResponseMessage> SaveJobCriteria(JobCriteriaViewModel argJobCriteria)
+        public async Task<HttpResponseMessage> SaveJobCriteria(JobRoleViewModel argJobCriteria)
         {
             #region Declarations
             HttpResponseMessage l_Response = new HttpResponseMessage();
@@ -213,7 +213,7 @@ namespace HRAnalytics.Web.Controllers
 
         public async Task<ActionResult> DeleteItem(int argID)
         {
-            JobCriteriaViewModel l_vwmodel = new();
+            JobRoleViewModel l_vwmodel = new();
             l_vwmodel.Mode = "Delete";
             l_vwmodel.JobCriteriaID = argID;
 

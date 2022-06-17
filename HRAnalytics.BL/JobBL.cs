@@ -115,7 +115,9 @@ namespace HRAnalytics.BL
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIADESCRIPTION, argJob.SubCriteriaDescription, DbType.String));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJob.JobId, DbType.Int32));
                     l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.CREATEDBY, argLoggedInUser, DbType.String));
-                   
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.SUBCRITERIAID, argJob.SubCriteriaId, DbType.Int32));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.MODE, argJob.Mode, DbType.String));
+
                     //Call stored procedure
                     l_HRAnalyticsDBManager.Insert(StoredProcedure.INSERT_SUBCRITERIA, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
                 }
