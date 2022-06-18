@@ -1,4 +1,5 @@
 ﻿using HRAnalytics.BL.Interfaces;
+using HRAnalytics.Entities;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,11 @@ namespace HRAnalytics.WebAPI.Controllers
 
         [HttpPost]
         [Route("SavePairs")]
-        public IActionResult SavePairs(string argLoggedInUser, int argEntityID, int? argParentEntityID)
+        public IActionResult SavePairs(string argLoggedInUser, int argEntityID)
         {
             try
             {
-                _ahpBL.SavePairs(argEntityID, argParentEntityID, argLoggedInUser);
+                _ahpBL.SavePairs(argEntityID, argLoggedInUser);
             }
             catch (Exception)
             {
@@ -35,7 +36,32 @@ namespace HRAnalytics.WebAPI.Controllers
             }
 
             return Ok();
+        }
 
+        [HttpGet]
+        [Route("GetAHPPairs")]
+        public IActionResult GetAHPPairs(int argEntityID, int? argParentEntityID)
+        {
+            #region Declarations
+            List<AHPPair> l_pairCollection;
+            #endregion
+            try
+            {
+                l_pairCollection = _ahpBL.GetAHPPairs(argEntityID, argParentEntityID);
+
+                if (l_pairCollection == null || l_pairCollection.Count == 0)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackTrace("Exception caught in GetAHPPairs model...");
+                _telemetryClient.TrackException(ex);
+                throw;
+            }
+
+            return Ok(l_pairCollection);
         }
     }
 }

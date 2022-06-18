@@ -10,7 +10,11 @@ namespace HRAnalytics.Entities
     {
         public int PairId { get; set; }
 
+        public string Pair1Name { get; set; }
+
         public int Pair1 { get; set; }
+
+        public string Pair2Name { get; set; }
 
         public int Pair2 { get; set; }
 

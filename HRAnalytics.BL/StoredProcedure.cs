@@ -27,6 +27,8 @@ namespace HRAnalytics.BL
         public const string SAVE_AHP_PAIRS = "usp_sav_AHPPairs";
         public const string SAVE_RESULT = "usp_UpdateCompensation";
 
+        public const string GET_AHPPAIRS = "usp_getAHPPairs";
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRAnalytics.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace HRAnalytics.BL.Interfaces
     {
         List<string> generatePairs(List<string> argPairs);
 
-        void SavePairs(int argEntityID, int? argParentEntityID, string argLoggedInUser);
+        void SavePairs(int argEntityID, string argLoggedInUser);
+
+        List<AHPPair> GetAHPPairs(int argEntityID, int? argParentEntityID);
     }
 }
