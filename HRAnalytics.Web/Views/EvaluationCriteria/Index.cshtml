@@ -17,20 +17,25 @@
       <h2>Evaluation Criteria</h2>
       </div>
    </div>
-
-   <div class="row">
+   <div class="container"> 
+       <div class="error_msg">
+             <partial name="_partialStatusMessage" />  
+       </div>
+   </div>
+   
+   <div class="row"> 
   <div class="col-md-12">
       <div class="candidate_evaluation role_cri eval_cri">
 
-          <partial name="_partialStatusMessage" />
+        
 
-         <form id="candidate_pr" class="form-horizontal"  method="POST">
+         <form id="candidate_pr" class="form-horizontal"  method="POST">  
              @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @*Role Dropdown*@
              <div class="form-group">
-				<label class="control-label" asp-for="@Model.Criteria.JobId">Job Role:</label>
+				<label class="control-label" asp-for="@Model.Criteria.JobId">Job Role:</label> 
 				@Html.DropDownListFor(m => m.Criteria.JobId, ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "job-role" })
 				<span asp-validation-for="@Model.Criteria.JobId" class="text-danger"></span>
 			</div>
