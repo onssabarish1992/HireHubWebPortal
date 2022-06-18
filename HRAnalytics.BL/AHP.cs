@@ -222,5 +222,48 @@ namespace HRAnalytics.BL
             }
             return l_PairCollection;
         }
+
+
+        public void SavAHPWeightage(string argLoggedInUserID, List<AHPPair> argAHPPairs)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            XElement l_pairXML;
+            try
+            {
+                l_pairXML = GenerateWeightageXML(argAHPPairs);
+
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUserID, DbType.String));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.WEIGHTAGEXML, l_pairXML.ToString(), DbType.Xml));
+
+                //Call stored procedure
+                l_HRAnalyticsDBManager.Insert(StoredProcedure.SAVE_AHPWEIGHTAGE, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private XElement GenerateWeightageXML(List<AHPPair> argAHPPairs)
+        {
+            XElement l_PairXML;
+            try
+            {
+                l_PairXML = new XElement("Pairs",
+                    from scr in argAHPPairs
+                    select new XElement("Pair",
+                    new XElement("PairId", scr.PairId),
+                    new XElement("Weightage", scr.Weightage)
+                    ));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_PairXML;
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace HRAnalytics.BL.Interfaces
         void SavePairs(int argEntityID, string argLoggedInUser);
 
         List<AHPPair> GetAHPPairs(int argEntityID, int? argParentEntityID);
+
+        void SavAHPWeightage(string argLoggedInUserID, List<AHPPair> argAHPPairs);
     }
 }

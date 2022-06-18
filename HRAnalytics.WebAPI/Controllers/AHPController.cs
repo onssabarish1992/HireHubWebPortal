@@ -63,5 +63,23 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok(l_pairCollection);
         }
+
+        [HttpPost]
+        [Route("SaveAHPWeightage")]
+        public IActionResult SaveAHPWeightage(string argLoggedInUserID, List<AHPPair> argAHPPairs)
+        {
+            try
+            {
+                _ahpBL.SavAHPWeightage(argLoggedInUserID, argAHPPairs);
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackTrace("Exception caught in SaveAHPWeightage method...");
+                _telemetryClient.TrackException(ex);
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
     }
 }
