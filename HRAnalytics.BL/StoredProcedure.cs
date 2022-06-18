@@ -29,7 +29,7 @@ namespace HRAnalytics.BL
 
         public const string GET_AHPPAIRS = "usp_getAHPPairs";
         public const string SAVE_AHPWEIGHTAGE = "usp_sav_AHPWeightage";
-
+        public const string SAVE_AHPFINALSCORES = "usp_sav_AHPFinalScores";
 
     }
 }

@@ -37,5 +37,7 @@ namespace HRAnalytics.BL
 
         public const string PARENTENTITYID = "@parent_entity_id";
         public const string WEIGHTAGEXML = "@AHPWeightagesXML";
+
+        public const string AHPFINALSCOREXML = "@AHPFinalscoresXML";
     }
 }

@@ -81,5 +81,23 @@ namespace HRAnalytics.WebAPI.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("SaveAHPFinalScores")]
+        public IActionResult SaveAHPFinalScores(string argLoggedInUserID, int argEntityID, int? argJobId)
+        {
+            try
+            {
+                _ahpBL.SavAHPFinalScores(argLoggedInUserID, argEntityID, argJobId);
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackTrace("Exception caught in SaveAHPFinalScores method...");
+                _telemetryClient.TrackException(ex);
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
     }
 }

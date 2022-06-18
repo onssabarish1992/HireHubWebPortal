@@ -265,5 +265,246 @@ namespace HRAnalytics.BL
 
             return l_PairXML;
         }
+
+
+        /// <summary>
+        /// Thus function is used to calculate AHP final scores
+        /// </summary>
+        /// <param name="argScores"></param>
+        /// <returns></returns>
+        public double[] CalculateAHPScores(double[,] argScores)
+        {
+            double[] argScorescolSum = new double[argScores.GetLength(1)];
+            for (int j = 0; j < argScores.GetLength(1); j++)
+            {
+                argScorescolSum[j] = 0;
+            }
+            double[,] argScoresNormal = new double[argScores.GetLength(0), argScores.GetLength(1)];
+            for (int j = 0; j < argScores.GetLength(1); j++)
+            {
+                for (int i = 0; i < argScores.GetLength(0); i++)
+                {
+                    argScorescolSum[j] += argScores[i, j];
+                }
+            }
+            for (int i = 0; i < argScores.GetLength(0); i++)
+            {
+                for (int j = 0; j < argScores.GetLength(1); j++)
+                {
+                    argScoresNormal[i, j] = argScores[i, j] / argScorescolSum[j];
+                }
+            }
+
+            double[] argScoresrowSum = new double[argScores.GetLength(0)];
+            for (int i = 0; i < argScores.GetLength(0); i++)
+            {
+                argScoresrowSum[i] = 0;
+            }
+            for (int i = 0; i < argScores.GetLength(0); i++)
+            {
+                for (int j = 0; j < argScores.GetLength(1); j++)
+                {
+                    argScoresrowSum[i] += argScoresNormal[i, j];
+                }
+            }
+
+            double[] argScoresrowsumNormal = new double[argScoresrowSum.Length];
+            double argScoresrowsumSum = 0;
+            for (int i = 0; i < argScoresrowSum.Length; i++)
+            {
+                argScoresrowsumSum += argScoresrowSum[i];
+            }
+            if (argScoresrowsumSum != 0)
+            {
+                for (int i = 0; i < argScoresrowSum.Length; i++)
+                {
+                    argScoresrowsumNormal[i] = (argScoresrowSum[i] / argScoresrowsumSum);
+                }
+            }
+
+            return argScoresrowsumNormal;
+        }
+
+
+        public void SavAHPFinalScores(string argLoggedInUserID, int argEntityID, int? argJobId)
+        {
+            HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
+            List<IDbDataParameter> l_Parameters = new();
+            int l_LastID = 0;
+            XElement l_pairXML;
+            List<AHPFinalScore> l_FinalScores = new List<AHPFinalScore>();
+            try
+            {
+
+                var l_Entities = GetAHPPairs(argEntityID, argJobId);
+
+                if(l_Entities != null)
+                {
+                    var l_distinctRecordSet1 = l_Entities.Select(x => x.Pair1).Distinct();
+
+                    var l_distinctRecordSet2 = l_Entities.Select(x => x.Pair2).Distinct();
+
+                    var l_OverallRecordSet = l_distinctRecordSet1.Union(l_distinctRecordSet2);
+
+                    var l_CriteriaCount = l_OverallRecordSet.Distinct().Count();
+
+                    //Generate the matrix
+                    var l_Matrix = createMatrix(l_Entities, l_CriteriaCount);
+
+                    //Generate the score
+                    var l_AHPScores = CalculateAHPScores(l_Matrix);
+
+                    //Create the final scores list
+                    l_FinalScores = GenerateFinalScoresData(l_AHPScores, argEntityID, argJobId);
+                  
+                    //Form the XML for stored procedure
+                    l_pairXML = GenerateFinalScoresXML(l_FinalScores);
+
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.LOGGEDINUSER, argLoggedInUserID, DbType.String));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.AHPFINALSCOREXML, l_pairXML.ToString(), DbType.Xml));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ENTITYID, argEntityID, DbType.Int32));
+                    l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.JOBID, argJobId.HasValue ? argJobId.Value : DBNull.Value, DbType.Int32));
+
+                    //Call stored procedure
+                    l_HRAnalyticsDBManager.Insert(StoredProcedure.SAVE_AHPFINALSCORES, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
+                }
+
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// IMP: Create final data score
+        /// </summary>
+        /// <param name="argAHPScores"></param>
+        /// <param name="argEntityID"></param>
+        /// <param name="argJobId"></param>
+        /// <returns></returns>
+        private List<AHPFinalScore> GenerateFinalScoresData(double[] argAHPScores, int argEntityID, int? argJobId)
+        {
+            List<AHPFinalScore> l_FinalScores = new List<AHPFinalScore>();
+            AHPFinalScore l_AHPScore;
+            try
+            {
+                if(argEntityID == 1)
+                {
+                    //Get the job roles
+                    var l_Jobs = _jobBL.GetRoles();
+
+                    //Get the distinct jobs ordered based on job id
+                    var l_OrderedJobs = l_Jobs.OrderBy(x => x.JobId).ToList();
+
+                    for (int i = 0; i < l_OrderedJobs.Count(); i++)
+                    {
+                        l_AHPScore = new AHPFinalScore();
+                        l_AHPScore.EvalID = l_OrderedJobs[i].JobId;
+                        l_AHPScore.Score = argAHPScores[i];
+
+                        l_FinalScores.Add(l_AHPScore);
+                    }
+                }
+                else if(argEntityID == 2)
+                {
+                    //Get the subcriteria
+                    var l_Criteria = _jobBL.GetEvaluationCriteria();
+
+                    //Get evaluation criterias for required job
+                    var l_ReqdCriterias = l_Criteria.Where(x=>x.JobId == argJobId).OrderBy(y => y.CriteriaID).ToList();
+
+                    for (int i = 0; i < l_ReqdCriterias.Count(); i++)
+                    {
+                        l_AHPScore = new AHPFinalScore();
+                        l_AHPScore.EvalID = l_ReqdCriterias[i].CriteriaID;
+                        l_AHPScore.Score = argAHPScores[i];
+
+                        l_FinalScores.Add(l_AHPScore);
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return l_FinalScores;
+        }
+
+        /// <summary>
+        /// This function is used to create matrix for AHP
+        /// </summary>
+        /// <param name="argAHPPairs"></param>
+        /// <returns></returns>
+        public double[,] createMatrix(List<AHPPair> argAHPPairs, int argDistinctRecordSet)
+        {
+            #region Declarations
+            double[,] a = new double[argDistinctRecordSet, argDistinctRecordSet];
+            int comparison_factors = (argDistinctRecordSet * argDistinctRecordSet - argDistinctRecordSet) / 2;
+            double[] p = new double[comparison_factors];
+            int m = 0;
+            int k = 0;
+            #endregion
+            try
+            {
+                
+                for (int i = 0; i < argAHPPairs.Count; i++)
+                {
+                    p[m] = argAHPPairs[i].Weightage < 0 ? (double)1 / Math.Abs(argAHPPairs[i].Weightage) : argAHPPairs[i].Weightage;
+                    m++;
+                }
+
+                for (int i = 0; i < a.GetLength(0); i++)
+                {
+                    for (int j = 0; j < a.GetLength(1); j++)
+                    {
+                        if (i == j)
+                        {
+                            a[i, j] = 1;
+                        }
+                        else if (i < j)
+                        {
+                            a[i, j] = p[k];
+                            k++;
+                        }
+                        else
+                        {
+                            a[i, j] = (1 / a[j, i]);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return a;
+        }
+
+        private XElement GenerateFinalScoresXML(List<AHPFinalScore> argAHPPairs)
+        {
+            XElement l_PairXML;
+            try
+            {
+                l_PairXML = new XElement("Pairs",
+                    from scr in argAHPPairs
+                    select new XElement("Pair",
+                    new XElement("EvalID", scr.EvalID),
+                    new XElement("Weightage", scr.Score)
+                    ));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return l_PairXML;
+        }
+
+
     }
 }

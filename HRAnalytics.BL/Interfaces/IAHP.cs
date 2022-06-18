@@ -16,5 +16,9 @@ namespace HRAnalytics.BL.Interfaces
         List<AHPPair> GetAHPPairs(int argEntityID, int? argParentEntityID);
 
         void SavAHPWeightage(string argLoggedInUserID, List<AHPPair> argAHPPairs);
+
+        double[] CalculateAHPScores(double[,] argScores);
+
+        void SavAHPFinalScores(string argLoggedInUserID, int argEntityID, int? argJobId);
     }
 }
