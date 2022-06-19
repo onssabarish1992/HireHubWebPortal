@@ -1,8 +1,21 @@
 ﻿
+
+<head>
+   
+    <link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
+</head>
+<div class="c_eval">
 <div class="confirmation-message">
 
 </div>
-
+<div id="bg">
+<img src="../Images/dem2.jpg" alt="">   
+</div>
+       <div class="eval_head">   
+      <h2>Set Job Priority</h2> 
+      </div>
+<div class="container">
+    <div class="prio_crit">
  <form id="candidate_pr" class="form-horizontal"  method="POST">  
     <div>
         @Html.DropDownList("JobRole",ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "ddl_job_role", @onchange = "populateCriterias()"})
@@ -11,11 +24,19 @@
     <div id="div_slidersection">
 
     </div>
+    <div class="prio_btns">
+
 
     <input type="button" class="btn_Save" value = "Save" style="display:none;" onclick="SaveWeightage(2)"/>
 
     <input type="button" class="btn_Previous" value = "Previous" style="display:none;" onclick="window.location.href='@Url.Action("Index", "Priority")';"/>
+
+    </div>
+
 </form>
+</div>
+</div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

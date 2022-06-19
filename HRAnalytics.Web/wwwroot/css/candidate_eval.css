@@ -511,16 +511,44 @@ input.form-control {
     text-align: center;
 }
 
-
-
+.prio_crit {
+    text-align: center;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.6);
+    padding: 30px 30px 0px 30px;
+    display: flex;
+}
+    .prio_crit select {
+        margin-bottom: 30px;
+    }
+    .prio_crit input {
+        background: #000;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 5px 15px;
+        display: inline-block;
+        font-size: 18px;
+        border-radius: 5px;
+        -webkit-box-shadow: 5px 5px 15px 5px #000000;
+        box-shadow: 5px 5px 15px 3px #000000;
+        transition: all 0.3s ease-in-out 0s;
+    }
+        .prio_crit input:hover {
+            background: #fff;
+            border: 1px solid #000;
+            color: #000;
+        }
+.prio_btns {
+    margin-top:30px;
+}
 /*     ends            */
-
-
-
 .dropdown-item {
     text-decoration: none !important;
     font-size: 16px;
 }
+    .dropdown-item:hover {
+        color: #03d6d2 !important;
+    }
 /*     Homepage CSS starts           */
 .homepage {
     overflow-x: hidden;
