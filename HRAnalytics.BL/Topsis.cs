@@ -23,6 +23,7 @@ namespace HRAnalytics.BL
             int l_alternativesCount = argAlternatives.Count;
             try
             {
+                
                 //Step 1: Create score matrix
                 double[,] l_scoreMatrix = createScoreMatrix(argAlternatives, l_CriteriaCount);
 
@@ -30,7 +31,7 @@ namespace HRAnalytics.BL
                 double[,] l_NormalizedMatrix = createNormalizedDecisionMatrix(argCriteria, l_scoreMatrix, l_alternativesCount);
 
                 //Find best and worst solution
-                findIdealBestAndWorst(l_CriteriaCount, l_CriteriaCount, l_NormalizedMatrix, argCriteria);
+                findIdealBestAndWorst(l_CriteriaCount, l_alternativesCount, l_NormalizedMatrix, argCriteria);
 
                 //Compute Euclidean distance from best and worst
                 computeEuclidianDistancesFromIdealBestAndWorst(l_NormalizedMatrix, l_alternativesCount, l_CriteriaCount);
@@ -120,6 +121,9 @@ namespace HRAnalytics.BL
 
         void findIdealBestAndWorst(int argCriteriaCount, int argAlternativeCount, double[,] argNormalizedScores, List<Criteria> argCriteria)
         {
+            l_IdealBest = null;
+            l_IdealWorst = null;
+
             l_IdealBest = new double[argCriteriaCount];
             l_IdealWorst = new double[argCriteriaCount];
 
@@ -164,6 +168,9 @@ namespace HRAnalytics.BL
 
         private void computeEuclidianDistancesFromIdealBestAndWorst(double[,] argNormalizedScores, int argNumberOfAlternatives, int argNumberOfCriteria)
         {
+
+            l_distancesFromlIdealBest = null;
+            l_distancesFromIdealWorst = null;
 
             l_distancesFromlIdealBest = new double[argNumberOfAlternatives];
             l_distancesFromIdealWorst = new double[argNumberOfAlternatives];
