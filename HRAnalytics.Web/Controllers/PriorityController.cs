@@ -1,6 +1,7 @@
 ﻿using HRAnalytics.Entities;
 using HRAnalytics.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 
@@ -138,7 +139,8 @@ namespace HRAnalytics.Web.Controllers
             #endregion
             try
             {
-                l_pairURL = apiBaseURL + "api/AHP/GetAHPPairs?argEntityID="+ argEntityID+ "&argParentEntityID ="+ argParentEntityID;
+                var l_ParentEntityID = argParentEntityID.HasValue ? argParentEntityID.Value : 0;
+                l_pairURL = apiBaseURL + "api/AHP/GetAHPPairs?argEntityID="+ argEntityID+ "&argParentEntityID=" + l_ParentEntityID;
 
                 HttpResponseMessage l_pairData = await client.GetAsync(l_pairURL);
 
@@ -154,6 +156,55 @@ namespace HRAnalytics.Web.Controllers
                 throw;
             }
             return l_AHPPairs;
+        }
+
+
+        public async Task<ActionResult> Criteria()
+        {
+            await PopulateDropdownValues();
+            return View();
+        }
+
+        /// <summary>
+        /// This function is used to populate the criteria dropdown
+        /// </summary>
+        /// <returns></returns>
+        private async Task<bool> PopulateDropdownValues()
+        {
+            bool l_Executed;
+            try
+            {
+                //This API call which fetch only the list of job roles created in set criteria screen 
+                var JobsCreated = await GetJobCriterias();
+
+                ViewBag.Citeria = Enumerable.Empty<SelectListItem>();
+                ViewBag.Jobs = new SelectList(JobsCreated, "JobId", "JobName");
+
+                l_Executed = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_Executed;
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> GetAHHCriteriaPairs(int argJobIdParam)
+        {
+            try
+            {
+                var l_AHPJobPairs = await GetAHPCreatedPairs(2, argJobIdParam);
+
+                List<AHPPairViewModel> l_AHPPairViewModel = ConvertPairsToViewModel(l_AHPJobPairs);
+
+                return PartialView("_partialSlider", l_AHPPairViewModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -15,7 +15,32 @@ function loadCombinations() {
         error: function (response) {
             console.log("Error in application")
         }
-    })
+    });
+}
+
+//On change event of dropdown
+function populateCriterias() {
+    var selectedValue = $("#ddl_job_role").val();
+
+    if (selectedValue) {
+        $.ajax({
+            type: "POST",
+            url: URLConstants["GetAHHCriteriaPairs"],
+            data: jQuery.param({ argJobIdParam: selectedValue }),
+            success: function (response) {
+                $("#div_slidersection").html(response);
+                $(".btn_Save").show();
+            },
+            error: function (response) {
+                console.log(response)
+                console.log("Error in application")
+            }
+        });
+    }
+    else {
+        $("#div_slidersection").html('');
+        $(".btn_Save").hide();
+    }
 }
 
 //Reset isEqual radio button
@@ -30,7 +55,7 @@ function resetNumericScale(argPairId) {
 }
 
 
-function SaveWeightage() {
+function SaveWeightage(argEntityID) {
     var AHPPairs = [];
 
     $('#table_scorings > tbody  > tr').each(function (index, tr) {
@@ -67,7 +92,13 @@ function SaveWeightage() {
         dataType: "json",
         success: function (response) {
             if (response != null && response) {
-                loadCombinations();
+                if (argEntityID == 1) {
+                    loadCombinations();
+                }
+                else {
+                    populateCriterias();
+                }
+                
             }
         },
         error: function (a, b, c) {

@@ -1,0 +1,26 @@
+﻿
+
+ <form id="candidate_pr" class="form-horizontal"  method="POST">  
+    <div>
+        @Html.DropDownList("JobRole",ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "ddl_job_role", @onchange = "populateCriterias()"})
+    </div>
+
+    <div id="div_slidersection">
+
+    </div>
+
+    <input type="button" class="btn_Save" value = "Save" onclick="SaveWeightage(2)"/>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="~/js/Slider.js"></script>
+
+<script type="text/javascript">
+    var URLConstants = {};
+    URLConstants["GetAHPJobPairs"] = '@Url.Action("GetAHPJobPairs", "Priority")';
+    URLConstants["SaveAHPRatings"] = '@Url.Action("SaveAHPRatings", "Priority")';
+
+    URLConstants["GetAHHCriteriaPairs"] = '@Url.Action("GetAHHCriteriaPairs", "Priority")';
+</script>

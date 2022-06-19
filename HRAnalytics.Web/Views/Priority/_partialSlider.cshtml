@@ -22,19 +22,27 @@
 
                     @if(ahpmodel.Weightage > 0)
                     {
-                        <input type="radio" id=@ahpmodel.Pair1 class="rd_1" value="p1" name="select_priority" checked> 
+                        <input type="radio" id=@ahpmodel.Pair1 class="rd_1" value="p1" name="select_priority_+@ahpmodel.PairId" checked> 
                         <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
 
-                        <input type="radio" id=@ahpmodel.Pair2 class="rd_2" value="p2" name="select_priority"> 
+                        <input type="radio" id=@ahpmodel.Pair2 class="rd_2" value="p2" name="select_priority_+@ahpmodel.PairId"> 
+                        <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>
+                    }
+                    else if(ahpmodel.Weightage < 0)
+                    {
+                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority_+@ahpmodel.PairId"> 
+                        <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
+
+                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority_+@ahpmodel.PairId" checked> 
                         <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>
                     }
                     else
                     {
-                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority"> 
+                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority_+@ahpmodel.PairId"> 
                         <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
 
-                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority" checked> 
-                        <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>              
+                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority_+@ahpmodel.PairId"> 
+                        <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>                
                     }
                     
                 </td>
@@ -56,13 +64,13 @@
                     {
                         if(i == @Math.Abs(ahpmodel.Weightage))
                         {
-                            <input type="radio" checked name="select_rating" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
+                            <input type="radio" checked name="select_rating_@ahpmodel.PairId" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
                         }
                         else
                         {
-                            <input type="radio" name="select_rating" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
+                            <input type="radio" name="select_rating_@ahpmodel.PairId" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
                         }
-                         <label name="select_rating">@i</label>
+                         <label name="select_rating_@ahpmodel.PairId">@i</label>
                     }
                 </td>
             </tr>
@@ -79,9 +87,6 @@ else
 
 </div>
 </div>
-
-
-<input type="button" value = "Save" onclick="SaveWeightage()"/>
 
 
 <script type="text/javascript" src="~/js/Slider.js"></script>
