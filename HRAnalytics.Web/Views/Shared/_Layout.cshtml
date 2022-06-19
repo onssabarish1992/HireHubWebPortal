@@ -39,9 +39,10 @@
         <a class="nav-link dropdown-toggle" id="elements" onclick="$('#drp').toggle();" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">Manage</a>
         <div class="dropdown-menu dropdown-primary pb-0" id="drp" aria-labelledby="elements">
-          <a class="dropdown-item" href="element1.html">Element1</a>
-          <a class="dropdown-item" href="element2.html">Element2</a> 
-          <a class="dropdown-item" href="element3.html">Element3</a> 
+          <a class="dropdown-item " asp-area="" asp-controller="RoleCriteria" asp-action="Index">Set Roles</a>
+            <a class="dropdown-item " asp-area="" asp-controller="EvaluationCriteria" asp-action="Index">Set Criteria</a>
+                   
+        
         </div>
       </li>
                     </ul>
