@@ -66,7 +66,7 @@ namespace HRAnalytics.WebAPI.Controllers
 
         [HttpPost]
         [Route("SaveAHPWeightage")]
-        public IActionResult SaveAHPWeightage(string argLoggedInUserID, List<AHPPair> argAHPPairs)
+        public IActionResult SaveAHPWeightage(string argLoggedInUserID, [FromBody]List<AHPPair> argAHPPairs)
         {
             try
             {

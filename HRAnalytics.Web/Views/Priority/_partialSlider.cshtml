@@ -1,0 +1,98 @@
+﻿
+@model List<AHPPairViewModel>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="custom_table table-responsive">
+@if(Model!=null && Model.Count > 0)
+{
+    <table id="table_scorings">
+        <thead>
+            <tr>
+            <th style="width:25%">Priorities</th>
+            <th style="width:20%">Equal</th>
+            <th>How much more?</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var ahpmodel in Model)
+        {
+            <tr id="@ahpmodel.PairId">
+                <td style="width:25%" id="@string.Concat(ahpmodel.PairId,"_","col1")">
+
+                    @if(ahpmodel.Weightage > 0)
+                    {
+                        <input type="radio" id=@ahpmodel.Pair1 class="rd_1" value="p1" name="select_priority" checked> 
+                        <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
+
+                        <input type="radio" id=@ahpmodel.Pair2 class="rd_2" value="p2" name="select_priority"> 
+                        <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>
+                    }
+                    else
+                    {
+                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority"> 
+                        <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
+
+                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority" checked> 
+                        <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>              
+                    }
+                    
+                </td>
+
+                <td style="width:20%" id="@string.Concat(ahpmodel.PairId,"_","col2")">
+                    @if(ahpmodel.Weightage == 1)
+                    {
+                       <input type="radio" class="rd_equal" onclick="resetNumericScale('@ahpmodel.PairId')" checked>
+                    }
+                    else
+                    {
+                        <input type="radio" class="rd_equal" onclick="resetNumericScale('@ahpmodel.PairId')">
+                    }
+                    
+                </td>
+
+                <td id="@string.Concat(ahpmodel.PairId,"_","col3")">
+                    @for(int i=2;i<=9;i++)
+                    {
+                        if(i == @Math.Abs(ahpmodel.Weightage))
+                        {
+                            <input type="radio" checked name="select_rating" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
+                        }
+                        else
+                        {
+                            <input type="radio" name="select_rating" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
+                        }
+                         <label name="select_rating">@i</label>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    </table>
+}
+else
+{
+    <p>No combinations created!!</p>
+}
+
+</div>
+
+</div>
+</div>
+
+
+<input type="button" value = "Save" onclick="SaveWeightage()"/>
+
+
+<script type="text/javascript" src="~/js/Slider.js"></script>
+
+
+
+
+
+
+
+
+
+
+

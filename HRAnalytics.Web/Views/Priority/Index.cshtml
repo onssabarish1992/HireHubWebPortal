@@ -1,14 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 <head>
    
     <link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
-    	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
 </head>
-
 
 <div class="c_eval">
 <div id="bg">
@@ -18,93 +13,42 @@
 <div class="range_parent">
 <div class="container"> 
        <div class="eval_head">  
-      <h2>Set Priority</h2> 
+      <h2>Set Job Priority</h2> 
       </div>
-   <div class="range_slider">
-      <div class="range">
-         <div class="row">
-            <div class="col-md-2">
-               <h3>Job Role 1</h3>
-            </div>
-            <div class="col-md-8">
-               <div class="range_wrap">
-                  	<div id="1" class="sliders"></div>
-               </div>
-               <div class="prior_input">
-			    <label for="kpa1">Priority Value:</label>
-			
-               <input type="text" class="kpa1" >
-               </div>
-            </div>
-            <div class="col-md-2">
-               <h4>Job Role 2</h4>
-            </div>
-         </div>
-      </div>
-   </div>
+      
+      <div id="div_slidersection">
 
-      <div class="range_slider"> 
-      <div class="range">
-         <div class="row">
-            <div class="col-md-2">
-               <h3>Job Role 1</h3>
-            </div>
-            <div class="col-md-8">
-               <div class="range_wrap">
-                   <div id="2" class="sliders"></div>
-               </div>
-               <div class="">
-			     <label for="kpa2">Priority Value:</label>
-				
-               <input type="text" class="kpa2"  >
-               </div>
-            </div>
-            <div class="col-md-2">
-               <h4>Job Role 2</h4>
-            </div>
-         </div>
       </div>
-   </div>
+      
 </div> 
 </div>
 </div>
 
 
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/Slider.js"></script>
 
+    <script type="text/javascript">
+         var URLConstants = {};
 
+        URLConstants["GetAHPJobPairs"] = '@Url.Action("GetAHPJobPairs", "Priority")';
+        URLConstants["SaveAHPRatings"] = '@Url.Action("SaveAHPRatings", "Priority")';
 
-
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $(function() {
-        var valMap = [9, 8, 7, 6, 5, 4, 3, 2, 1,2,3,4,5,6,7,8,9];
+        $(document).ready(function () {
+            loadCombinations();
+        });
         
-        $(".sliders").slider({
-                max: valMap.length - 1,
-				value: [8],
-                slide: function(event, ui) {
-                    var id = $(this).attr("id");
-					$("input[class*=" + id + "]").val(valMap[ui.value]);
-                }
-            })
-            .each(function() {
-
-                var opt = $(this).data().uiSlider.options;
-
-                var vals = opt.max - opt.min;
+    </script>
+    
+}
 
 
-                var arrayLength = valMap.length;
-                for (var i = 0; i < arrayLength; i++) {
 
-                    var el = $('<label>' + (valMap[i]) + '</label>').css('left', (i / vals * 100) + '%');
 
-                    $(".sliders").append(el); 
 
-                }
 
-            });
-    });
 
-</script>
+
+

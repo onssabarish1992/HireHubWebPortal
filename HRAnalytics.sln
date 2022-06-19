@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRAnalytics.DAL", "HRAnalyt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRAnalytics.BL", "HRAnalytics.BL\HRAnalytics.BL.csproj", "{5C33B723-73AA-4B27-87E7-32A62A019AC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAnalytics.Web", "HRAnalytics.Web\HRAnalytics.Web.csproj", "{E51812A3-7E78-4F96-8CEE-638432C5F6C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRAnalytics.Web", "HRAnalytics.Web\HRAnalytics.Web.csproj", "{E51812A3-7E78-4F96-8CEE-638432C5F6C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
