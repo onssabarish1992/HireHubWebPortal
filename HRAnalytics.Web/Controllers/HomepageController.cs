@@ -12,7 +12,14 @@ namespace HRAnalytics.Web.Controllers
             {
                 return RedirectToAction("Index", "Interviewer");
             }
-            return View();
+            else if(User.IsInRole("HR"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
         }
 
 
