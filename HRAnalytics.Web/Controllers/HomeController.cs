@@ -18,11 +18,13 @@ namespace HRAnalytics.Web.Controllers
         public IActionResult Index()
         {
             //If logged in user is interviwer redirect to interviewer page
-            if(User.IsInRole("Interviewer"))
+            if (User.IsInRole("Interviewer"))
             {
                 return RedirectToAction("Index", "Interviewer");
             }
             return View();
+
+            //return RedirectToAction("Index", "Homepage");
         }
 
         public IActionResult Privacy()
