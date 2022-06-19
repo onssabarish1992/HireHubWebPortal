@@ -35,7 +35,7 @@
                         {
                             <tr>
                                 <td>@role.JobName</td>
-                                <td>@role.CandidateName</td>
+                                <td>@Html.ActionLink(role.CandidateName,"Candidate","Candidate",new { argScheduleID = role.ScheduleId},new {target = "_blank"})</td>
                                 <td>@role.ActualCompensation</td>
                                 <td>@role.Recommendation</td>
                             </tr>

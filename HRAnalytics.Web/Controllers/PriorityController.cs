@@ -1,5 +1,6 @@
 ﻿using HRAnalytics.Entities;
 using HRAnalytics.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace HRAnalytics.Web.Controllers
 {
+    [Authorize(Roles = "HR")]
     public class PriorityController : HRAnalyticsBaseController
     {
         public PriorityController(IConfiguration configuration) : base(configuration)

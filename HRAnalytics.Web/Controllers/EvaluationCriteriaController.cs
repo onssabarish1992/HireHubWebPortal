@@ -1,12 +1,14 @@
 ﻿using HRAnalytics.Entities;
 using HRAnalytics.Utilities;
 using HRAnalytics.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace HRAnalytics.Web.Controllers
 {
+    [Authorize(Roles = "HR")]
     public class EvaluationCriteriaController : HRAnalyticsBaseController
     {
         public EvaluationCriteriaController(IConfiguration configuration) : base(configuration)

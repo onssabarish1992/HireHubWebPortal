@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+ @{
+    var l_roles = ((ClaimsIdentity)User.Identity).Claims
+            .Where(x => x.Type == ClaimTypes.Role)
+            .Select(y => y.Value);
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/fc-4.1.0/fh-3.2.3/r-2.3.0/datatables.min.css"/>
      <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 
+  
 </head>
 <body>
     <header>
@@ -24,25 +34,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">  
                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RoleCriteria" asp-action="Index">Set Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="EvaluationCriteria" asp-action="Index">Set Criteria</a>
-                        </li>
+                        @if(l_roles.Contains("HR"))
+                        {
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RoleCriteria" asp-action="Index">Set Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="EvaluationCriteria" asp-action="Index">Set Criteria</a>
+                            </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="elements" onclick="$('#drp').toggle();" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">Prioritize</a>
-                            <div class="dropdown-menu dropdown-primary pb-0" id="drp" aria-labelledby="elements">
-                              <a class="dropdown-item " asp-area="" asp-controller="Priority" asp-action="Index">Roles</a>
-                              <a class="dropdown-item " asp-area="" asp-controller="Priority" asp-action="Criteria"> Criteria</a>
-                            </div>
-                          </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Candidate" asp-action="Index">Schedule Interview</a>
+                            </li>
 
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GlobalScore" asp-action="Index">View Results</a>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="elements" onclick="$('#drp').toggle();" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">Prioritize</a>
+                                <div class="dropdown-menu dropdown-primary pb-0" id="drp" aria-labelledby="elements">
+                                  <a class="dropdown-item " asp-area="" asp-controller="Priority" asp-action="Index">Roles</a>
+                                  <a class="dropdown-item " asp-area="" asp-controller="Priority" asp-action="Criteria"> Criteria</a>
+                                </div>
+                              </li>
+
+                              <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GlobalScore" asp-action="Index">View Results</a>
+                            </li>
+                        }
+                       
                     </ul>
                      <partial name="_LoginPartial"/>
                 </div>

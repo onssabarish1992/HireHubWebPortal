@@ -1,6 +1,7 @@
 ﻿using HRAnalytics.Entities;
 using HRAnalytics.Utilities;
 using HRAnalytics.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using System.Net.Http.Headers;
 
 namespace HRAnalytics.Web.Controllers
 {
+    [Authorize(Roles = "HR")]
     public class RoleCriteriaController : HRAnalyticsBaseController
     {
         #region Page level declarations

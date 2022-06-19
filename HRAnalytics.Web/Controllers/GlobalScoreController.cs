@@ -1,12 +1,14 @@
 ﻿using System;
 using HRAnalytics.Entities;
 using HRAnalytics.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace HRAnalytics.Web.Controllers
 {
-	public class GlobalScoreController : HRAnalyticsBaseController
+    [Authorize(Roles = "HR")]
+    public class GlobalScoreController : HRAnalyticsBaseController
     {
         public GlobalScoreController(IConfiguration configuration) : base(configuration)
         {
@@ -64,7 +66,7 @@ namespace HRAnalytics.Web.Controllers
                 scoreViewModel.Recommendation = item.IsRecommended.HasValue && item.IsRecommended.Value? "Hire" : "No Hire";
                 scoreViewModel.ProposedCompensation = item.ProposedCompensation;
                 scoreViewModel.ActualCompensation = item.ActualCompensation;
-
+                scoreViewModel.ScheduleId = item.ScheduleID;
                 lst_score.Add(scoreViewModel);
             }
 

@@ -19,6 +19,8 @@ namespace HRAnalytics.Web.Models
 		public bool? IsHired { get; set; }
 
 		public string? Recommendation { get; set; }
+
+		public int ScheduleId { get; set; }
 	}
 }
 
