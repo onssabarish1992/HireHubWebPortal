@@ -14,21 +14,30 @@ namespace HRAnalytics.WebAPI.Controllers
 
         IAHP _ahpBL;
 
+        private IJobBL _jobBL;
+
         public AHPController(TelemetryClient telemetryClient,
-                                        IAHP ahpBL)
+                                        IAHP ahpBL,
+                                        IJobBL jobBL)
 
         {
             _telemetryClient = telemetryClient;
             _ahpBL = ahpBL;
+            _jobBL = jobBL;
         }
 
         [HttpPost]
         [Route("SavePairs")]
-        public IActionResult SavePairs(string argLoggedInUser, int argEntityID)
+        public IActionResult SavePairs(string argLoggedInUser)
         {
             try
             {
-                _ahpBL.SavePairs(argEntityID, argLoggedInUser);
+                //Save Pairs for roles
+                _ahpBL.SavePairs(1, argLoggedInUser);
+
+
+                //Save Pairs for criterias
+                _ahpBL.SavePairs(2, argLoggedInUser);
             }
             catch (Exception)
             {
@@ -89,6 +98,36 @@ namespace HRAnalytics.WebAPI.Controllers
             try
             {
                 _ahpBL.SavAHPFinalScores(argLoggedInUserID, argEntityID, argJobId);
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackTrace("Exception caught in SaveAHPFinalScores method...");
+                _telemetryClient.TrackException(ex);
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("SaveAHPAllScores")]
+        public IActionResult SaveAHPAllScores(string argLoggedInUserID)
+        {
+            try
+            {
+                //Save scores for job roles
+                _ahpBL.SavAHPFinalScores(argLoggedInUserID, 1, null);
+
+                //Save scores for job criteria
+                var l_RolesCreated = _jobBL.GetRoles();
+
+                if(l_RolesCreated!=null && l_RolesCreated.Count > 0)
+                {
+                    foreach (var role in l_RolesCreated)
+                    {
+                        _ahpBL.SavAHPFinalScores(argLoggedInUserID, 2, role.JobId);
+                    }
+                }
             }
             catch (Exception ex)
             {

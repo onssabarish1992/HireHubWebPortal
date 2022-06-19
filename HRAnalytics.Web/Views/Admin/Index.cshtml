@@ -1,0 +1,42 @@
+﻿
+
+
+ <div class="confirmation-message">
+
+      </div>
+<table>
+     <thead>
+        <tr>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="button" class="btn_Save" value = "Create" onclick="SaveData('SAVEAHPPAIR')"/></td>
+            <td>Used to generate AHP Pairs</td>
+        </tr>
+        <tr>
+            <td><input type="button" class="btn_Save" value = "Calulate" onclick="SaveData('SAVEAHPSCORES')"/></td>
+            <td>Used to give weightage to AHP Pairs</td>
+        </tr>
+        <tr>
+            <td><input type="button" class="btn_Save" value = "Optimize" onclick="SaveData('CALCULATERESULTS')"/></td>
+            <td>Uses TOPSIS and optimizer to get final results</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/Admin.js"></script>
+
+    <script type="text/javascript">
+         var URLConstants = {};
+
+        URLConstants["ProcessData"] = '@Url.Action("ProcessData", "Admin")';
+        
+    </script>
+    
+}
