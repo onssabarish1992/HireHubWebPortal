@@ -17,14 +17,14 @@
 <div class="container">
     <div class="prio_crit">
  <form id="candidate_pr" class="form-horizontal"  method="POST">  
-    <div>
+    <div class="selt">
         @Html.DropDownList("JobRole",ViewBag.Jobs as SelectList, "--Select--", new { @class = "form-control", @id = "ddl_job_role", @onchange = "populateCriterias()"})
     </div>
 
     <div id="div_slidersection">
 
     </div>
-    <div class="prio_btns">
+    <div class="prio_btns"> 
 
 
     <input type="button" class="btn_Save" value = "Save" style="display:none;" onclick="SaveWeightage(2)"/>
