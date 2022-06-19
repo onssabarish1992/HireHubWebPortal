@@ -1,6 +1,4 @@
 ﻿
-
-
 function loadCombinations() {
 
     var parameters = {};
@@ -36,10 +34,12 @@ function populateCriterias() {
                 console.log("Error in application")
             }
         });
+
+        $("input[type=button]").show();
     }
     else {
         $("#div_slidersection").html('');
-        $(".btn_Save").hide();
+        $("input[type=button]").hide();
     }
 }
 

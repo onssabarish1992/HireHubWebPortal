@@ -12,9 +12,9 @@
 
     </div>
 
-    <input type="button" class="btn_Save" value = "Save" onclick="SaveWeightage(2)"/>
+    <input type="button" class="btn_Save" value = "Save" style="display:none;" onclick="SaveWeightage(2)"/>
 
-    <input type="button" class="btn_Previous" value = "Previous" onclick="window.location.href='@Url.Action("Index", "Priority")';"/>
+    <input type="button" class="btn_Previous" value = "Previous" style="display:none;" onclick="window.location.href='@Url.Action("Index", "Priority")';"/>
 </form>
 
 
@@ -28,4 +28,5 @@
     URLConstants["SaveAHPRatings"] = '@Url.Action("SaveAHPRatings", "Priority")';
 
     URLConstants["GetAHHCriteriaPairs"] = '@Url.Action("GetAHHCriteriaPairs", "Priority")';
+
 </script>
