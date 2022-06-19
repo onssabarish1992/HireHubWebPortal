@@ -29,7 +29,7 @@
 
         
 
-         <form id="candidate_pr" class="form-horizontal"  method="POST">  
+         <form id="candidate_pr" class="form-horizontal"  method="POST" new { onsubmit = "showLoader();"}>  
              @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

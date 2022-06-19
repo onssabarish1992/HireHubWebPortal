@@ -1,6 +1,7 @@
 ﻿
 function loadCombinations() {
 
+    showLoader();
     var parameters = {};
 
     $.ajax({
@@ -9,8 +10,10 @@ function loadCombinations() {
         data: parameters,
         success: function (response) {
             $("#div_slidersection").html(response);
+            hideLoader();
         },
         error: function (response) {
+            hideLoader();
             console.log("Error in application")
         }
     });
@@ -20,6 +23,8 @@ function loadCombinations() {
 function populateCriterias() {
     var selectedValue = $("#ddl_job_role").val();
 
+    showLoader();
+
     if (selectedValue) {
         $.ajax({
             type: "POST",
@@ -28,8 +33,11 @@ function populateCriterias() {
             success: function (response) {
                 $("#div_slidersection").html(response);
                 $(".btn_Save").show();
+
+                hideLoader();
             },
             error: function (response) {
+                hideLoader();
                 console.log(response)
                 console.log("Error in application")
             }
@@ -84,6 +92,7 @@ function SaveWeightage(argEntityID) {
         AHPPairs.push(RatingViewModel);
     });
 
+    showLoader();
     $.ajax({
         type: "POST",
         url: URLConstants["SaveAHPRatings"],
@@ -99,10 +108,12 @@ function SaveWeightage(argEntityID) {
                     populateCriterias();
                 }
                 displayConfirmationMessage('Data saved successfully', 'alert-success');
+                hideLoader();
             }
         },
         error: function (a, b, c) {
             displayConfirmationMessage('Request could not be processed successfully', 'alert-danger');
+            hideLoader();
         }
     });
 
@@ -115,5 +126,8 @@ function displayConfirmationMessage(argMessage, argType) {
     var resultTemplate = alertTemplate.replace("#message-type#", argType).replace("#message#", argMessage);
     $(".confirmation-message").html(resultTemplate);
 }
+
+
+
 
 

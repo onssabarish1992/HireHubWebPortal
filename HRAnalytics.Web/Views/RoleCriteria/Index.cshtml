@@ -21,7 +21,7 @@
       <div class="candidate_evaluation role_cri"> 
          <partial name="_partialStatusMessage" />  
 
-         <form id="candidate_pr" class="form-horizontal" action="/" method="POST">
+         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" new { onsubmit = "showLoader();"}>
 
              @Html.AntiForgeryToken()
              <div asp-validation-summary="ModelOnly" class="text-danger"></div>
