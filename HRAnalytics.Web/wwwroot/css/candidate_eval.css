@@ -252,7 +252,22 @@ input.form-control {
 
 
 /*    candidate evaluation css starts             */
-
+.page-loader img {
+    height: 100px;
+    width: 135px;
+}
+.page-loader {
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .checkbox-inline input {
     margin-right:5px;
 }
@@ -266,7 +281,7 @@ input.form-control {
 }
 .eval_head {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
     .eval_cri #jd {
@@ -333,7 +348,7 @@ input.form-control {
   
 
 /*     priority starts            */
-
+/*
 .range_wrap {
     padding: 0px 10px 50px 10px;
 }
@@ -456,11 +471,52 @@ input.form-control {
     margin: 0;
     float: left;
     font-weight: bold;
+} */
+
+
+
+#table_scorings {
+    margin: 0 auto;
+    width: 100%;
+}
+    #table_scorings th {
+        border: 1px solid #fff;
+        text-align: center;
+        padding: 10px 0px;
+    }
+    #table_scorings td {
+        text-align: center;
+        padding: 10px 0px;
+    }
+
+.priority_btn input {
+    background: #000;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 15px;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 5px;
+    -webkit-box-shadow: 5px 5px 15px 5px #000000;
+    box-shadow: 5px 5px 15px 3px #000000;
+    transition: all 0.3s ease-in-out 0s;
+}
+.priority_btn input:hover {
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
+}
+.priority_btn {
+    margin: 25px 0px;
+    text-align: center;
 }
 
 
 
 /*     ends            */
+
+
+
 .dropdown-item {
     text-decoration: none !important;
     font-size: 16px;

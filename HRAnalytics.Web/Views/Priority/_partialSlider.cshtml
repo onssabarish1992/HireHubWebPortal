@@ -9,8 +9,8 @@
     <table id="table_scorings">
         <thead>
             <tr>
-            <th style="width:25%">Priorities</th>
-            <th style="width:20%">Equal</th>
+            <th >Priorities</th>
+            <th >Equal</th>
             <th>How much more?</th>
             </tr>
         </thead>
@@ -18,7 +18,7 @@
         @foreach(var ahpmodel in Model)
         {
             <tr id="@ahpmodel.PairId">
-                <td style="width:25%" id="@string.Concat(ahpmodel.PairId,"_","col1")">
+                <td id="@string.Concat(ahpmodel.PairId,"_","col1")">
 
                     @if(ahpmodel.Weightage > 0)
                     {
@@ -47,7 +47,7 @@
                     
                 </td>
 
-                <td style="width:20%" id="@string.Concat(ahpmodel.PairId,"_","col2")">
+                <td id="@string.Concat(ahpmodel.PairId,"_","col2")">
                     @if(ahpmodel.Weightage == 1)
                     {
                        <input type="radio" class="rd_equal" onclick="resetNumericScale('@ahpmodel.PairId')" checked>
@@ -70,17 +70,19 @@
                         {
                             <input type="radio" name="select_rating_@ahpmodel.PairId" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
                         }
+
                          <label name="select_rating_@ahpmodel.PairId">@i</label>
+
                     }
                 </td>
-            </tr>
+            </tr> 
         }
     </tbody>
     </table>
 }
 else
 {
-    <p>No combinations created!!</p>
+    <p>No combinations created!!</p>  
 }
 
 </div>
