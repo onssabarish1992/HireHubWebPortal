@@ -1,5 +1,4 @@
-﻿
-@model List<AHPPairViewModel>
+﻿@model List<AHPPairViewModel>
 
 <div class="row">
     <div class="col-md-12">
@@ -18,36 +17,36 @@
         @foreach(var ahpmodel in Model)
         {
             <tr id="@ahpmodel.PairId">
-                <td id="@string.Concat(ahpmodel.PairId,"_","col1")">
+                <td style="" id="@string.Concat(ahpmodel.PairId,"_","col1")">
 
                     @if(ahpmodel.Weightage > 0)
                     {
-                        <input type="radio" id=@ahpmodel.Pair1 class="rd_1" value="p1" name="select_priority_+@ahpmodel.PairId" checked> 
+                        <input type="radio" id=@ahpmodel.Pair1 class="rd_1" value="p1" name="select_priority_+@ahpmodel.PairId" checked>
                         <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
 
-                        <input type="radio" id=@ahpmodel.Pair2 class="rd_2" value="p2" name="select_priority_+@ahpmodel.PairId"> 
+                        <input type="radio" id=@ahpmodel.Pair2 class="rd_2" value="p2" name="select_priority_+@ahpmodel.PairId">
                         <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>
                     }
                     else if(ahpmodel.Weightage < 0)
                     {
-                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority_+@ahpmodel.PairId"> 
+                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority_+@ahpmodel.PairId">
                         <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
 
-                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority_+@ahpmodel.PairId" checked> 
+                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority_+@ahpmodel.PairId" checked>
                         <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>
                     }
                     else
                     {
-                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority_+@ahpmodel.PairId"> 
+                        <input type="radio" id=@ahpmodel.Pair1 value="p1" name="select_priority_+@ahpmodel.PairId">
                         <label for="@ahpmodel.Pair1">@ahpmodel.Pair1Name</label>
 
-                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority_+@ahpmodel.PairId"> 
+                        <input type="radio" id=@ahpmodel.Pair2 value="p2" name="select_priority_+@ahpmodel.PairId">
                         <label for=@ahpmodel.Pair2>@ahpmodel.Pair2Name</label>                
                     }
-                    
+                   
                 </td>
 
-                <td id="@string.Concat(ahpmodel.PairId,"_","col2")">
+                <td style="" id="@string.Concat(ahpmodel.PairId,"_","col2")">
                     @if(ahpmodel.Weightage == 1)
                     {
                        <input type="radio" class="rd_equal" onclick="resetNumericScale('@ahpmodel.PairId')" checked>
@@ -56,7 +55,7 @@
                     {
                         <input type="radio" class="rd_equal" onclick="resetNumericScale('@ahpmodel.PairId')">
                     }
-                    
+                   
                 </td>
 
                 <td id="@string.Concat(ahpmodel.PairId,"_","col3")">
@@ -70,19 +69,17 @@
                         {
                             <input type="radio" name="select_rating_@ahpmodel.PairId" value="@i" onclick="resetEqualWeightage('@ahpmodel.PairId')">
                         }
-
                          <label name="select_rating_@ahpmodel.PairId">@i</label>
-
                     }
                 </td>
-            </tr> 
+            </tr>
         }
     </tbody>
     </table>
 }
 else
 {
-    <p>No combinations created!!</p>  
+    <p>No combinations created!!</p>
 }
 
 </div>
@@ -92,14 +89,3 @@ else
 
 
 <script type="text/javascript" src="~/js/Slider.js"></script>
-
-
-
-
-
-
-
-
-
-
-
