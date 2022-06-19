@@ -61,7 +61,7 @@ namespace HRAnalytics.Web.Controllers
                 scoreViewModel.CandidateName = item.CandidateName;
                 scoreViewModel.JobName = item.JobName;
                 scoreViewModel.IsHired = item.IsHired;
-                scoreViewModel.Recommendation = "Hire";
+                scoreViewModel.Recommendation = item.IsRecommended.HasValue && item.IsRecommended.Value? "Hire" : "No Hire";
                 scoreViewModel.ProposedCompensation = item.ProposedCompensation;
                 scoreViewModel.ActualCompensation = item.ActualCompensation;
 
