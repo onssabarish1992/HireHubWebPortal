@@ -223,6 +223,8 @@ namespace HRAnalytics.BL
                         l_Candidate.ProposedCompensation = l_Row["proposed_compensation"] == DBNull.Value ? 0 : Convert.ToDouble(l_Row["proposed_compensation"]);
                         l_Candidate.ActualCompensation = l_Row["actual_compensation"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["actual_compensation"]);
                         l_Candidate.ScheduleID = l_Row["schedule_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["schedule_id"]);
+                        l_Candidate.GlobalScoreId = l_Row["global_score_id"] == DBNull.Value ? 0 : Convert.ToInt32(l_Row["global_score_id"]);
+
                         l_GlobalScore.Add(l_Candidate);
 
                     }

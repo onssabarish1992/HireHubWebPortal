@@ -51,11 +51,11 @@ namespace HRAnalytics.Web.Controllers
             return l_candidate;
         }
 
+
         private List<GlobalScoreViewModel> ConvertEntityToViewModel(CandidateCollection candidates)
         {
             List<GlobalScoreViewModel> lst_score = new List<GlobalScoreViewModel>();
-
-            GlobalScoreViewModel scoreViewModel = null;
+            GlobalScoreViewModel scoreViewModel;
 
             foreach (var item in candidates)
             {
@@ -67,10 +67,61 @@ namespace HRAnalytics.Web.Controllers
                 scoreViewModel.ProposedCompensation = item.ProposedCompensation;
                 scoreViewModel.ActualCompensation = item.ActualCompensation;
                 scoreViewModel.ScheduleId = item.ScheduleID;
+                scoreViewModel.GlobalScoreId = item.GlobalScoreId;
                 lst_score.Add(scoreViewModel);
             }
 
             return lst_score;
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> SaveCandidateHiringDetails(bool argIsHired, double argActualCompensation, int argGlobalScoreID)
+        {
+            bool IsSuccess = false;
+            HttpResponseMessage l_Message = new HttpResponseMessage();
+            Candidate l_Candidate = new Candidate();
+            try
+            {
+                l_Candidate.GlobalScoreId = argGlobalScoreID;
+                l_Candidate.ActualCompensation = argActualCompensation;
+                l_Candidate.IsHired = argIsHired;
+                l_Candidate.ProjectName = string.Empty;
+                l_Candidate.CandidateName = string.Empty;
+                l_Candidate.InterviewerID = string.Empty;
+
+
+                l_Message = await SaveCandidateHiringDetails(l_Candidate);
+
+                if (l_Message != null && l_Message.IsSuccessStatusCode)
+                {
+                    IsSuccess = true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Json(IsSuccess);
+        }
+
+        private async Task<HttpResponseMessage> SaveCandidateHiringDetails(Candidate argCandidate)
+        {
+            #region Declarations
+            HttpResponseMessage l_Response = new HttpResponseMessage();
+            string l_SaveCandidateResultURL = apiBaseURL + "api/CandidateScore/SaveResult";
+            #endregion
+            try
+            {
+                l_Response = await client.PostAsJsonAsync(l_SaveCandidateResultURL, argCandidate);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return l_Response;
         }
     }
 }

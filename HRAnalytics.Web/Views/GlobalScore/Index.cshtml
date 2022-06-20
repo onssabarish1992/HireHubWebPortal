@@ -24,8 +24,10 @@
                     <tr>
                         <th>Job Role</th>
                         <th>Candidate Name</th>
-                        <th>Compensation(EUR)</th>
+                        <th>Proposed Compensation(EUR)</th>
                         <th>Recommendation</th>
+                        <th>Is Hired ?</th>
+                        <th>Actual Compensation(EUR)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,11 +35,21 @@
                     {
                         @foreach (var role in Model)
                         {
-                            <tr>
+                            <tr id="@role.GlobalScoreId">
                                 <td>@role.JobName</td>
                                 <td>@Html.ActionLink(role.CandidateName,"Candidate","Candidate",new { argScheduleID = role.ScheduleId},new {target = "_blank"})</td>
-                                <td>@role.ActualCompensation</td>
+                                <td>@role.ProposedCompensation</td>
                                 <td>@role.Recommendation</td>
+                                @if(role.IsHired.HasValue && role.IsHired.Value)
+                                {
+                                    <td><input id=@String.Concat(role.GlobalScoreId,"_chk") type="checkbox" checked onchange="SaveData(@role.GlobalScoreId)"></td>
+                                }
+                                else
+                                {
+                                    <td><input id=@String.Concat(role.GlobalScoreId,"_chk") type="checkbox" onchange="SaveData(@role.GlobalScoreId)"></td>
+                                }
+
+                                <td><input type="number" id=@String.Concat(role.GlobalScoreId,"_text") value=@role.ActualCompensation onblur="SaveData(@role.GlobalScoreId)"></td>
                             </tr>
                         }
                     }
@@ -64,6 +76,25 @@
         $('#tbl_score').DataTable({
             responsive: true
         });
-}
+    }
+
+    function SaveData(argGlobalScoreID){
+        var IsChecked = $("#"+argGlobalScoreID+"_chk").prop("checked");
+        var ActualCompensation = $("#"+argGlobalScoreID+"_text").val();
+
+        showLoader();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SaveCandidateHiringDetails","GlobalScore")',
+            data: jQuery.param({ argIsHired: IsChecked, argActualCompensation: ActualCompensation, argGlobalScoreID: argGlobalScoreID}),
+            success: function (response) {
+                hideLoader();
+            },
+            error: function (response) {
+                hideLoader();
+            }
+        });
+    }
 </script>
 }

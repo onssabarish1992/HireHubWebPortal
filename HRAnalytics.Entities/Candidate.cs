@@ -38,6 +38,8 @@
 
         public bool? IsRecommended { get; set; }
 
+        public int GlobalScoreId { get; set; }
+
 
     }
 

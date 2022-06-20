@@ -120,12 +120,12 @@ namespace HRAnalytics.WebAPI.Controllers
 
         [HttpPost]
         [Route("SaveResult")]
-        public IActionResult SaveResult(double argCompensation, bool argIsHired, int argGlobalID)
+        public IActionResult SaveResult([FromBody]Candidate argCandidate)
         {
             try
             {
                 
-                _candiadateScoreBL.SaveResult(argCompensation, argIsHired, argGlobalID);
+                _candiadateScoreBL.SaveResult(argCandidate);
             }
             catch (Exception)
             {

@@ -21,6 +21,8 @@ namespace HRAnalytics.Web.Models
 		public string? Recommendation { get; set; }
 
 		public int ScheduleId { get; set; }
+
+		public int GlobalScoreId { get; set; }
 	}
 }
 

@@ -245,7 +245,7 @@ namespace HRAnalytics.BL
             return l_ratingXML;
         }
 
-        public void SaveResult(double argCompensation, bool argIsHired, int argGlobalID)
+        public void SaveResult(Candidate candidate)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
             List<IDbDataParameter> l_Parameters = new();
@@ -254,9 +254,9 @@ namespace HRAnalytics.BL
             try
             {
                 
-                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ACTUALCOMPENSATION, argCompensation, DbType.Decimal));
-                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ISHIRED, argIsHired, DbType.Boolean));
-                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.GLOBALSCOREID, argGlobalID, DbType.Int32));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ACTUALCOMPENSATION, candidate.ActualCompensation, DbType.Decimal));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.ISHIRED, candidate.IsHired.HasValue? candidate.IsHired.Value:false, DbType.Boolean));
+                l_Parameters.Add(l_HRAnalyticsDBManager.CreateParameter(ProcedureParams.GLOBALSCOREID, candidate.GlobalScoreId, DbType.Int32));
 
                 //Call stored procedure
                 l_HRAnalyticsDBManager.Insert(StoredProcedure.SAVE_RESULT, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
