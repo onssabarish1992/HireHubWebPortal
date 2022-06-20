@@ -128,6 +128,34 @@
     .navbar-light .navbar-nav .nav-link:hover {
         color: #03d6d2 !important;
     }
+.error_msg {
+    display: flex;
+    margin: 0 auto;
+    width: 325px;
+}
+
+    .error_msg a {
+        float: right;
+        text-decoration: none;
+        margin-right: -30px;
+    }
+.page-loader img {
+    height: 100px;
+    width: 135px;
+}
+
+.page-loader {
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {
     .c_profile h2 {

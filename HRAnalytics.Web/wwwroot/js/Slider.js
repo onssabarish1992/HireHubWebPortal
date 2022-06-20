@@ -107,7 +107,7 @@ function SaveWeightage(argEntityID) {
                 else {
                     populateCriterias();
                 }
-                displayConfirmationMessage('Data saved successfully', 'alert-success');
+                displayConfirmationMessage('Data saved successfully', 'alert-success'); 
                 hideLoader();
             }
         },

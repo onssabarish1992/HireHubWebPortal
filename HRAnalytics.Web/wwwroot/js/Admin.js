@@ -7,7 +7,7 @@ function SaveData(argType) {
         url: URLConstants["ProcessData"],
         data: jQuery.param({ argRequestType: argType }),
         success: function (response) {
-            displayConfirmationMessage('Data processed successfully', 'alert-success');
+            displayConfirmationMessage('Data processed successfully', 'alert-success alert-dismissible');
             hideLoader();
         },
         error: function (response) {
