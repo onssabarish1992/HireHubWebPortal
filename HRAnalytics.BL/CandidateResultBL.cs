@@ -127,7 +127,7 @@ namespace HRAnalytics.BL
                     candidate.ScheduleID = l_scores.Where(x => x.CandidateID == candidate.CandidateID && x.JobId == argRole.JobId).Select(y => y.ScheduleID.Value).FirstOrDefault();
                     candidate.LocalScore = alternative.calculatedPerformance;
                     candidate.GlobalScore = candidate.LocalScore * argRole.Weightage;
-                    candidate.ActualCompensation = argRole.Compensation;
+                    candidate.ProposedCompensation = argRole.Compensation;
                     l_Candidate.Add(candidate);
                 }
             }
