@@ -122,8 +122,17 @@
         color: #fff;
     }
 
+/*  Tableau CSS starts     */
 
-
+.tableauPlaceholder {
+    width:100% !important;
+    height:100vh !important;
+}
+.tableauPlaceholder iframe{
+    width: 100% !important;
+    height: 100vh !important;
+}
+/*  ends     */
 /*  ends     */
 .candidate_evaluation .form-group {
     margin-bottom: 10px;
