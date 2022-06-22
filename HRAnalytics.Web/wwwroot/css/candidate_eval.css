@@ -1,4 +1,6 @@
 ﻿body {
+    overflow-x: hidden;
+    background: linear-gradient(106deg, #7F14CC 0%, #7384C7 44%, #73F6D3 100%);
 }
 .c_profile h2 {
     text-align: left;
@@ -12,7 +14,7 @@
     box-shadow: 5px 5px 15px 5px #000000;
 }
 #logoutForm button {
-    padding: 10px !important;
+    padding: 8px !important;
 }
 .navbar {
     margin-bottom: 0px !important;
@@ -37,10 +39,13 @@
 }
 .candidate_evaluation {
     margin: 30px 0px;
-    background: rgba(37,41,88,0.9);
     padding: 15px 15px 10px 15px;
     display: inline-block;
     width: 450px;
+    background: linear-gradient(106deg, #7F14CC 0%, #7384C7 44%, #73F6D3 100%);
+    box-shadow: 9px 10px 13px 3px rgb(0 0 0 / 70%);
+    -webkit-box-shadow: 9px 10px 13px 3px rgb(0 0 0 / 70%);
+    -moz-box-shadow: 9px 10px 13px 3px rgba(0,0,0,0.7);
 }
 #candidate_pr select {
     color:#000 !important;
@@ -61,14 +66,13 @@
 
     .c_eval h2 {
         text-align: left;
-        background: #000;
-        border: 1px solid #fff;
+        border-bottom: 1px solid #fff;
         color: #fff;
-        padding: 15px;
         display: inline-block;
         font-size: 20px;
-        -webkit-box-shadow: 5px 5px 15px 3px #000000;
-        box-shadow: 5px 5px 15px 5px #000000;
+        font-weight: bold;
+        font-size: 48px;
+        padding-bottom: 0px;
     }
 #candidate_pr {
     float: left;
@@ -308,10 +312,10 @@ input.form-control {
 }
 .eval_cri {
     max-width: 500px;
-    background: rgba(37,41,88,0.8);
+    background: linear-gradient(106deg, #7F14CC 0%, #7384C7 44%, #73F6D3 100%);
     padding: 15px;
     margin: 0 auto;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
     display: flex;
 }
 .eval_head {

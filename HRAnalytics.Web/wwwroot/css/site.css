@@ -1,6 +1,10 @@
 html {
   font-size: 14px;
 }
+body {
+    overflow-x: hidden;
+    background: linear-gradient(106deg, #7F14CC 0%, #7384C7 44%, #73F6D3 100%);
+}
 
 @media (min-width: 768px) {
   html {
