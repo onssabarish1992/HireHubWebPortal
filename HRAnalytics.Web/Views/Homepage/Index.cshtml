@@ -5,17 +5,17 @@
 }
 <head>
 		<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
-        	
+         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/aos.css" >	
 </head>
 	
 <div class="homepage"> 
    <div class="home_wrap">
        <div id="particles-js"></div>
-      <div class="container"> 
+      <div class="container-fluid"> 
          <div class="row">
             <div class="col-md-12"> 
                <div class="login-logo" data-aos="zoom-in-up">   
-                  <img src="../Images/hirehub-logo.png" alt="">         
+                  <img src="../Images/hirehub-logo.png" alt="">          
                </div>
             </div>
          </div>
@@ -115,9 +115,10 @@
    </div>
 </div>
 
-
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/particles.min.js"></script>
 	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/1.0.0/typewriter.min.js"></script>
+        	<script src="~/lib/bootstrap/dist/js/aos.js"></script>
 	
 	  
 <script>
@@ -251,7 +252,9 @@ particlesJS("particles-js", {
              .start();
 			 
 			 
-		
 
+		      AOS.init({
+  duration: 1300,
+})
 
 </script>
