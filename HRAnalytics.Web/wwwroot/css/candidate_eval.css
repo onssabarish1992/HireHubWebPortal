@@ -812,6 +812,25 @@ input.form-control {
 /*     ends            */
 
 
+/* custom */
+
+
+
+.particles-js-canvas-el {
+    position: absolute;
+    top: 0;
+}
+
+#typtxt {
+    color: rgba(252,181,146,1);
+}
+
+
+
+
+
+/* ends */
+
 
 /* global score CSS starts*/
 .final_result .custom_table {
@@ -903,8 +922,8 @@ table.dataTable.no-footer {
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {
     .c_eval h2 {
-        padding: 10px;
-        font-size: 18px;
+        padding: 5px;
+        font-size: 24px;
     }
 
     .candidate_evaluation {
@@ -975,52 +994,88 @@ table.dataTable.no-footer {
     .homepage .home_panel2 {
         margin-bottom: 10px;
     }
+    #tbl_score {
+        padding: 0px;
+    }
+    #tbl_eval {
+        padding: 0px;
+    }
+
+    #tbl_role {
+        padding: 0px;
+    }
  
 }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .navbar-brand img {
+        max-width:100px;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        padding: 3px !important;
+        font-size: 12px;
+    }
+    .nav-logout #manage {
+        padding-top: 10px !important;
+    }
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1080px) {
-    .homepage .home_panel1 h3 {
-        font-size: 16px;
+        .homepage .home_panel1 h3 {
+            font-size: 16px;
+        }
+
+        .homepage .home_panel2 h3 {
+            font-size: 16px;
+        }
+
+        .homepage .home_panel3 h3 {
+            font-size: 16px;
+        }
+
+        .homepage .home_panel1 h2 {
+            font-size: 18px;
+            padding-bottom: 0px;
+        }
+
+        .homepage .home_panel2 h2 {
+            font-size: 18px;
+            padding-bottom: 0px;
+        }
+
+        .homepage .home_panel3 h2 {
+            font-size: 18px;
+            padding-bottom: 0px;
+        }
+
+        .homepage .right_content {
+            margin-top: 30px;
+        }
+
+        .c_eval h2 {
+            padding: 5px;
+            font-size: 36px;
+        }
+
+
+        .homepage .home_panel1 {
+            margin: 0 0px;
+        }
+
+        .homepage .home_panel2 {
+            margin: 0 0px;
+        }
+
+        .homepage .home_panel3 {
+            margin: 0 0px;
+        }
     }
 
-    .homepage .home_panel2 h3 {
-        font-size: 16px;
+@media only screen and (min-width: 768px) and (max-width: 1080px) {
+    .navbar-light .navbar-nav .nav-link {
+        padding: 5px !important;
+        font-size: 14px;
     }
-
-    .homepage .home_panel3 h3 {
-        font-size: 16px;
-    }
-
-    .homepage .home_panel1 h2 {
-        font-size: 18px;
-        padding-bottom: 0px;
-    }
-
-    .homepage .home_panel2 h2 {
-        font-size: 18px;
-        padding-bottom: 0px;
-    }
-
-    .homepage .home_panel3 h2 {
-        font-size: 18px;
-        padding-bottom: 0px;
-    }
-
-    .homepage .right_content {
-        margin-top: 30px;
-    }
-
-
-
-
-    .homepage .home_panel1 {
-        margin: 0 0px;
-    }
-
-    .homepage .home_panel2 {
-        margin: 0 0px;
-    }
-
-    .homepage .home_panel3 {
-        margin: 0 0px;
+    .nav-logout #manage {
+        padding-top: 10px !important;
     }
 }

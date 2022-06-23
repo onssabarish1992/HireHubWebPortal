@@ -5,22 +5,24 @@
 }
 <head>
 		<link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
+        	
 </head>
 	
 <div class="homepage"> 
    <div class="home_wrap">
+       <div id="particles-js"></div>
       <div class="container"> 
          <div class="row">
             <div class="col-md-12"> 
-               <div class="login-logo">   
+               <div class="login-logo" data-aos="zoom-in-up">   
                   <img src="../Images/hirehub-logo.png" alt="">         
                </div>
             </div>
          </div>
          <div class="row">
             <div class="col-md-6">
-               <div class="left_content">
-                  <h1>Hiring made easier</h1>
+               <div class="left_content" data-aos="slide-left">
+                  <h1>Hiring made <span id="typtxt"></span></h1>
                   <p>Hirehub's usage of Data Analytics for final decision making during the hiring process allows you to establish your new team for your small or medium business in a single click.</p>
                   <div class="right_content">
                      <a href="/Identity/Account/Login">Login</a>
@@ -29,7 +31,7 @@
                </div>
             </div>
             <div class="col-md-6">
-               <div class="right_content">
+               <div class="right_content" data-aos="slide-right">
                   <div class="right_back">
                      <img src="../Images/back-g.png" alt="Hiring background"> 
                                        <div class="right_back_content">
@@ -48,27 +50,27 @@
    </div>
    <div class="centralised">
       <div class="row">
-         <h2>One centralized platform designed to make<br> your hiring easier</h2>
+         <h2 data-aos="zoom-in-up">One centralized platform designed to make<br> your hiring easier</h2>
          <div class="col-sm-6 col-md-3">
-            <div class="centra_content">
+            <div class="centra_content" data-aos="slide-up">
                <img src="../Images/icon1.jpg" alt=""> 
                <p>Reduce Time to Hire</p>
             </div>
          </div>
          <div class="col-sm-6 col-md-3">
-            <div class="centra_content">
+            <div class="centra_content" data-aos="slide-up">
                <img src="../Images/icon2.jpg" alt=""> 
                <p>Lower Your Costs</p>
             </div>
          </div>
          <div class="col-sm-6 col-md-3">
-            <div class="centra_content">
+            <div class="centra_content" data-aos="slide-up">
                <img src="../Images/icon3.jpg" alt=""> 
                <p>Hire Better People</p>
             </div>
          </div>
          <div class="col-sm-6 col-md-3">
-            <div class="centra_content">
+            <div class="centra_content" data-aos="slide-up">
                <img src="../Images/icon4.jpg" alt=""> 
                <p>Complete GDPR Confidence</p>
             </div>
@@ -77,10 +79,10 @@
    </div>
    <div class="pricing">
       <div class="container">
-         <h1>Plans & Pricing</h1>
+         <h1 data-aos="zoom-in-up">Plans & Pricing</h1>
          <div class="row">
             <div class="col-sm-4 col-md-4">
-               <div class="home_panel1">
+               <div class="home_panel1" data-aos="slide-up">
                   <h3>Standard</h3>
                   <h2>&euro; 300</h2>
                   <p>/subscription/billed monthly</p>
@@ -88,7 +90,7 @@
                </div>
             </div>
             <div class="col-sm-4 col-md-4">
-               <div class="home_panel2">
+               <div class="home_panel2" data-aos="slide-up">
                   <h3>Professional</h3>
                   <h2>&euro; 3000</h2>
                   <p>/subscription/billed annualy</p>
@@ -96,7 +98,7 @@
                </div>
             </div>
             <div class="col-sm-4 col-md-4">
-               <div class="home_panel3">
+               <div class="home_panel3" data-aos="slide-up">
                   <h3>Renewal</h3>
                   <h2>&euro; 1500</h2>
                   <p>/subscription/billed annually</p>
@@ -108,7 +110,148 @@
    </div>
    <div class="col-md-12">
       <div class="home_closing">
-         <p>Discover the next generation of Hiring with Hire Hub.</p> 
+         <p data-aos="linear">Discover the next generation of Hiring with Hire Hub.</p> 
       </div>
    </div>
 </div>
+
+
+<script src="~/lib/bootstrap/dist/js/particles.min.js"></script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/1.0.0/typewriter.min.js"></script>
+	
+	  
+<script>
+particlesJS("particles-js", {
+         "particles": {
+           "number": {
+             "value": 80,
+             "density": {
+               "enable": true,
+               "value_area": 800
+             }
+           },
+           "color": {
+             "value": "#ffffff"
+           },
+           "shape": {
+             "type": "circle",
+             "stroke": {
+               "width": 0,
+               "color": "#000000"
+             },
+             "polygon": {
+               "nb_sides": 5
+             },
+             "image": {
+               "src": "img/github.svg",
+               "width": 100,
+               "height": 100
+             }
+           },
+           "opacity": {
+             "value": 0.7,
+             "random": false,
+             "anim": {
+               "enable": false,
+               "speed": 1,
+               "opacity_min": 0.1,
+               "sync": false
+             }
+           },
+           "size": {
+             "value": 3,
+             "random": true,
+             "anim": {
+               "enable": false,
+               "speed": 40,
+               "size_min": 0.1,
+               "sync": false
+             }
+           },
+           "line_linked": {
+             "enable": true,
+             "distance": 150,
+             "color": "#ffffff",
+             "opacity": 0.4,
+             "width": 1
+           },
+           "move": {
+             "enable": true,
+             "speed": 6,
+             "direction": "none",
+             "random": false,
+             "straight": false,
+             "out_mode": "out",
+             "bounce": false,
+             "attract": {
+               "enable": false,
+               "rotateX": 600,
+               "rotateY": 1200
+             }
+           }
+         },
+         "interactivity": {
+           "detect_on": "canvas",
+           "events": {
+             "onhover": {
+               "enable": false,
+               "mode": "repulse"
+             },
+             "onclick": {
+               "enable": true,
+               "mode": "push"
+             },
+             "resize": true
+           },
+           "modes": {
+             "grab": {
+               "distance": 400,
+               "line_linked": {
+                 "opacity": 1
+               }
+             },
+             "bubble": {
+               "distance": 400,
+               "size": 40,
+               "duration": 2,
+               "opacity": 8,
+               "speed": 3
+             },
+             "repulse": {
+               "distance": 200,
+               "duration": 0.4
+             },
+             "push": {
+               "particles_nb": 4
+             },
+             "remove": {
+               "particles_nb": 2
+             }
+           }
+         },
+         "retina_detect": true
+         });
+		 
+		 
+		 
+		var typtxt = document.getElementById('typtxt');
+         
+         var typewriter = new Typewriter(typtxt, {
+             loop: true
+         });
+         
+         typewriter.typeString('easier')
+             .pauseFor(1500)
+             .deleteAll().typeString('faster')
+             .pauseFor(1500)
+             .deleteAll()
+             .typeString('less time consuming')
+             .pauseFor(1500)
+             .deleteAll()
+             .start();
+			 
+			 
+		
+
+
+</script>
