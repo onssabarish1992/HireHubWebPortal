@@ -22,8 +22,10 @@ builder.Services.AddScoped<ICandidateResult, CandidateResultBL>();
 builder.Services.AddScoped<ICandidateOptimization, CandidateOptimization>();
 
 builder.Services.AddScoped<IAHP, AHP>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+
 
 
 

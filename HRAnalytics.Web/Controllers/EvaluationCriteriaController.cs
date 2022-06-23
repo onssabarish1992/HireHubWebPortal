@@ -79,11 +79,11 @@ namespace HRAnalytics.Web.Controllers
                 l_jobURL = apiBaseURL + "api/Job/GetEvaluationCriteria";
                 HttpResponseMessage l_jobData = await client.GetAsync(l_jobURL);
 
-                if (l_jobData != null && l_jobData.IsSuccessStatusCode)
-                {
-                    var l_JobResponse = l_jobData.Content.ReadAsStringAsync().Result;
-                    l_JobCollection = JsonConvert.DeserializeObject<JobCollection>(l_JobResponse);
-                }
+                    if (l_jobData != null && l_jobData.IsSuccessStatusCode)
+                    {
+                        var l_JobResponse = l_jobData.Content.ReadAsStringAsync().Result;
+                        l_JobCollection = JsonConvert.DeserializeObject<JobCollection>(l_JobResponse);
+                    }
 
             }
             catch (Exception)

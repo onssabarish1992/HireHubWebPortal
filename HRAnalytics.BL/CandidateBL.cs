@@ -14,10 +14,12 @@ namespace HRAnalytics.BL
     public class CandidateBL: ICandidateBL
     {
         private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailservice;
 
-        public CandidateBL(IConfiguration configuration)
+        public CandidateBL(IConfiguration configuration, IEmailService emailService)
         {
             _configuration = configuration;
+            _emailservice = emailService;
         }
 
         /// <summary>
@@ -47,6 +49,8 @@ namespace HRAnalytics.BL
                     //Call stored procedure
                     l_HRAnalyticsDBManager.Insert(StoredProcedure.INSERT_INTERVIEWSCHEDULE, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
                 }
+
+                _emailservice.SendEmail(argCandidate.CandidateName,argCandidate.ProjectName,argCandidate.InterviewTimeStamp);
             }
             catch (Exception)
             {
