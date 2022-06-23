@@ -20,7 +20,7 @@
              <partial name="_partialStatusMessage" />  
 
 
-	<form id="candidate_pr" method="post" class="form-horizontal" new { onsubmit = "showLoader();"}>
+	<form id="candidate_pr" method="post" class="form-horizontal" new { onsubmit = "displayLoader();"}>
 		 @Html.AntiForgeryToken()
 
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -82,7 +82,17 @@
     <script>
         $(function () {
             $('#datepicker1').datetimepicker();
-        });
+		});
+        function displayLoader() {
+            $("#candidate_pr").submit(function (e) {
+                if ($(this).valid()) {
+                    showLoader();
+                }
+                else {
+                    hideLoader();
+                }
+            });
+        }
     </script>
 }
 

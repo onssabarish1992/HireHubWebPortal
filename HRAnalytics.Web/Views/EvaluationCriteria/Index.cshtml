@@ -29,7 +29,7 @@
 
         
 
-         <form id="candidate_pr" class="form-horizontal"  method="POST" new { onsubmit = "showLoader();"}>  
+         <form id="candidate_pr" class="form-horizontal"  method="POST" new { onsubmit = "displayLoader();"}>  
              @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -88,6 +88,17 @@
         $('#tbl_eval').DataTable({
             responsive: true
         });
+
+    function displayLoader() {
+        $("#candidate_pr").submit(function (e) {
+             if ($(this).valid()) {
+                    showLoader();
+                }
+             else {
+                    hideLoader();
+                }
+        });
+        }
 }
 </script>
 

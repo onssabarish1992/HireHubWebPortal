@@ -26,7 +26,7 @@
       <div class="candidate_evaluation role_cri">  
  
 
-         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" new { onsubmit = "showLoader();"}>
+         <form id="candidate_pr" class="form-horizontal" action="/" method="POST" new { onsubmit = "displayLoader();"}>
 
              @Html.AntiForgeryToken()
              <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -100,6 +100,18 @@
         $('#tbl_role').DataTable({
             responsive: true
         });
+
+
+    function displayLoader() {
+        $("#candidate_pr").submit(function (e) {
+            if ($(this).valid()) {
+                showLoader();
+            }
+            else {
+                hideLoader();
+            }
+        });
+        }
 }
 </script>
 }
