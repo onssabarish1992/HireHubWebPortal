@@ -22,7 +22,7 @@ namespace HRAnalytics.BL
             // requires using System.Text.Json;
             var jsonData = JsonSerializer.Serialize(new
             {
-                email = "121106823@umail.ucc.ie",
+                email = "hirehub@outlook.ie",
                 due = CandidateName,
                 task = "Hire Hub - Interview Scheduled Notification",
                 ProjectName = PrjName,
