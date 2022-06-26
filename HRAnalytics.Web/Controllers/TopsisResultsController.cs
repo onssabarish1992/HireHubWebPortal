@@ -2,7 +2,7 @@
 
 namespace HRAnalytics.Web.Controllers
 {
-    public class TopsisResults : Controller
+    public class TopsisResultsController : Controller
     {
         public IActionResult Index()
         {

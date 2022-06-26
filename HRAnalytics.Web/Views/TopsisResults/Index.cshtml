@@ -1,0 +1,128 @@
+﻿
+<head>
+    <link rel="stylesheet" href="~/css/candidate_eval.css" asp-append-version="true" />
+</head>
+
+<div class="c_eval final_result">  
+    <div class="col-md-12">
+        <div class="eval_head"> 
+        <h2>Final Result</h2> 
+    </div>
+    </div>
+    <div class="container">
+        <div class="custom_table table-responsive">
+            <table id="tbl_score" class="table table-bordered">  
+                <thead>
+                    <tr>
+                        <th>Job Role</th>
+                        <th>Candidate Name</th>
+                        <th>Proposed Compensation(EUR)</th>
+                        <th>Recommendation</th>
+                        <th>Is Hired ?</th>
+                        <th>Actual Compensation(EUR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="152">
+                                <td>Project Manager</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1164" target="_blank">Edwin Donnely</a></td>
+                                <td>80000</td>
+                                <td>No Hire</td>
+                                    <td><input id=152_chk type="checkbox" onchange="SaveData(152)"></td>
+
+                                <td><input type="number" id=152_text value=0 onblur="SaveData(152)"></td>
+                            </tr>
+                            <tr id="153">
+                                <td>Project Manager</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1166" target="_blank">Timothy Patrick</a></td>
+                                <td>80000</td>
+                                <td>Hire</td>
+                                    <td><input id=153_chk type="checkbox" onchange="SaveData(153)"></td>
+
+                                <td><input type="number" id=153_text value=0 onblur="SaveData(153)"></td>
+                            </tr>
+                            <tr id="154">
+                                <td>Project Manager</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1165" target="_blank">Ulisses Franca</a></td>
+                                <td>80000</td>
+                                <td>No Hire</td>
+                                    <td><input id=154_chk type="checkbox" onchange="SaveData(154)"></td>
+
+                                <td><input type="number" id=154_text value=0 onblur="SaveData(154)"></td>
+                            </tr>
+                            <tr id="155">
+                                <td>Product Owner</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1169" target="_blank">Cathy Sierra</a></td>
+                                <td>70000</td>
+                                <td>No Hire</td>
+                                    <td><input id=155_chk type="checkbox" onchange="SaveData(155)"></td>
+
+                                <td><input type="number" id=155_text value=0 onblur="SaveData(155)"></td>
+                            </tr>
+                            <tr id="156">
+                                <td>Product Owner</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1168" target="_blank">Paul Desmond</a></td>
+                                <td>70000</td>
+                                <td>No Hire</td>
+                                    <td><input id=156_chk type="checkbox" onchange="SaveData(156)"></td>
+
+                                <td><input type="number" id=156_text value=0 onblur="SaveData(156)"></td>
+                            </tr>
+                            <tr id="157">
+                                <td>Product Owner</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1167" target="_blank">Shane Mahony</a></td>
+                                <td>70000</td>
+                                <td>Hire</td>
+                                    <td><input id=157_chk type="checkbox" onchange="SaveData(157)"></td>
+
+                                <td><input type="number" id=157_text value=0 onblur="SaveData(157)"></td>
+                            </tr>
+                            <tr id="158">
+                                <td>Software Developer</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1178" target="_blank">Cathryn Fernandes</a></td>
+                                <td>50000</td>
+                                <td>No Hire</td>
+                                    <td><input id=158_chk type="checkbox" onchange="SaveData(158)"></td>
+
+                                <td><input type="number" id=158_text value=0 onblur="SaveData(158)"></td>
+                            </tr>
+                            <tr id="159">
+                                <td>Software Developer</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1177" target="_blank">Mark Obrien</a></td>
+                                <td>50000</td>
+                                <td>Hire</td>
+                                    <td><input id=159_chk type="checkbox" onchange="SaveData(159)"></td>
+
+                                <td><input type="number" id=159_text value=0 onblur="SaveData(159)"></td>
+                            </tr>
+                            <tr id="160">
+                                <td>Software Developer</td>
+                                <td><a href="/Candidate/Candidate?argScheduleID=1176" target="_blank">Sandy Orton</a></td>
+                                <td>50000</td>
+                                <td>Hire</td>
+                                    <td><input id=160_chk type="checkbox" onchange="SaveData(160)"></td>
+
+                                <td><input type="number" id=160_text value=0 onblur="SaveData(160)"></td>
+                            </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/fc-4.1.0/fh-3.2.3/r-2.3.0/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/fc-4.1.0/fh-3.2.3/r-2.3.0/datatables.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        initialiseDataTable();
+    })
+    function initialiseDataTable() {
+        $('#tbl_score').DataTable({
+            responsive: true
+        });
+    }
+</script>
+}
