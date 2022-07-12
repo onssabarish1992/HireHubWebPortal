@@ -15,12 +15,19 @@ namespace HRAnalytics.Web.Controllers
         {
         }
 
+        /// <summary>
+        /// Landing page for AHP
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
-
+        /// <summary>
+        /// Partial view to load AHP job pairs
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> GetAHPJobPairs()
         {
@@ -38,6 +45,11 @@ namespace HRAnalytics.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// AJAX Post method to save AHP ratings
+        /// </summary>
+        /// <param name="AHPPairs"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> SaveAHPRatings([FromBody]List<RatingViewModel> AHPPairs)
         {
@@ -59,6 +71,11 @@ namespace HRAnalytics.Web.Controllers
 
         }
 
+        /// <summary>
+        /// API call to save AHP rating
+        /// </summary>
+        /// <param name="argPairs"></param>
+        /// <returns></returns>
         private async Task<HttpResponseMessage> SaveAHPRating(List<AHPPair> argPairs)
         {
             #region Declarations
@@ -80,6 +97,11 @@ namespace HRAnalytics.Web.Controllers
             return l_Response;
         }
 
+        /// <summary>
+        /// Convert AHP roles/criteria to entity which will be passed to API
+        /// </summary>
+        /// <param name="postData"></param>
+        /// <returns></returns>
         private List<AHPPair> ConvertAHPPairToEntity(List<RatingViewModel> postData)
         {
             List<AHPPair> l_AHPPair=new List<AHPPair>();
@@ -104,6 +126,11 @@ namespace HRAnalytics.Web.Controllers
             return l_AHPPair;
         }
 
+        /// <summary>
+        /// Convert Entity to View Model
+        /// </summary>
+        /// <param name="l_AHPJobPairs"></param>
+        /// <returns></returns>
         private List<AHPPairViewModel> ConvertPairsToViewModel(List<AHPPair> l_AHPJobPairs)
         {
             List<AHPPairViewModel> l_PairModel = new();
@@ -133,6 +160,12 @@ namespace HRAnalytics.Web.Controllers
             return l_PairModel;
         }
 
+        /// <summary>
+        /// API call to get AHP Pairs
+        /// </summary>
+        /// <param name="argEntityID"></param>
+        /// <param name="argParentEntityID"></param>
+        /// <returns></returns>
         public async Task<List<AHPPair>> GetAHPCreatedPairs(int argEntityID, int? argParentEntityID)
         {
             #region Declarations
@@ -160,7 +193,10 @@ namespace HRAnalytics.Web.Controllers
             return l_AHPPairs;
         }
 
-
+        /// <summary>
+        /// Default page for loading job criteria pairs
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Criteria()
         {
             await PopulateDropdownValues();
@@ -191,7 +227,11 @@ namespace HRAnalytics.Web.Controllers
             return l_Executed;
         }
 
-
+        /// <summary>
+        /// Partial View for AHP roles/criteria
+        /// </summary>
+        /// <param name="argJobIdParam"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> GetAHHCriteriaPairs(int argJobIdParam)
         {

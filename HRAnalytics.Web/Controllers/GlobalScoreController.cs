@@ -14,6 +14,10 @@ namespace HRAnalytics.Web.Controllers
         {
         }
 
+        /// <summary>
+        /// Controller for results page
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var candidatecollection = await GetGlobalScore();
@@ -23,8 +27,10 @@ namespace HRAnalytics.Web.Controllers
             return View(lst_global);
         }
 
-
-
+        /// <summary>
+        /// API call to get global scores
+        /// </summary>
+        /// <returns></returns>
         public async Task<CandidateCollection> GetGlobalScore()
         {
             #region Declarations
@@ -51,7 +57,11 @@ namespace HRAnalytics.Web.Controllers
             return l_candidate;
         }
 
-
+        /// <summary>
+        /// Convert entity to view model class
+        /// </summary>
+        /// <param name="candidates"></param>
+        /// <returns></returns>
         private List<GlobalScoreViewModel> ConvertEntityToViewModel(CandidateCollection candidates)
         {
             List<GlobalScoreViewModel> lst_score = new List<GlobalScoreViewModel>();
@@ -74,7 +84,13 @@ namespace HRAnalytics.Web.Controllers
             return lst_score;
         }
 
-
+        /// <summary>
+        /// Save compensation and actual hiring decision
+        /// </summary>
+        /// <param name="argIsHired"></param>
+        /// <param name="argActualCompensation"></param>
+        /// <param name="argGlobalScoreID"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> SaveCandidateHiringDetails(bool argIsHired, double argActualCompensation, int argGlobalScoreID)
         {
@@ -107,6 +123,11 @@ namespace HRAnalytics.Web.Controllers
             return Json(IsSuccess);
         }
 
+        /// <summary>
+        /// API call to save the details
+        /// </summary>
+        /// <param name="argCandidate"></param>
+        /// <returns></returns>
         private async Task<HttpResponseMessage> SaveCandidateHiringDetails(Candidate argCandidate)
         {
             #region Declarations

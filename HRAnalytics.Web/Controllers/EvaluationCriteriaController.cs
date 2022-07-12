@@ -15,6 +15,10 @@ namespace HRAnalytics.Web.Controllers
         {
         }
 
+        /// <summary>
+        /// Load evaluation criteria page
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             CriteriaViewModel criteriaViewMdel = new();
@@ -33,7 +37,11 @@ namespace HRAnalytics.Web.Controllers
             return View(criteriaViewMdel);
         }
 
-
+        /// <summary>
+        /// Get the required criterias
+        /// </summary>
+        /// <param name="criteriasCreated"></param>
+        /// <returns></returns>
         private List<SubcriteriaViewModel> ExtractRequiredCriterias(JobCollection criteriasCreated)
         {
             #region Declarations
@@ -63,7 +71,6 @@ namespace HRAnalytics.Web.Controllers
             return subCriteriasCreated;
         }
 
-
         /// <summary>
         /// This method is used to retrieve saved criterias from database
         /// </summary>
@@ -92,7 +99,6 @@ namespace HRAnalytics.Web.Controllers
             }
             return l_JobCollection;
         }
-
 
         /// <summary>
         /// Populate dropdown values 
@@ -145,7 +151,6 @@ namespace HRAnalytics.Web.Controllers
 
             return jobCollection;
         }
-
 
         /// <summary>
         /// Post Method for save
@@ -223,7 +228,6 @@ namespace HRAnalytics.Web.Controllers
             return l_Response;
         }
 
-
         /// <summary>
         /// Convert view model to entity
         /// </summary>
@@ -252,6 +256,11 @@ namespace HRAnalytics.Web.Controllers
             return l_job;
         }
 
+        /// <summary>
+        /// Method to delete job criteria
+        /// </summary>
+        /// <param name="argJobCriteria"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<HttpResponseMessage> DeleteJobCriteria(SubcriteriaViewModel argJobCriteria)
         {
@@ -289,6 +298,11 @@ namespace HRAnalytics.Web.Controllers
             return l_Response;
         }
 
+        /// <summary>
+        /// Convert view model to Entity
+        /// </summary>
+        /// <param name="argJobCriteria"></param>
+        /// <returns></returns>
         private Job ConvertJobCriteriaViewModeltoEntity(SubcriteriaViewModel argJobCriteria)
         {
             Job l_job = new();
@@ -310,6 +324,11 @@ namespace HRAnalytics.Web.Controllers
             return l_job;
         }
 
+        /// <summary>
+        /// Delete criteria method
+        /// </summary>
+        /// <param name="argID"></param>
+        /// <returns></returns>
         public async Task<ActionResult> DeleteItem(int argID)
         {
             SubcriteriaViewModel l_vwmodel = new();

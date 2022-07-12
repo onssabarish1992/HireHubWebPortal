@@ -12,25 +12,15 @@ namespace HRAnalytics.Web.Controllers
     [Authorize(Roles = "HR")]
     public class RoleCriteriaController : HRAnalyticsBaseController
     {
-        #region Page level declarations
-        HttpClient client;
-        private readonly IConfiguration _configuration;
-        private readonly string apiBaseURL;
-        #endregion
-
 
         public RoleCriteriaController(IConfiguration configuration):base(configuration)
         {
-            _configuration = configuration;
-            apiBaseURL = _configuration.GetValue<string>(
-                "APIBaseURL");
-            client = new HttpClient();
-            client.BaseAddress = new Uri(apiBaseURL);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-
+        /// <summary>
+        /// Default page for job role
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             #region Declarations
@@ -56,6 +46,11 @@ namespace HRAnalytics.Web.Controllers
             return View(l_jobRoleModel);
         }
 
+        /// <summary>
+        /// Get required criterias and form the entity
+        /// </summary>
+        /// <param name="jobsCreated"></param>
+        /// <returns></returns>
         private List<JobCriteriaViewModel> ExtractRequiredCriterias(JobCollection jobsCreated)
         {
             #region Declarations
@@ -108,7 +103,11 @@ namespace HRAnalytics.Web.Controllers
             return l_Executed;
         }
 
-
+        /// <summary>
+        /// Post request to save job role
+        /// </summary>
+        /// <param name="argJobCriteria"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SaveJobRole(JobRoleViewModel argJobCriteria)
@@ -148,7 +147,11 @@ namespace HRAnalytics.Web.Controllers
             return RedirectToAction("Index", "Candidate");
         }
 
-
+        /// <summary>
+        /// API call for job role
+        /// </summary>
+        /// <param name="argJobCriteria"></param>
+        /// <returns></returns>
         private async Task<HttpResponseMessage> SaveJobCriteria(JobRoleViewModel argJobCriteria)
         {
             #region Declarations
@@ -251,6 +254,11 @@ namespace HRAnalytics.Web.Controllers
             return l_job;
         }
 
+        /// <summary>
+        /// Delete job role option
+        /// </summary>
+        /// <param name="argID"></param>
+        /// <returns></returns>
         public async Task<ActionResult> DeleteItem(int argID)
         {
             JobCriteriaViewModel l_vwmodel = new();

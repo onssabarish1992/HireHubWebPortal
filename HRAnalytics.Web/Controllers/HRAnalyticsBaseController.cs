@@ -6,6 +6,9 @@ using System.Security.Claims;
 
 namespace HRAnalytics.Web.Controllers
 {
+    /// <summary>
+    /// Custom base controller
+    /// </summary>
     public class HRAnalyticsBaseController : Controller
     {
         public readonly IConfiguration _configuration;

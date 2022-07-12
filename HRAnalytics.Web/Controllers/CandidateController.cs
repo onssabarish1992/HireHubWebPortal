@@ -10,23 +10,15 @@ namespace HRAnalytics.Web.Controllers
 {
     public class CandidateController : HRAnalyticsBaseController
     {
-        #region Page level declarations
-        HttpClient client;
-        private readonly IConfiguration _configuration;
-        private readonly string apiBaseURL;
-        #endregion
 
         public CandidateController(IConfiguration configuration):base(configuration)
         {
-            _configuration = configuration;
-            apiBaseURL = _configuration.GetValue<string>(
-                "APIBaseURL");
-            client = new HttpClient();
-            client.BaseAddress = new Uri(apiBaseURL);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        /// <summary>
+        /// Page level default controller
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             await PopulateDropdownValues();
@@ -38,6 +30,11 @@ namespace HRAnalytics.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Controller for candidate response page
+        /// </summary>
+        /// <param name="argScheduleID"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Candidate(int argScheduleID)
         {
             CandidateScoreViewModel l_Score = new CandidateScoreViewModel();
@@ -70,7 +67,6 @@ namespace HRAnalytics.Web.Controllers
             return View(l_Score);
         }
 
-
         /// <summary>
         /// Create dropdown for rating scale
         /// </summary>
@@ -99,10 +95,8 @@ namespace HRAnalytics.Web.Controllers
 
         }
 
-
-
         /// <summary>
-        /// Cpnvert to view model
+        /// Convert to view model
         /// </summary>
         /// <param name="candidateScoreInfo"></param>
         /// <returns></returns>
@@ -279,7 +273,6 @@ namespace HRAnalytics.Web.Controllers
             return l_Response;
         }
 
-
         /// <summary>
         /// Convert view model to entit
         /// </summary>
@@ -369,7 +362,7 @@ namespace HRAnalytics.Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Convert view model ratings to entity
         /// </summary>
         /// <param name="argCandidateScoreViewModel"></param>
         /// <returns></returns>

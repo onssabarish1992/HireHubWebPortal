@@ -12,6 +12,10 @@ namespace HRAnalytics.Web.Controllers
 
         }
 
+        /// <summary>
+        /// Default landing page for interviewer
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var candidatecollection = await GetCandidateCollection();
@@ -22,7 +26,10 @@ namespace HRAnalytics.Web.Controllers
         }
 
 
-
+        /// <summary>
+        /// API call to get list of candidates assigned to interviewer
+        /// </summary>
+        /// <returns></returns>
         public async Task<CandidateCollection> GetCandidateCollection()
         {
             #region Declarations
@@ -49,6 +56,11 @@ namespace HRAnalytics.Web.Controllers
             return l_candidate;
         }
 
+        /// <summary>
+        /// Convert entity to view model
+        /// </summary>
+        /// <param name="candidates"></param>
+        /// <returns></returns>
         private List<CandidateViewModel> ConvertEntityToViewModel(CandidateCollection candidates)
         {
             List<CandidateViewModel> lst_candidate = new List<CandidateViewModel>();

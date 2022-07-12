@@ -6,6 +6,10 @@ namespace HRAnalytics.Web.Controllers
     public class HomepageController : Controller
 
     {
+        /// <summary>
+        /// Custom home page to be loaded based on logged in user role
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             if (User.IsInRole("Interviewer"))

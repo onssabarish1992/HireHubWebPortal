@@ -15,6 +15,10 @@ namespace HRAnalytics.Web.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Application level home page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             //If logged in user is interviwer redirect to interviewer page
@@ -27,11 +31,19 @@ namespace HRAnalytics.Web.Controllers
             //return RedirectToAction("Index", "Homepage");
         }
 
+        /// <summary>
+        /// Privacy details page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Privacy()
         {
             return View();
         }
 
+        /// <summary>
+        /// Error page
+        /// </summary>
+        /// <returns></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
