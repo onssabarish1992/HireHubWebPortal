@@ -22,6 +22,10 @@ namespace HRAnalytics.BL
             _ICandidateScore = argCandidateScore;
         }
 
+        /// <summary>
+        /// Get optimim results from Linear Programming (MIP)
+        /// </summary>
+        /// <returns></returns>
         public List<Candidate> GetOptimumResult()
         {
             #region Declaration
@@ -95,6 +99,11 @@ namespace HRAnalytics.BL
             return argCandidateScore;
         }
 
+        /// <summary>
+        /// Load the compensation and strategic constraints
+        /// </summary>
+        /// <param name="argCandidateScore"></param>
+        /// <returns></returns>
         private List<InputConstraints> GetConstraints(List<Candidate> argCandidateScore)
         {
             #region Declarations
@@ -129,6 +138,12 @@ namespace HRAnalytics.BL
             return l_constraints;
         }
 
+        /// <summary>
+        /// Load stragetic constraints
+        /// </summary>
+        /// <param name="argRoles"></param>
+        /// <param name="argCandidateScore"></param>
+        /// <returns></returns>
         private List<InputConstraints> GetStrategicConstraints(JobCollection argRoles, List<Candidate> argCandidateScore)
         {
             List<InputConstraints> l_strategicConstraints = new List<InputConstraints>();
@@ -175,6 +190,12 @@ namespace HRAnalytics.BL
 
         }
 
+        /// <summary>
+        /// Create compensation constraints for MIP solver
+        /// </summary>
+        /// <param name="argRoles"></param>
+        /// <param name="argCandidates"></param>
+        /// <returns></returns>
         private InputConstraints CreateCompensationConstraint(JobCollection argRoles, List<Candidate> argCandidates)
         {
             #region Declaration

@@ -107,7 +107,6 @@ namespace HRAnalytics.BL
             return l_UserCollection;
         }
 
-
         /// <summary>
         /// Get the candidate information using schedule ID and candidate ID
         /// </summary>
@@ -148,6 +147,11 @@ namespace HRAnalytics.BL
             return l_candidate;
         }
        
+        /// <summary>
+        /// Load candidate list for interviewers
+        /// </summary>
+        /// <param name="argInterviewerID"></param>
+        /// <returns></returns>
         public CandidateCollection GetCandidateForInterviewer(string argInterviewerID)
         {
             #region Declarations
@@ -195,7 +199,10 @@ namespace HRAnalytics.BL
             return l_CandidateCollection;
         }
 
-
+        /// <summary>
+        /// Get the final result from database
+        /// </summary>
+        /// <returns></returns>
         public CandidateCollection GetGlobalScores()
         {
             #region Declarations

@@ -61,6 +61,12 @@ namespace HRAnalytics.BL
             return result;
         }
 
+        /// <summary>
+        /// Format the MIP solver results the way that should be represented in application
+        /// </summary>
+        /// <param name="resultStatus"></param>
+        /// <param name="requiredVariables"></param>
+        /// <returns></returns>
         private SolverResult FormatResults(Solver.ResultStatus resultStatus, ref List<Variable> requiredVariables)
         {
             SolverResult result = new();

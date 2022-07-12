@@ -21,7 +21,7 @@ namespace HRAnalytics.BL
         }
 
         /// <summary>
-        /// This method is used to save 
+        /// This method is used to get final candidate rankings 
         /// </summary>
         /// <returns></returns>
         public List<Candidate> GetCandidateResult()
@@ -54,7 +54,7 @@ namespace HRAnalytics.BL
         }
 
         /// <summary>
-        /// 
+        /// Get Topsis ranking for candidates
         /// </summary>
         /// <param name="l_roles"></param>
         /// <param name="l_criterias"></param>

@@ -22,6 +22,11 @@ namespace HRAnalytics.BL
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Create and Save AHP Pairs for job roles and criteria
+        /// </summary>
+        /// <param name="argEntityID"></param>
+        /// <param name="argLoggedInUser"></param>
         public void SavePairs(int argEntityID, string argLoggedInUser)
         {
             List<AHPPair> l_FinalPairs=new List<AHPPair>();
@@ -74,7 +79,13 @@ namespace HRAnalytics.BL
 
         }
 
-
+        /// <summary>
+        /// Create AHP Pairs
+        /// </summary>
+        /// <param name="argPairs"></param>
+        /// <param name="argEntityID"></param>
+        /// <param name="argParentEntityID"></param>
+        /// <returns></returns>
         private List<AHPPair> CreateAHPPairs(List<string> argPairs, int argEntityID, int? argParentEntityID)
         {
             #region Declarations
@@ -132,7 +143,11 @@ namespace HRAnalytics.BL
             return l_pairs;
         }
 
-
+        /// <summary>
+        /// Save AHP Pairs
+        /// </summary>
+        /// <param name="argLoggedInUserID"></param>
+        /// <param name="argAHPPairs"></param>
         public void SavAHPPairs(string argLoggedInUserID, List<AHPPair> argAHPPairs)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
@@ -155,6 +170,11 @@ namespace HRAnalytics.BL
             }
         }
 
+        /// <summary>
+        /// Generate XML for AHP Pairs
+        /// </summary>
+        /// <param name="argAHPPairs"></param>
+        /// <returns></returns>
         private XElement GeneratePAIRSXML(List<AHPPair> argAHPPairs)
         {
             XElement l_PairXML;
@@ -177,8 +197,12 @@ namespace HRAnalytics.BL
             return l_PairXML;
         }
 
-
-
+        /// <summary>
+        /// Get AHP pairs (roles, criteria) from tables
+        /// </summary>
+        /// <param name="argEntityID"></param>
+        /// <param name="argParentEntityID"></param>
+        /// <returns></returns>
         public List<AHPPair> GetAHPPairs(int argEntityID, int? argParentEntityID)
         {
             #region Declarations
@@ -223,7 +247,11 @@ namespace HRAnalytics.BL
             return l_PairCollection;
         }
 
-
+        /// <summary>
+        /// Save AHP Pairs to database
+        /// </summary>
+        /// <param name="argLoggedInUserID"></param>
+        /// <param name="argAHPPairs"></param>
         public void SavAHPWeightage(string argLoggedInUserID, List<AHPPair> argAHPPairs)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
@@ -246,6 +274,11 @@ namespace HRAnalytics.BL
             }
         }
 
+        /// <summary>
+        /// Create XML for weightage
+        /// </summary>
+        /// <param name="argAHPPairs"></param>
+        /// <returns></returns>
         private XElement GenerateWeightageXML(List<AHPPair> argAHPPairs)
         {
             XElement l_PairXML;
@@ -265,7 +298,6 @@ namespace HRAnalytics.BL
 
             return l_PairXML;
         }
-
 
         /// <summary>
         /// Thus function is used to calculate AHP final scores
@@ -325,7 +357,12 @@ namespace HRAnalytics.BL
             return argScoresrowsumNormal;
         }
 
-
+        /// <summary>
+        /// Save final calculated score for AHP
+        /// </summary>
+        /// <param name="argLoggedInUserID"></param>
+        /// <param name="argEntityID"></param>
+        /// <param name="argJobId"></param>
         public void SavAHPFinalScores(string argLoggedInUserID, int argEntityID, int? argJobId)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
@@ -485,6 +522,11 @@ namespace HRAnalytics.BL
             return a;
         }
 
+        /// <summary>
+        /// Create XML for final AHP Scores
+        /// </summary>
+        /// <param name="argAHPPairs"></param>
+        /// <returns></returns>
         private XElement GenerateFinalScoresXML(List<AHPFinalScore> argAHPPairs)
         {
             XElement l_PairXML;

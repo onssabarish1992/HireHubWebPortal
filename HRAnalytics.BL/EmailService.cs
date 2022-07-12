@@ -12,6 +12,13 @@ namespace HRAnalytics.BL
 		{
 		}
 
+        /// <summary>
+        /// Send email when interview is scheduled
+        /// </summary>
+        /// <param name="CandidateName"></param>
+        /// <param name="PrjName"></param>
+        /// <param name="IntTime"></param>
+        /// <returns></returns>
 		public async Task<bool> SendEmail(String CandidateName, String PrjName, DateTime IntTime)
         {
 

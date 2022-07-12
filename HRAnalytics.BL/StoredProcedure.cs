@@ -18,7 +18,6 @@ namespace HRAnalytics.BL
         public const string GET_CRITERIAFORJOB = "usp_getCriteriasForJob";
         public const string GET_JOBCRITERIA = "usp_get_JobCriteria";
         public const string SET_JOBCRITERIA = "usp_sav_JobCriteria";
-
         public const string GET_CANDIDATEINTERVIEWQUESTIONS = "usp_getInterviewQuestions";
         public const string INSERT_INTERVIEWERRATINGS = "usp_sav_InterviewRatings";
         public const string GET_GLOBAL_SCORE = "usp_getGlobalScores";
@@ -26,7 +25,6 @@ namespace HRAnalytics.BL
         public const string SAVE_GLOBAL_SCORE = "usp_sav_GlobalScores";
         public const string SAVE_AHP_PAIRS = "usp_sav_AHPPairs";
         public const string SAVE_RESULT = "usp_UpdateCompensation";
-
         public const string GET_AHPPAIRS = "usp_getAHPPairs";
         public const string SAVE_AHPWEIGHTAGE = "usp_sav_AHPWeightage";
         public const string SAVE_AHPFINALSCORES = "usp_sav_AHPFinalScores";

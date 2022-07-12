@@ -16,6 +16,12 @@ namespace HRAnalytics.BL
         private double[] l_distancesFromIdealWorst;
         private double[] l_distancesFromlIdealBest;
 
+        /// <summary>
+        /// Compute the global score of candidates
+        /// </summary>
+        /// <param name="argAlternatives"></param>
+        /// <param name="argCriteria"></param>
+        /// <returns></returns>
         public List<Alternative> ComputeTopsisScore(List<Alternative> argAlternatives, List<Criteria> argCriteria)
         {
             List<Alternative> l_alternatives = new List<Alternative>();
@@ -48,7 +54,6 @@ namespace HRAnalytics.BL
             return l_alternatives;
         }
 
-
         /// <summary>
         /// Used to create score matrix based on alternatives
         /// </summary>
@@ -80,7 +85,6 @@ namespace HRAnalytics.BL
 
             return scoreMatrix;
         }
-
 
         /// <summary>
         /// Create normalized decision matrix 
@@ -119,6 +123,13 @@ namespace HRAnalytics.BL
             return normalizedDecisionMatrix;
         }
 
+        /// <summary>
+        /// Find the ideal and worst solution based on rating provided to all candidates
+        /// </summary>
+        /// <param name="argCriteriaCount"></param>
+        /// <param name="argAlternativeCount"></param>
+        /// <param name="argNormalizedScores"></param>
+        /// <param name="argCriteria"></param>
         void findIdealBestAndWorst(int argCriteriaCount, int argAlternativeCount, double[,] argNormalizedScores, List<Criteria> argCriteria)
         {
             l_IdealBest = null;
@@ -166,6 +177,12 @@ namespace HRAnalytics.BL
 
         }
 
+        /// <summary>
+        /// Find out the Euclidean distance for each score
+        /// </summary>
+        /// <param name="argNormalizedScores"></param>
+        /// <param name="argNumberOfAlternatives"></param>
+        /// <param name="argNumberOfCriteria"></param>
         private void computeEuclidianDistancesFromIdealBestAndWorst(double[,] argNormalizedScores, int argNumberOfAlternatives, int argNumberOfCriteria)
         {
 
@@ -205,7 +222,11 @@ namespace HRAnalytics.BL
             }
         }
 
-
+        /// <summary>
+        /// Compute the final performace score
+        /// </summary>
+        /// <param name="argalternatives"></param>
+        /// <returns></returns>
         private List<Alternative> computePerformanceScore(List<Alternative> argalternatives)
         {
             int l_numberOflternatives = argalternatives.Count;

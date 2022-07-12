@@ -148,7 +148,6 @@ namespace HRAnalytics.BL
             return l_ratingXML;
         }
 
-
         /// <summary>
         /// Get All candidate scores for
         /// </summary>
@@ -195,7 +194,11 @@ namespace HRAnalytics.BL
             return l_CandidateEvaluations;
         }
 
-
+        /// <summary>
+        /// Save final scores of the candidate to table
+        /// </summary>
+        /// <param name="argLoggedInUserID"></param>
+        /// <param name="argGlobalScores"></param>
         public void SaveGlobalScores(string argLoggedInUserID, List<Candidate> argGlobalScores)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);
@@ -218,6 +221,11 @@ namespace HRAnalytics.BL
             }
         }
 
+        /// <summary>
+        /// Generate score XML
+        /// </summary>
+        /// <param name="argGlobalScores"></param>
+        /// <returns></returns>
         private XElement GenerateScoresXML(List<Candidate> argGlobalScores)
         {
             XElement l_ratingXML;
@@ -245,6 +253,10 @@ namespace HRAnalytics.BL
             return l_ratingXML;
         }
 
+        /// <summary>
+        /// Save result to database
+        /// </summary>
+        /// <param name="candidate"></param>
         public void SaveResult(Candidate candidate)
         {
             HRAnalyticsDBManager l_HRAnalyticsDBManager = new("HRAnalyticsConnection", _configuration);

@@ -56,6 +56,10 @@ namespace HRAnalytics.BL
             return l_JobCollection;
         }
 
+        /// <summary>
+        /// Get all the evaluation criteria
+        /// </summary>
+        /// <returns></returns>
         public JobCollection GetEvaluationCriteria()
         {
             #region Declarations
@@ -99,6 +103,11 @@ namespace HRAnalytics.BL
 
         }
 
+        /// <summary>
+        /// Save evaluation criteria
+        /// </summary>
+        /// <param name="argLoggedInUser"></param>
+        /// <param name="argJob"></param>
         public void SaveSubCriteria(string argLoggedInUser, Job argJob)
         {
             #region Declarations
@@ -129,6 +138,11 @@ namespace HRAnalytics.BL
       
         }
 
+        /// <summary>
+        /// Get criteria for job role
+        /// </summary>
+        /// <param name="argJobId"></param>
+        /// <returns></returns>
         public JobCollection GetCriteriaForJob(int argJobId)
         {
             #region Declarations
@@ -175,6 +189,10 @@ namespace HRAnalytics.BL
 
         }
 
+        /// <summary>
+        /// Get job roles
+        /// </summary>
+        /// <returns></returns>
         public JobCollection GetRoles()
         {
             #region Declarations
@@ -216,6 +234,11 @@ namespace HRAnalytics.BL
             return l_JobCollection;
         }
 
+        /// <summary>
+        /// Save job roles
+        /// </summary>
+        /// <param name="argLoggedInUser"></param>
+        /// <param name="argJob"></param>
         public void SaveRole(string argLoggedInUser, Job argJob)
         {
             #region Declarations

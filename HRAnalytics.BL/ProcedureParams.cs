@@ -34,10 +34,8 @@ namespace HRAnalytics.BL
         public const string JOBCRITERIAID="@job_criteria_id";
         public const string SUBCRITERIAID = "@sub_criteria_id";
         public const string ENTITYID = "@entity_id";
-
         public const string PARENTENTITYID = "@parent_entity_id";
         public const string WEIGHTAGEXML = "@AHPWeightagesXML";
-
         public const string AHPFINALSCOREXML = "@AHPFinalscoresXML";
     }
 }
