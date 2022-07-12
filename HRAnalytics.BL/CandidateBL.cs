@@ -50,7 +50,7 @@ namespace HRAnalytics.BL
                     l_HRAnalyticsDBManager.Insert(StoredProcedure.INSERT_INTERVIEWSCHEDULE, CommandType.StoredProcedure, l_Parameters.ToArray(), out l_LastID);
                 }
 
-                _emailservice.SendEmail(argCandidate.CandidateName,argCandidate.ProjectName,argCandidate.InterviewTimeStamp);
+                //_emailservice.SendEmail(argCandidate.CandidateName,argCandidate.ProjectName,argCandidate.InterviewTimeStamp);
             }
             catch (Exception)
             {
