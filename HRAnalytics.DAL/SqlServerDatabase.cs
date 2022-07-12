@@ -9,10 +9,17 @@ using System.Threading.Tasks;
 
 namespace HRAnalytics.DAL
 {
+    /// <summary>
+    /// Class specific to SQL Server since this is the database used in application
+    /// </summary>
     public class SqlServerDatabase: IDatabase
     {
         private string ConnectionString { get; set; }
 
+        /// <summary>
+        /// Close DB conenction 
+        /// </summary>
+        /// <param name="argConnection"></param>
         public void CloseConnection(IDbConnection argConnection)
         {
             var sqlConnection = (SqlConnection)argConnection;

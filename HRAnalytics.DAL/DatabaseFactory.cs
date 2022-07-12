@@ -6,7 +6,7 @@ namespace HRAnalytics.DAL
 {
     public class DatabaseFactory
     {
-        //private ConnectionStringSettings connectionStringSettings;
+    
         private readonly IConfiguration _configuration;
         private readonly string connectionString;
         private readonly string providerName;
@@ -18,6 +18,10 @@ namespace HRAnalytics.DAL
             providerName = _configuration.GetConnectionString("ProviderName");
         }
 
+        /// <summary>
+        /// Create database depending on database provider
+        /// </summary>
+        /// <returns></returns>
         public IDatabase CreateDatabase()
         {
             IDatabase database = null;
@@ -33,6 +37,10 @@ namespace HRAnalytics.DAL
             return database;
         }
 
+        /// <summary>
+        /// Return the SQL provider name
+        /// </summary>
+        /// <returns></returns>
         public string GetProviderName()
         {
             return providerName;

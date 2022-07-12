@@ -10,6 +10,15 @@ namespace HRAnalytics.DAL
 {
     public class DatabaseParameter
     {
+        /// <summary>
+        /// Overload - 1 to create data parameter for SQL
+        /// </summary>
+        /// <param name="argProviderName"></param>
+        /// <param name="argName"></param>
+        /// <param name="argValue"></param>
+        /// <param name="argDbType"></param>
+        /// <param name="argDirection"></param>
+        /// <returns></returns>
         public static IDbDataParameter CreateParameter(string argProviderName, string argName, object argValue, DbType argDbType, ParameterDirection argDirection = ParameterDirection.Input)
         {
             switch (argProviderName.ToLower())
@@ -21,6 +30,16 @@ namespace HRAnalytics.DAL
             }
         }
 
+        /// <summary>
+        /// Overload - 2 to create data parameter for SQL
+        /// </summary>
+        /// <param name="argProviderName"></param>
+        /// <param name="argName"></param>
+        /// <param name="argSize"></param>
+        /// <param name="argValue"></param>
+        /// <param name="argDbType"></param>
+        /// <param name="argDirection"></param>
+        /// <returns></returns>
         public static IDbDataParameter CreateParameter(string argProviderName, string argName, int argSize, object argValue, DbType argDbType, ParameterDirection argDirection = ParameterDirection.Input)
         {
             switch (argProviderName.ToLower())
@@ -32,6 +51,14 @@ namespace HRAnalytics.DAL
             }
         }
 
+        /// <summary>
+        /// Overload - 1 Create Stored Procedure Parameter
+        /// </summary>
+        /// <param name="argName"></param>
+        /// <param name="argValue"></param>
+        /// <param name="argDbType"></param>
+        /// <param name="argDirection"></param>
+        /// <returns></returns>
         private static IDbDataParameter CreateSqlParameter(string argName, object argValue, DbType argDbType, ParameterDirection argDirection)
         {
             return new SqlParameter
@@ -43,6 +70,15 @@ namespace HRAnalytics.DAL
             };
         }
 
+        /// <summary>
+        /// Overload - 2 Create Stored Procedure Parameter
+        /// </summary>
+        /// <param name="argName"></param>
+        /// <param name="argSize"></param>
+        /// <param name="argValue"></param>
+        /// <param name="argDbType"></param>
+        /// <param name="argDirection"></param>
+        /// <returns></returns>
         private static IDbDataParameter CreateSqlParameter(string argName, int argSize, object argValue, DbType argDbType, ParameterDirection argDirection)
         {
             return new SqlParameter
